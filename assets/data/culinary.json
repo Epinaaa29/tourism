@@ -1,0 +1,73 @@
+[
+  {
+    "id": "culinary-1",
+    "category": "culinary",
+    "name": "Warung Seafood Boulevard",
+    "district": "Boulevard Tahuna",
+    "rating": 4.7,
+    "description": "Warung seafood di kawasan kuliner Boulevard Tahuna dengan menu ikan segar hasil tangkapan nelayan lokal. Spesialisasi ikan bakar, cumi goreng tepung, dan udang saus dengan pemandangan laut yang indah. Lokasi favorit wisatawan dan warga lokal.",
+    "latitude": 3.608056,
+    "longitude": 125.488000,
+    "image": "seafood",
+    "images": ["local_cuisine", "traditional_food"],
+    "cuisineType": "Seafood",
+    "priceRange": "Rp 30.000 - Rp 100.000",
+    "operatingHours": "10:00 - 22:00"
+  },
+  {
+    "id": "culinary-2",
+    "category": "culinary",
+    "name": "Rumah Makan Rica-Rica Sangihe",
+    "district": "Tahuna",
+    "rating": 4.6,
+    "description": "Spesialisasi masakan Sangihe dan Manado dengan cita rasa pedas yang khas. Menu favorit: ikan rica-rica, ikan woku, dan cakalang fufu. Bumbu tradisional yang autentik dengan resep turun temurun.",
+    "latitude": 3.609167,
+    "longitude": 125.490278,
+    "image": "culinary_rica",
+    "cuisineType": "Manado/Sangihe",
+    "priceRange": "Rp 25.000 - Rp 75.000",
+    "operatingHours": "09:00 - 21:00"
+  },
+  {
+    "id": "culinary-3",
+    "category": "culinary",
+    "name": "Kafe Sunset Boulevard",
+    "district": "Boulevard Tahuna (Sawang Bendar)",
+    "rating": 4.5,
+    "description": "Kafe di tepi pantai Boulevard dengan view sunset spektakuler. Menyajikan kopi lokal Sangihe, makanan ringan, dan menu western. Tempat favorit anak muda untuk nongkrong sambil menikmati hembusan angin laut.",
+    "latitude": 3.607800,
+    "longitude": 125.487800,
+    "image": "culinary_cafe",
+    "cuisineType": "Cafe & Western",
+    "priceRange": "Rp 15.000 - Rp 80.000",
+    "operatingHours": "14:00 - 23:00"
+  },
+  {
+    "id": "culinary-4",
+    "category": "culinary",
+    "name": "Warung Mie Kering Khas Sangihe",
+    "district": "Tahuna",
+    "rating": 4.4,
+    "description": "Mie kering khas Sangihe dengan bumbu rahasia turun temurun. Tekstur mie kenyal dengan topping seafood dan ayam. Porsi jumbo dengan harga terjangkau. Menu andalan warga lokal.",
+    "latitude": 3.608889,
+    "longitude": 125.489444,
+    "image": "culinary_mie",
+    "cuisineType": "Local Sangihe",
+    "priceRange": "Rp 15.000 - Rp 35.000",
+    "operatingHours": "10:00 - 21:00"
+  },
+  {
+    "id": "culinary-5",
+    "category": "culinary",
+    "name": "Depot Ikan Bakar Manganitu",
+    "district": "Manganitu",
+    "rating": 4.6,
+    "description": "Depot ikan bakar dengan ikan segar dari perairan Sangihe. Bumbu meresap sempurna dengan aroma yang menggugah selera. Tersedia berbagai jenis ikan dan sambal khas yang pedas nikmat.",
+    "latitude": 3.380000,
+    "longitude": 125.465000,
+    "image": "culinary_bakar",
+    "cuisineType": "Seafood",
+    "priceRange": "Rp 35.000 - Rp 90.000",
+    "operatingHours": "11:00 - 20:00"
+  }
+]
