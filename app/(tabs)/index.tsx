@@ -1,8 +1,8 @@
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
-import React from 'react';
-import { FlatList, ScrollView, StyleSheet, Text, TouchableOpacity, useColorScheme, View } from 'react-native';
+import React, { useState } from 'react';
+import { FlatList, RefreshControl, ScrollView, StyleSheet, Text, TouchableOpacity, useColorScheme, View } from 'react-native';
 
 import { Hero } from '@/components/ui/Hero';
 import { PlaceholderImage } from '@/components/ui/PlaceholderImage';
@@ -106,9 +106,21 @@ const TrendingCard = ({ item }: { item: Item }) => {
 export default function HomeScreen() {
   const colorScheme = useColorScheme();
   const colors = getColors(colorScheme === 'dark');
-  const { getTrendingItems } = useAppStore();
+  const { getTrendingItems, loadAppData, isLoading } = useAppStore();
+  const [refreshing, setRefreshing] = useState(false);
 
   const trendingItems = getTrendingItems();
+
+  const onRefresh = async () => {
+    setRefreshing(true);
+    try {
+      await loadAppData();
+    } catch (error) {
+      console.error('Error refreshing data:', error);
+    } finally {
+      setRefreshing(false);
+    }
+  };
 
   const discoverItems = [
     { 
@@ -142,7 +154,18 @@ export default function HomeScreen() {
   ];
 
   return (
-    <ScrollView style={[styles.container, { backgroundColor: colors.background }]} showsVerticalScrollIndicator={false}>
+    <ScrollView 
+      style={[styles.container, { backgroundColor: colors.background }]} 
+      showsVerticalScrollIndicator={false}
+      refreshControl={
+        <RefreshControl
+          refreshing={refreshing || isLoading}
+          onRefresh={onRefresh}
+          tintColor={colors.primary}
+          colors={[colors.primary]}
+        />
+      }
+    >
       <Hero 
         title="Explore the Best Tourism"
         subtitle="in Your City"

@@ -8,6 +8,7 @@ import { SectionTitle } from '@/components/ui/SectionTitle';
 import { getColors } from '@/constants/colors';
 import { saveLocalEdit } from '@/lib/data';
 import { useAppStore } from '@/lib/store';
+import { useAuthStore } from '@/lib/auth-store';
 import { Category, Item } from '@/types';
 
 const AdminItemCard = ({ 
@@ -58,6 +59,7 @@ export default function AdminCategoryScreen() {
   const colors = getColors(colorScheme === 'dark');
   const { category } = useLocalSearchParams<{ category: Category }>();
   const { data } = useAppStore();
+  const { user } = useAuthStore();
 
   const items = data[category!] || [];
 
@@ -93,10 +95,10 @@ export default function AdminCategoryScreen() {
               id: item.id,
               action: 'delete',
               timestamp: new Date().toISOString(),
-            });
+            }, user?.uid);
             // Refresh data by reloading the store
             const { loadAppData } = useAppStore.getState();
-            loadAppData();
+            loadAppData(user?.uid);
           },
         },
       ]
@@ -175,7 +177,8 @@ export default function AdminCategoryScreen() {
             renderItem={renderItem}
             keyExtractor={(item) => item.id}
             contentContainerStyle={styles.list}
-            showsVerticalScrollIndicator={false}
+            showsVerticalScrollIndicator={true}
+            style={styles.listContainer}
           />
         )}
       </View>
@@ -212,7 +215,11 @@ const styles = StyleSheet.create({
     padding: 8,
   },
   content: {
+    flex: 1,
     padding: 20,
+  },
+  listContainer: {
+    flex: 1,
   },
   list: {
     paddingBottom: 20,

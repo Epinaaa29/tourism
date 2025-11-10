@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "934736403877",
+    "project_id": "tourism-1d046",
+    "storage_bucket": "tourism-1d046.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:934736403877:android:64e5d0fa4c67879f519c4c",
+        "android_client_info": {
+          "package_name": "com.sitouxz.cityexplorer"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSzjMOT7eA7o_ampKmJLTuCgZHYt5IZ7g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,7 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import React, { useState } from 'react';
-import { FlatList, StyleSheet, TouchableOpacity, useColorScheme, View } from 'react-native';
+import { FlatList, RefreshControl, StyleSheet, TouchableOpacity, useColorScheme, View } from 'react-native';
 
 import { Card } from '@/components/ui/Card';
 import { EmptyState } from '@/components/ui/EmptyState';
@@ -14,11 +14,23 @@ import { Category } from '@/types';
 export default function HotelsScreen() {
   const colorScheme = useColorScheme();
   const colors = getColors(colorScheme === 'dark');
-  const { searchQuery, setSearchQuery, getFilteredData, addToRecent } = useAppStore();
+  const { searchQuery, setSearchQuery, getFilteredData, addToRecent, loadAppData, isLoading } = useAppStore();
 
   const [showFilters, setShowFilters] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
 
   const items = getFilteredData('hotel' as Category);
+
+  const onRefresh = async () => {
+    setRefreshing(true);
+    try {
+      await loadAppData();
+    } catch (error) {
+      console.error('Error refreshing data:', error);
+    } finally {
+      setRefreshing(false);
+    }
+  };
 
   const handleItemPress = (itemId: string) => {
     addToRecent(itemId);
@@ -89,6 +101,14 @@ export default function HotelsScreen() {
         keyExtractor={(item) => item.id}
         contentContainerStyle={styles.list}
         showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing || isLoading}
+            onRefresh={onRefresh}
+            tintColor={colors.primary}
+            colors={[colors.primary]}
+          />
+        }
       />
     </View>
   );

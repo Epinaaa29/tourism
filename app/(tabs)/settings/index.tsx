@@ -7,11 +7,14 @@ import { SectionTitle } from '@/components/ui/SectionTitle';
 import { getColors } from '@/constants/colors';
 import { clearAllData, getAdminAuth, setAdminAuth, updateAdminPin, verifyAdminPinLocal } from '@/lib/data';
 import { useAppStore } from '@/lib/store';
+import { useAuthStore } from '@/lib/auth-store';
+import { logoutUser } from '@/lib/auth-service';
 
 export default function SettingsScreen() {
   const colorScheme = useColorScheme();
   const colors = getColors(colorScheme === 'dark');
   const { isDarkMode, setDarkMode, favorites, clearFilters } = useAppStore();
+  const { user, clearAuth } = useAuthStore();
   
   const [showAdminModal, setShowAdminModal] = useState(false);
   const [showChangePinModal, setShowChangePinModal] = useState(false);
@@ -98,6 +101,29 @@ export default function SettingsScreen() {
     } catch (error: any) {
       Alert.alert('Error', error.message || 'Failed to update PIN');
     }
+  };
+
+  const handleLogout = () => {
+    Alert.alert(
+      'Logout',
+      'Are you sure you want to logout?',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        {
+          text: 'Logout',
+          style: 'destructive',
+          onPress: async () => {
+            try {
+              await logoutUser();
+              clearAuth();
+              // Stay on settings screen after logout
+            } catch (error: any) {
+              Alert.alert('Error', error.message || 'Failed to logout');
+            }
+          },
+        },
+      ]
+    );
   };
 
   const SettingItem = ({ 
@@ -203,6 +229,42 @@ export default function SettingsScreen() {
 
         <View style={styles.section}>
           <Text style={[styles.sectionTitle, { color: colors.text }]}>
+            Account
+          </Text>
+          {user ? (
+            <>
+              <SettingItem
+                icon="person-outline"
+                title="User"
+                subtitle={user.email || 'Logged in'}
+              />
+              <SettingItem
+                icon="log-out-outline"
+                title="Logout"
+                subtitle="Sign out of your account"
+                onPress={handleLogout}
+              />
+            </>
+          ) : (
+            <>
+              <SettingItem
+                icon="log-in-outline"
+                title="Login"
+                subtitle="Sign in to your account"
+                onPress={() => router.push('/auth/login')}
+              />
+              <SettingItem
+                icon="person-add-outline"
+                title="Register"
+                subtitle="Create a new account"
+                onPress={() => router.push('/auth/register')}
+              />
+            </>
+          )}
+        </View>
+
+        <View style={styles.section}>
+          <Text style={[styles.sectionTitle, { color: colors.text }]}>
             Admin
           </Text>
           <SettingItem
@@ -211,12 +273,14 @@ export default function SettingsScreen() {
             subtitle="Manage app content"
             onPress={handleAdminAccess}
           />
-          <SettingItem
-            icon="key-outline"
-            title="Change Admin PIN"
-            subtitle="Update admin access PIN"
-            onPress={() => setShowChangePinModal(true)}
-          />
+          {isAdminAuthenticated && (
+            <SettingItem
+              icon="key-outline"
+              title="Change Admin PIN"
+              subtitle="Update admin access PIN"
+              onPress={() => setShowChangePinModal(true)}
+            />
+          )}
         </View>
 
         <View style={styles.section}>
