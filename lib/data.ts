@@ -8,47 +8,27 @@ import {
   deleteItem 
 } from './firestore-service';
 
-// Import JSON data as fallback
-import culinaryData from '../assets/data/culinary.json';
-import eventData from '../assets/data/events.json';
-import hotelData from '../assets/data/hotels.json';
-import tourismData from '../assets/data/tourism.json';
-
 const DATA_KEYS = {
   FAVORITES: 'city_explorer_favorites',
   RECENT: 'city_explorer_recent',
   ADMIN_AUTH: 'city_explorer_admin_auth',
 } as const;
 
-// Fallback data from JSON files (used if Firestore fails)
-const fallbackData: Record<Category, Item[]> = {
-  tourism: tourismData as Item[],
-  culinary: culinaryData as Item[],
-  hotel: hotelData as Item[],
-  event: eventData as Item[],
-};
-
 /**
- * Load all data from Firestore
- * Falls back to JSON data if Firestore is not available
+ * Load all data from Firestore (user-specific)
+ * Always uses Firestore data - throws error if Firestore is not available
  */
-export const loadData = async (): Promise<Record<Category, Item[]>> => {
-  try {
-    // Try to load from Firestore
-    const data = await getAllItems();
-    return data;
-  } catch (error) {
-    console.error('Error loading data from Firestore, using fallback:', error);
-    // Return fallback data if Firestore fails
-    return fallbackData;
-  }
+export const loadData = async (userId?: string): Promise<Record<Category, Item[]>> => {
+  // Always load from Firestore - no fallback
+  const data = await getAllItems(userId);
+  return data;
 };
 
 /**
- * Save an item (create or update) to Firestore
+ * Save an item (create or update) to Firestore (user-specific)
  * This replaces the old saveLocalEdit function
  */
-export const saveLocalEdit = async (edit: LocalEdit): Promise<void> => {
+export const saveLocalEdit = async (edit: LocalEdit, userId?: string): Promise<void> => {
   try {
     if (!edit.data) {
       throw new Error('Item data is required');
@@ -61,14 +41,14 @@ export const saveLocalEdit = async (edit: LocalEdit): Promise<void> => {
 
     switch (edit.action) {
       case 'create':
-        await createItem(category, edit.data);
+        await createItem(category, edit.data, userId);
         break;
       case 'update':
-        await updateItem(category, edit.data);
+        await updateItem(category, edit.data, userId);
         break;
       case 'delete':
         if (edit.id) {
-          await deleteItem(category, edit.id);
+          await deleteItem(category, edit.id, userId);
         }
         break;
       default:

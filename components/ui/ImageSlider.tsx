@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
-import { StyleSheet, View, Image, Dimensions, Text } from 'react-native';
+import { StyleSheet, View, Dimensions, Text } from 'react-native';
+import { Image } from 'expo-image';
 import Carousel from 'react-native-reanimated-carousel';
 import { PlaceholderImage } from './PlaceholderImage';
 

@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { Category, FilterOptions, Item } from '../types';
 import { addFavorite, addRecent, getFavorites, getRecent, loadData, removeFavorite } from './data';
+import { useAuthStore } from './auth-store';
 
 interface AppState {
   // Data
@@ -17,7 +18,7 @@ interface AppState {
   filters: FilterOptions;
   
   // Actions
-  loadAppData: () => Promise<void>;
+  loadAppData: (userId?: string) => Promise<void>;
   setDarkMode: (isDark: boolean) => void;
   setSearchQuery: (query: string) => void;
   setFilters: (filters: FilterOptions) => void;
@@ -51,12 +52,12 @@ export const useAppStore = create<AppState>((set, get) => ({
   searchQuery: '',
   filters: {},
   
-  // Load all app data
-  loadAppData: async () => {
+  // Load all app data (user-specific)
+  loadAppData: async (userId?: string) => {
     set({ isLoading: true });
     try {
       const [data, favorites, recent] = await Promise.all([
-        loadData(),
+        loadData(userId),
         getFavorites(),
         getRecent(),
       ]);

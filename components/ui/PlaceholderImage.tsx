@@ -1,6 +1,7 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
-import { Image, StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
+import { Image } from 'expo-image';
 import { isBase64Image, base64ToImageUri } from '@/lib/image-base64';
 
 interface PlaceholderImageProps {
