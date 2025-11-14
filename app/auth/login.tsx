@@ -10,17 +10,17 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  useColorScheme,
   View,
 } from 'react-native';
 
 import { getColors } from '@/constants/colors';
+import { useIsDarkMode } from '@/hooks/use-theme';
 import { loginUser } from '@/lib/auth-service';
 import { useAuthStore } from '@/lib/auth-store';
 
 export default function LoginScreen() {
-  const colorScheme = useColorScheme();
-  const colors = getColors(colorScheme === 'dark');
+  const isDarkMode = useIsDarkMode();
+  const colors = getColors(isDarkMode);
   const { setUser } = useAuthStore();
 
   const [email, setEmail] = useState('');

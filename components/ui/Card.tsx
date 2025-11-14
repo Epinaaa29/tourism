@@ -1,7 +1,8 @@
 import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, useColorScheme, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { getColors } from '../../constants/colors';
+import { useIsDarkMode } from '../../hooks/use-theme';
 import { LocationRow } from './LocationRow';
 import { PlaceholderImage } from './PlaceholderImage';
 import { RatingBadge } from './RatingBadge';
@@ -29,8 +30,8 @@ export const Card: React.FC<CardProps> = ({
   onPress,
   style,
 }) => {
-  const colorScheme = useColorScheme();
-  const colors = getColors(colorScheme === 'dark');
+  const isDarkMode = useIsDarkMode();
+  const colors = getColors(isDarkMode);
 
   return (
     <TouchableOpacity

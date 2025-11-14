@@ -1,7 +1,8 @@
 import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
-import { StyleSheet, Text, useColorScheme, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { getColors } from '../../constants/colors';
+import { useIsDarkMode } from '../../hooks/use-theme';
 
 interface RatingBadgeProps {
   rating: number;
@@ -14,8 +15,8 @@ export const RatingBadge: React.FC<RatingBadgeProps> = ({
   size = 'medium',
   showStars = true 
 }) => {
-  const colorScheme = useColorScheme();
-  const colors = getColors(colorScheme === 'dark');
+  const isDarkMode = useIsDarkMode();
+  const colors = getColors(isDarkMode);
 
   const sizeStyles = {
     small: { fontSize: 12, iconSize: 12, padding: 4 },

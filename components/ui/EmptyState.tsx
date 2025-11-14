@@ -1,7 +1,8 @@
 import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
-import { StyleSheet, Text, useColorScheme, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { getColors } from '../../constants/colors';
+import { useIsDarkMode } from '../../hooks/use-theme';
 
 interface EmptyStateProps {
   icon: keyof typeof Ionicons.glyphMap;
@@ -16,8 +17,8 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
   description,
   action,
 }) => {
-  const colorScheme = useColorScheme();
-  const colors = getColors(colorScheme === 'dark');
+  const isDarkMode = useIsDarkMode();
+  const colors = getColors(isDarkMode);
 
   return (
     <View style={styles.container}>

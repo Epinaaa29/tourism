@@ -1,14 +1,15 @@
 import { Ionicons } from '@expo/vector-icons';
 import { router, useLocalSearchParams } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { Alert, Linking, ScrollView, StyleSheet, Text, TouchableOpacity, useColorScheme, View } from 'react-native';
+import { Alert, Linking, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { getColors } from '../../constants/colors';
+import { useIsDarkMode } from '../../hooks/use-theme';
 import { useTourStore } from '../../lib/tour-store';
 import { Transport } from '../../types';
 
 export default function TransportDetailScreen() {
-  const colorScheme = useColorScheme();
-  const colors = getColors(colorScheme === 'dark');
+  const isDarkMode = useIsDarkMode();
+  const colors = getColors(isDarkMode);
   const { transportId } = useLocalSearchParams<{ transportId: string }>();
   
   const { routes } = useTourStore();

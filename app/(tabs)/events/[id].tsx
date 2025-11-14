@@ -1,7 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { router, useLocalSearchParams } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { Alert, Linking, ScrollView, StyleSheet, Text, TouchableOpacity, useColorScheme, View } from 'react-native';
+import { Alert, Linking, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { OpenStreetMapView } from '@/components/ui/OpenStreetMapView';
 
 import { LocationRow } from '@/components/ui/LocationRow';
@@ -10,17 +10,18 @@ import { ImageSlider } from '@/components/ui/ImageSlider';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 import { getImagesForItem } from '@/lib/image-utils';
 import { getColors } from '@/constants/colors';
+import { useIsDarkMode } from '@/hooks/use-theme';
 import { useAppStore } from '@/lib/store';
 import { useTourStore } from '@/lib/tour-store';
 import { Item } from '@/types';
 
 export default function EventDetailScreen() {
-  const colorScheme = useColorScheme();
-  const colors = getColors(colorScheme === 'dark');
+  const isDarkMode = useIsDarkMode();
+  const colors = getColors(isDarkMode);
   const { id } = useLocalSearchParams<{ id: string }>();
   
   const { data, isFavorite, toggleFavorite, getNearbyItems } = useAppStore();
-  const { getTourByDestinationId, loadTourRoutes } = useTourStore();
+  const { routes, loadTourRoutes } = useTourStore();
   const [item, setItem] = useState<Item | null>(null);
   const [nearbyItems, setNearbyItems] = useState<Item[]>([]);
   const [hasTourRoute, setHasTourRoute] = useState(false);
@@ -34,16 +35,46 @@ export default function EventDetailScreen() {
           const nearby = getNearbyItems(foundItem, 'event');
           setNearbyItems(nearby);
           
-          // Load tour routes and check if this destination has a tour
-          await loadTourRoutes();
-          const tourRoute = getTourByDestinationId(id);
-          setHasTourRoute(!!tourRoute);
+          // Load tour routes if not already loaded
+          try {
+            let currentRoutes = routes;
+            if (currentRoutes.length === 0) {
+              await loadTourRoutes();
+              // Get routes after loading
+              currentRoutes = useTourStore.getState().routes;
+            }
+            
+            // First try to match by destinationId
+            let tourRoute = currentRoutes.find(route => route.destinationId === id);
+            
+            // If no match by ID, try to match by name (case-insensitive, partial match)
+            if (!tourRoute && foundItem.name) {
+              const itemNameLower = foundItem.name.toLowerCase();
+              tourRoute = currentRoutes.find(route => {
+                const routeNameLower = route.destinationName.toLowerCase();
+                return routeNameLower.includes(itemNameLower) || 
+                       itemNameLower.includes(routeNameLower) ||
+                       itemNameLower.replace(/\s+/g, '') === routeNameLower.replace(/\s+/g, '');
+              });
+            }
+            
+            console.log('🔍 Tour Route Check:', {
+              itemId: id,
+              itemName: foundItem.name,
+              foundRoute: tourRoute ? tourRoute.id : null,
+              hasTourRoute: !!tourRoute
+            });
+            setHasTourRoute(!!tourRoute);
+          } catch (error) {
+            console.error('Error loading tour routes:', error);
+            setHasTourRoute(false);
+          }
         }
       }
     };
 
     initializeData();
-  }, [id, data]);
+  }, [id, data, routes]);
 
   const handleOpenMaps = () => {
     if (item) {
@@ -65,14 +96,51 @@ export default function EventDetailScreen() {
   };
 
   const handleStartTour = async () => {
-    if (!id) return;
+    if (!id || !item) return;
     
-    const tourRoute = getTourByDestinationId(id);
+    // Ensure routes are loaded
+    let currentRoutes = useTourStore.getState().routes;
+    if (currentRoutes.length === 0) {
+      await useTourStore.getState().loadTourRoutes();
+      currentRoutes = useTourStore.getState().routes;
+    }
+    
+    // Use the same matching logic as checkTourRoute
+    let tourRoute = currentRoutes.find(route => route.destinationId === id);
+    
+    // If no match by ID, try to match by name (prioritize exact/close matches)
+    if (!tourRoute && item.name) {
+      const itemNameLower = item.name.toLowerCase().trim();
+      const itemNameNormalized = itemNameLower.replace(/\s+/g, '');
+      
+      // First try exact match (after normalization)
+      tourRoute = currentRoutes.find(route => {
+        const routeNameNormalized = route.destinationName.toLowerCase().trim().replace(/\s+/g, '');
+        return routeNameNormalized === itemNameNormalized;
+      });
+      
+      // If still no match, try partial match (but be more strict)
+      if (!tourRoute) {
+        tourRoute = currentRoutes.find(route => {
+          const routeNameLower = route.destinationName.toLowerCase().trim();
+          // Only match if one name is a significant substring of the other (at least 5 chars)
+          const minLength = Math.min(itemNameLower.length, routeNameLower.length);
+          if (minLength < 5) return false;
+          
+          return routeNameLower === itemNameLower ||
+                 (routeNameLower.includes(itemNameLower) && itemNameLower.length >= minLength * 0.7) ||
+                 (itemNameLower.includes(routeNameLower) && routeNameLower.length >= minLength * 0.7);
+        });
+      }
+    }
+    
     if (!tourRoute) {
+      console.log('❌ No tour route found:', { id, itemName: item.name, routesCount: currentRoutes.length });
       Alert.alert('No Tour Available', 'This destination does not have a guided tour route.');
       return;
     }
 
+    console.log('✅ Starting tour:', { tourId: tourRoute.id, destinationId: tourRoute.destinationId, name: tourRoute.destinationName });
     try {
       await useTourStore.getState().startTour(tourRoute.id);
       router.push({

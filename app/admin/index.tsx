@@ -1,10 +1,11 @@
 import { Ionicons } from '@expo/vector-icons';
 import { router, Stack } from 'expo-router';
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, useColorScheme, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import { SectionTitle } from '@/components/ui/SectionTitle';
 import { getColors } from '@/constants/colors';
+import { useIsDarkMode } from '@/hooks/use-theme';
 import { useAppStore } from '@/lib/store';
 import { Category } from '@/types';
 
@@ -22,8 +23,8 @@ const CategoryCard = ({
   count: number; 
   onPress: () => void; 
 }) => {
-  const colorScheme = useColorScheme();
-  const colors = getColors(colorScheme === 'dark');
+  const isDarkMode = useIsDarkMode();
+  const colors = getColors(isDarkMode);
 
   const categoryInfo = {
     tourism: { title: 'Tourism', icon: 'camera-outline' as const, color: colors.primary },
@@ -53,8 +54,8 @@ const CategoryCard = ({
 };
 
 export default function AdminScreen() {
-  const colorScheme = useColorScheme();
-  const colors = getColors(colorScheme === 'dark');
+  const isDarkMode = useIsDarkMode();
+  const colors = getColors(isDarkMode);
   const { data } = useAppStore();
 
   const categories: Category[] = ['tourism', 'culinary', 'hotel', 'event'];
@@ -65,6 +66,10 @@ export default function AdminScreen() {
 
   const handleCategoryPress = (category: Category) => {
     router.push(`/admin/${category}`);
+  };
+
+  const handleTourGuidesPress = () => {
+    router.push('/admin/tour-guides');
   };
 
   const handleBack = () => {
@@ -98,6 +103,22 @@ export default function AdminScreen() {
               onPress={() => handleCategoryPress(category)}
             />
           ))}
+          
+          {/* Tour Guides Card */}
+          <TouchableOpacity
+            style={[styles.categoryCard, { backgroundColor: colors.card }]}
+            onPress={handleTourGuidesPress}
+          >
+            <View style={[styles.iconContainer, { backgroundColor: '#8B5CF6' + '20' }]}>
+              <Ionicons name="map-outline" size={32} color="#8B5CF6" />
+            </View>
+            <Text style={[styles.categoryTitle, { color: colors.text }]}>
+              Tour Guides
+            </Text>
+            <Text style={[styles.categoryCount, { color: colors.textMuted }]}>
+              Manage routes
+            </Text>
+          </TouchableOpacity>
         </View>
 
         <View style={styles.statsContainer}>

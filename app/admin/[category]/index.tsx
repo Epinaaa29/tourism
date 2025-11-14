@@ -1,11 +1,12 @@
 import { Ionicons } from '@expo/vector-icons';
-import { router, Stack, useLocalSearchParams } from 'expo-router';
+import { router, Stack, useLocalSearchParams, useFocusEffect } from 'expo-router';
 import React from 'react';
-import { Alert, FlatList, StyleSheet, Text, TouchableOpacity, useColorScheme, View } from 'react-native';
+import { Alert, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import { EmptyState } from '@/components/ui/EmptyState';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 import { getColors } from '@/constants/colors';
+import { useIsDarkMode } from '@/hooks/use-theme';
 import { saveLocalEdit } from '@/lib/data';
 import { useAppStore } from '@/lib/store';
 import { useAuthStore } from '@/lib/auth-store';
@@ -20,8 +21,8 @@ const AdminItemCard = ({
   onEdit: () => void; 
   onDelete: () => void; 
 }) => {
-  const colorScheme = useColorScheme();
-  const colors = getColors(colorScheme === 'dark');
+  const isDarkMode = useIsDarkMode();
+  const colors = getColors(isDarkMode);
 
   return (
     <View style={[styles.itemCard, { backgroundColor: colors.card }]}>
@@ -55,13 +56,22 @@ const AdminItemCard = ({
 };
 
 export default function AdminCategoryScreen() {
-  const colorScheme = useColorScheme();
-  const colors = getColors(colorScheme === 'dark');
+  const isDarkMode = useIsDarkMode();
+  const colors = getColors(isDarkMode);
   const { category } = useLocalSearchParams<{ category: Category }>();
-  const { data } = useAppStore();
+  const { data, loadAppData } = useAppStore();
   const { user } = useAuthStore();
 
   const items = data[category!] || [];
+
+  // Refresh data when screen comes into focus (when navigating back from edit screen)
+  useFocusEffect(
+    React.useCallback(() => {
+      if (user?.uid) {
+        loadAppData(user.uid);
+      }
+    }, [user?.uid, loadAppData])
+  );
 
   const categoryInfo = {
     tourism: { title: 'Tourism', icon: 'camera-outline' as const },
@@ -94,6 +104,7 @@ export default function AdminCategoryScreen() {
             await saveLocalEdit({
               id: item.id,
               action: 'delete',
+              category: item.category,
               timestamp: new Date().toISOString(),
             }, user?.uid);
             // Refresh data by reloading the store

@@ -1,20 +1,89 @@
 import { Ionicons } from '@expo/vector-icons';
 import { router, Stack, useLocalSearchParams } from 'expo-router';
-import React, { useEffect, useState } from 'react';
-import { Alert, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, useColorScheme, View } from 'react-native';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { Alert, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { Image } from 'expo-image';
 
 import { SectionTitle } from '@/components/ui/SectionTitle';
 import { getColors } from '@/constants/colors';
+import { useIsDarkMode } from '@/hooks/use-theme';
 import { saveLocalEdit } from '@/lib/data';
 import { pickImageAndConvertToBase64, base64ToImageUri } from '@/lib/image-base64';
 import { useAppStore } from '@/lib/store';
 import { useAuthStore } from '@/lib/auth-store';
 import { Category, CulinaryItem, EventItem, HotelItem, TourismItem } from '@/types';
 
+// InputField component - defined outside to prevent recreation on each render
+const InputField = React.memo(({ 
+  label, 
+  value, 
+  onChangeText, 
+  placeholder, 
+  keyboardType = 'default',
+  multiline = false,
+  inputColors
+}: {
+  label: string;
+  value: string;
+  onChangeText: (text: string) => void;
+  placeholder: string;
+  keyboardType?: any;
+  multiline?: boolean;
+  inputColors: any;
+}) => {
+  return (
+    <View style={inputFieldStyles.inputGroup}>
+      <Text style={[inputFieldStyles.inputLabel, { color: inputColors.text }]}>
+        {label}
+      </Text>
+      <TextInput
+        style={[
+          inputFieldStyles.input,
+          {
+            backgroundColor: inputColors.surface,
+            color: inputColors.text,
+            borderColor: inputColors.border,
+          },
+          multiline && inputFieldStyles.multilineInput
+        ]}
+        value={value}
+        onChangeText={onChangeText}
+        placeholder={placeholder}
+        placeholderTextColor={inputColors.textMuted}
+        keyboardType={keyboardType}
+        multiline={multiline}
+        blurOnSubmit={false}
+        returnKeyType={multiline ? 'default' : 'next'}
+      />
+    </View>
+  );
+});
+
+const inputFieldStyles = StyleSheet.create({
+  inputGroup: {
+    marginBottom: 16,
+  },
+  inputLabel: {
+    fontSize: 16,
+    fontWeight: '600',
+    marginBottom: 8,
+  },
+  input: {
+    borderWidth: 1,
+    borderRadius: 12,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    fontSize: 16,
+  },
+  multilineInput: {
+    height: 80,
+    textAlignVertical: 'top',
+  },
+});
+
 export default function AdminItemScreen() {
-  const colorScheme = useColorScheme();
-  const colors = getColors(colorScheme === 'dark');
+  const isDarkMode = useIsDarkMode();
+  const colors = getColors(isDarkMode);
   const { category, id } = useLocalSearchParams<{ category: Category; id: string }>();
   const { data } = useAppStore();
   const { user } = useAuthStore();
@@ -142,6 +211,10 @@ export default function AdminItemScreen() {
         timestamp: new Date().toISOString(),
       }, user?.uid);
 
+      // Reload data after saving
+      const { loadAppData } = useAppStore.getState();
+      await loadAppData(user?.uid);
+
       Alert.alert(
         'Success',
         `Item ${isEditing ? 'updated' : 'created'} successfully`,
@@ -195,44 +268,69 @@ export default function AdminItemScreen() {
     return base64ToImageUri(base64);
   };
 
-  const InputField = ({ 
-    label, 
-    value, 
-    onChangeText, 
-    placeholder, 
-    keyboardType = 'default',
-    multiline = false 
-  }: {
-    label: string;
-    value: string;
-    onChangeText: (text: string) => void;
-    placeholder: string;
-    keyboardType?: any;
-    multiline?: boolean;
-  }) => (
-    <View style={styles.inputGroup}>
-      <Text style={[styles.inputLabel, { color: colors.text }]}>
-        {label}
-      </Text>
-      <TextInput
-        style={[
-          styles.input,
-          {
-            backgroundColor: colors.surface,
-            color: colors.text,
-            borderColor: colors.border,
-          },
-          multiline && styles.multilineInput
-        ]}
-        value={value}
-        onChangeText={onChangeText}
-        placeholder={placeholder}
-        placeholderTextColor={colors.textMuted}
-        keyboardType={keyboardType}
-        multiline={multiline}
-      />
-    </View>
-  );
+  // Memoize colors to prevent InputField re-renders
+  const inputColors = useMemo(() => colors, [isDarkMode]);
+
+  // Create stable callback handlers for all form fields
+  const handleNameChange = useCallback((text: string) => {
+    setFormData(prev => ({ ...prev, name: text }));
+  }, []);
+
+  const handleDistrictChange = useCallback((text: string) => {
+    setFormData(prev => ({ ...prev, district: text }));
+  }, []);
+
+  const handleRatingChange = useCallback((text: string) => {
+    setFormData(prev => ({ ...prev, rating: text }));
+  }, []);
+
+  const handleDescriptionChange = useCallback((text: string) => {
+    setFormData(prev => ({ ...prev, description: text }));
+  }, []);
+
+  const handleLatitudeChange = useCallback((text: string) => {
+    setFormData(prev => ({ ...prev, latitude: text }));
+  }, []);
+
+  const handleLongitudeChange = useCallback((text: string) => {
+    setFormData(prev => ({ ...prev, longitude: text }));
+  }, []);
+
+  const handleOperatingHoursChange = useCallback((text: string) => {
+    setFormData(prev => ({ ...prev, operatingHours: text }));
+  }, []);
+
+  const handlePriceRangeChange = useCallback((text: string) => {
+    setFormData(prev => ({ ...prev, priceRange: text }));
+  }, []);
+
+  const handleAdmissionFeeChange = useCallback((text: string) => {
+    setFormData(prev => ({ ...prev, admissionFee: text }));
+  }, []);
+
+  const handleCuisineTypeChange = useCallback((text: string) => {
+    setFormData(prev => ({ ...prev, cuisineType: text }));
+  }, []);
+
+  const handleStarRatingChange = useCallback((text: string) => {
+    setFormData(prev => ({ ...prev, starRating: text }));
+  }, []);
+
+  const handleAmenitiesChange = useCallback((text: string) => {
+    setFormData(prev => ({ ...prev, amenities: text }));
+  }, []);
+
+  const handleStartDateChange = useCallback((text: string) => {
+    setFormData(prev => ({ ...prev, startDate: text }));
+  }, []);
+
+  const handleEndDateChange = useCallback((text: string) => {
+    setFormData(prev => ({ ...prev, endDate: text }));
+  }, []);
+
+  const handleVenueChange = useCallback((text: string) => {
+    setFormData(prev => ({ ...prev, venue: text }));
+  }, []);
 
   const categoryInfo = {
     tourism: { title: 'Tourism', icon: 'camera-outline' as const },
@@ -260,7 +358,18 @@ export default function AdminItemScreen() {
   return (
     <>
       <Stack.Screen options={{ title: screenTitle, headerShown: false }} />
-      <ScrollView style={[styles.container, { backgroundColor: colors.background }]}>
+      <KeyboardAvoidingView 
+        style={[styles.container, { backgroundColor: colors.background }]}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={Platform.OS === 'ios' ? 90 : 0}
+      >
+      <ScrollView 
+        style={styles.scrollView}
+        keyboardShouldPersistTaps="always"
+        keyboardDismissMode="none"
+        contentContainerStyle={styles.scrollContent}
+        nestedScrollEnabled={true}
+      >
         <View style={styles.header}>
         <TouchableOpacity onPress={handleBack} style={styles.backButton}>
           <Ionicons name="arrow-back" size={24} color={colors.text} />
@@ -286,36 +395,40 @@ export default function AdminItemScreen() {
           <InputField
             label="Name *"
             value={formData.name}
-            onChangeText={(text) => setFormData({ ...formData, name: text })}
+            onChangeText={handleNameChange}
             placeholder="Enter item name"
+            inputColors={inputColors}
           />
 
           <InputField
             label="District *"
             value={formData.district}
-            onChangeText={(text) => setFormData({ ...formData, district: text })}
+            onChangeText={handleDistrictChange}
             placeholder="e.g., City Center, North District"
+            inputColors={inputColors}
           />
 
           <InputField
             label="Rating *"
             value={formData.rating}
-            onChangeText={(text) => setFormData({ ...formData, rating: text })}
+            onChangeText={handleRatingChange}
             placeholder="0.0 - 5.0"
             keyboardType="numeric"
+            inputColors={inputColors}
           />
 
           <InputField
             label="Description *"
             value={formData.description}
-            onChangeText={(text) => setFormData({ ...formData, description: text })}
+            onChangeText={handleDescriptionChange}
             placeholder="Enter detailed description"
             multiline
+            inputColors={inputColors}
           />
 
           {/* Image Upload Section */}
-          <View style={styles.inputGroup}>
-            <Text style={[styles.inputLabel, { color: colors.text }]}>
+          <View style={inputFieldStyles.inputGroup}>
+            <Text style={[inputFieldStyles.inputLabel, { color: colors.text }]}>
               Main Image *
             </Text>
             {mainImage ? (
@@ -346,8 +459,8 @@ export default function AdminItemScreen() {
           </View>
 
           {/* Additional Images */}
-          <View style={styles.inputGroup}>
-            <Text style={[styles.inputLabel, { color: colors.text }]}>
+          <View style={inputFieldStyles.inputGroup}>
+            <Text style={[inputFieldStyles.inputLabel, { color: colors.text }]}>
               Additional Images ({additionalImages.length})
             </Text>
             <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.additionalImagesContainer}>
@@ -382,31 +495,35 @@ export default function AdminItemScreen() {
             <InputField
               label="Latitude *"
               value={formData.latitude}
-              onChangeText={(text) => setFormData({ ...formData, latitude: text })}
+              onChangeText={handleLatitudeChange}
               placeholder="-6.200000"
               keyboardType="numeric"
+              inputColors={inputColors}
             />
             <InputField
               label="Longitude *"
               value={formData.longitude}
-              onChangeText={(text) => setFormData({ ...formData, longitude: text })}
+              onChangeText={handleLongitudeChange}
               placeholder="106.816666"
               keyboardType="numeric"
+              inputColors={inputColors}
             />
           </View>
 
           <InputField
             label="Operating Hours"
             value={formData.operatingHours}
-            onChangeText={(text) => setFormData({ ...formData, operatingHours: text })}
+            onChangeText={handleOperatingHoursChange}
             placeholder="e.g., 9:00 AM - 5:00 PM"
+            inputColors={inputColors}
           />
 
           <InputField
             label="Price Range"
             value={formData.priceRange}
-            onChangeText={(text) => setFormData({ ...formData, priceRange: text })}
+            onChangeText={handlePriceRangeChange}
             placeholder="e.g., $, $$, $$$, $$$$"
+            inputColors={inputColors}
           />
 
           {/* Category-specific fields */}
@@ -414,8 +531,9 @@ export default function AdminItemScreen() {
             <InputField
               label="Admission Fee"
               value={formData.admissionFee}
-              onChangeText={(text) => setFormData({ ...formData, admissionFee: text })}
+              onChangeText={handleAdmissionFeeChange}
               placeholder="e.g., Free, $5, $10"
+              inputColors={inputColors}
             />
           )}
 
@@ -423,8 +541,9 @@ export default function AdminItemScreen() {
             <InputField
               label="Cuisine Type"
               value={formData.cuisineType}
-              onChangeText={(text) => setFormData({ ...formData, cuisineType: text })}
+              onChangeText={handleCuisineTypeChange}
               placeholder="e.g., Italian, Japanese, Local"
+              inputColors={inputColors}
             />
           )}
 
@@ -433,15 +552,17 @@ export default function AdminItemScreen() {
               <InputField
                 label="Star Rating"
                 value={formData.starRating}
-                onChangeText={(text) => setFormData({ ...formData, starRating: text })}
+                onChangeText={handleStarRatingChange}
                 placeholder="1-5"
                 keyboardType="numeric"
+                inputColors={inputColors}
               />
               <InputField
                 label="Amenities"
                 value={formData.amenities}
-                onChangeText={(text) => setFormData({ ...formData, amenities: text })}
+                onChangeText={handleAmenitiesChange}
                 placeholder="WiFi, Pool, Spa, Gym (comma separated)"
+                inputColors={inputColors}
               />
             </>
           )}
@@ -451,26 +572,30 @@ export default function AdminItemScreen() {
               <InputField
                 label="Start Date"
                 value={formData.startDate}
-                onChangeText={(text) => setFormData({ ...formData, startDate: text })}
+                onChangeText={handleStartDateChange}
                 placeholder="2024-07-15T18:00:00.000Z"
+                inputColors={inputColors}
               />
               <InputField
                 label="End Date"
                 value={formData.endDate}
-                onChangeText={(text) => setFormData({ ...formData, endDate: text })}
+                onChangeText={handleEndDateChange}
                 placeholder="2024-07-17T23:00:00.000Z"
+                inputColors={inputColors}
               />
               <InputField
                 label="Venue"
                 value={formData.venue}
-                onChangeText={(text) => setFormData({ ...formData, venue: text })}
+                onChangeText={handleVenueChange}
                 placeholder="Event venue name"
+                inputColors={inputColors}
               />
             </>
           )}
         </View>
       </View>
     </ScrollView>
+    </KeyboardAvoidingView>
     </>
   );
 }
@@ -478,6 +603,12 @@ export default function AdminItemScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  scrollView: {
+    flex: 1,
+  },
+  scrollContent: {
+    flexGrow: 1,
   },
   header: {
     flexDirection: 'row',
@@ -507,25 +638,6 @@ const styles = StyleSheet.create({
   },
   form: {
     gap: 20,
-  },
-  inputGroup: {
-    marginBottom: 16,
-  },
-  inputLabel: {
-    fontSize: 16,
-    fontWeight: '600',
-    marginBottom: 8,
-  },
-  input: {
-    borderWidth: 1,
-    borderRadius: 12,
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    fontSize: 16,
-  },
-  multilineInput: {
-    height: 80,
-    textAlignVertical: 'top',
   },
   coordinatesRow: {
     flexDirection: 'row',

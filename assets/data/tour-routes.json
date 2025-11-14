@@ -1,500 +1,828 @@
 [
   {
-    "id": "route-pulau-para",
-    "destinationId": "tourism-1",
-    "destinationName": "Pulau Para (Negeri 8 Pantai)",
+    "id": "route-culinary-bubur-manado-sangihe",
+    "destinationId": "culinary-bubur-manado-sangihe",
+    "destinationName": "Bubur Manado Sangihe",
     "checkpoints": [
       {
-        "id": "checkpoint-para-1",
-        "name": "Pelabuhan Tahuna",
-        "description": "Titik keberangkatan menuju Pulau Para. Tersedia perahu dan speedboat untuk menyeberang.",
-        "latitude": 3.609000,
-        "longitude": 125.489000,
+        "id": "checkpoint-culinary-bubur-manado-sangihe-1",
+        "name": "Pintu Masuk Bubur Manado Sangihe",
+        "description": "Titik awal kunjungan ke Bubur Manado Sangihe. Dapatkan informasi dan peta lokasi.",
+        "latitude": 3.604,
+        "longitude": 125.494,
         "type": "landmark",
         "order": 1,
         "estimatedTime": 0,
-        "notes": "Perahu berangkat setiap jam. Persiapkan peralatan snorkeling dan kamera underwater."
+        "notes": "Selamat datang di Bubur Manado Sangihe. Nikmati pengalaman wisata yang menyenangkan."
       },
       {
-        "id": "checkpoint-para-2",
-        "name": "Pantai Pulau Para",
-        "description": "Pantai dengan pasir putih halus dan air yang jernih. Spot pertama untuk snorkeling.",
-        "latitude": 3.748000,
-        "longitude": 125.598000,
-        "type": "landmark",
-        "order": 2,
-        "estimatedTime": 45,
-        "notes": "Spot terbaik untuk snorkeling. Terumbu karang masih sangat indah."
-      },
-      {
-        "id": "checkpoint-para-3",
-        "name": "Kawasan Konservasi P3K Tatoareng",
-        "description": "Area konservasi dengan keanekaragaman hayati laut yang tinggi.",
-        "latitude": 3.750000,
-        "longitude": 125.600000,
-        "type": "landmark",
-        "order": 3,
-        "estimatedTime": 90,
-        "notes": "Masuk 300 Besar ADWI. Jaga kebersihan dan tidak merusak terumbu karang."
-      }
-    ],
-    "transports": [
-      {
-        "id": "transport-para-1",
-        "name": "Perahu Tradisional",
-        "type": "boat",
-        "description": "Perahu tradisional menuju Pulau Para",
-        "price": "Rp 50.000",
-        "schedule": ["07:00", "09:00", "11:00", "13:00", "15:00"],
-        "duration": "45 menit",
-        "bookingUrl": "",
-        "departurePoint": "Pelabuhan Tahuna",
-        "arrivalPoint": "Pulau Para"
-      }
-    ],
-    "totalEstimatedTime": 180,
-    "difficulty": "medium",
-    "description": "Perjalanan wisata ke Pulau Para dengan 8 pantai indah dan snorkeling di kawasan konservasi."
-  },
-  {
-    "id": "route-gunung-api-mahengetang",
-    "destinationId": "tourism-2",
-    "destinationName": "Gunung Api Bawah Laut Mahengetang",
-    "checkpoints": [
-      {
-        "id": "checkpoint-volcano-1",
-        "name": "Dive Center Tahuna",
-        "description": "Pusat penyelaman dengan instruktur bersertifikat dan peralatan lengkap.",
-        "latitude": 3.608500,
-        "longitude": 125.488500,
-        "type": "landmark",
-        "order": 1,
-        "estimatedTime": 0,
-        "notes": "Wajib briefing keselamatan. Sertifikat diving direkomendasikan."
-      },
-      {
-        "id": "checkpoint-volcano-2",
-        "name": "Lokasi Penyelaman Mahengetang",
-        "description": "Titik penyelaman di atas gunung api bawah laut yang aktif.",
-        "latitude": 3.800000,
-        "longitude": 125.580000,
-        "type": "landmark",
+        "id": "checkpoint-culinary-bubur-manado-sangihe-2",
+        "name": "Bubur Manado Sangihe",
+        "description": "Bubur khas Manado yang diadaptasi dengan rasa lokal Sangihe. Berisi sayuran segar, ikan, dan bumbu rempah yang membuatnya menjadi hidangan yang sehat dan lezat.",
+        "latitude": 3.604,
+        "longitude": 125.494,
+        "type": "restaurant",
         "order": 2,
         "estimatedTime": 60,
-        "notes": "Kedalaman 15-30 meter. Ikuti instruksi pemandu. Pengalaman unik diving di gunung api aktif."
+        "notes": "Jelajahi dan nikmati Bubur Manado Sangihe. Ambil foto dan buat kenangan indah."
       }
     ],
-    "transports": [
-      {
-        "id": "transport-volcano-1",
-        "name": "Boat Diving",
-        "type": "boat",
-        "description": "Kapal khusus untuk aktivitas diving",
-        "price": "Rp 300.000 (paket lengkap)",
-        "schedule": ["08:00", "13:00"],
-        "duration": "1 jam + 2 jam diving",
-        "bookingUrl": "",
-        "departurePoint": "Dive Center",
-        "arrivalPoint": "Mahengetang"
-      }
-    ],
-    "totalEstimatedTime": 240,
-    "difficulty": "hard",
-    "description": "Eksplorasi gunung api bawah laut Banuawuhu dengan diving yang menantang."
+    "transports": [],
+    "totalEstimatedTime": 60,
+    "difficulty": "easy",
+    "description": "Tur terpandu ke Bubur Manado Sangihe. Bubur khas Manado yang diadaptasi dengan rasa lokal Sangihe. Berisi sayuran segar, ikan, dan bumbu rempah yang membuatnya menjadi hidangan yang sehat dan lezat."
   },
   {
-    "id": "route-mangrove-tahuna",
-    "destinationId": "tourism-3",
-    "destinationName": "Kawasan Mangrove Tahuna",
+    "id": "route-culinary-cakalang-fufu",
+    "destinationId": "culinary-cakalang-fufu",
+    "destinationName": "Cakalang Fufu",
     "checkpoints": [
       {
-        "id": "checkpoint-mangrove-1",
-        "name": "Pintu Masuk Mangrove",
-        "description": "Gerbang masuk kawasan wisata mangrove dengan pusat informasi.",
-        "latitude": 3.609500,
-        "longitude": 125.489200,
+        "id": "checkpoint-culinary-cakalang-fufu-1",
+        "name": "Pintu Masuk Cakalang Fufu",
+        "description": "Titik awal kunjungan ke Cakalang Fufu. Dapatkan informasi dan peta lokasi.",
+        "latitude": 3.606,
+        "longitude": 125.492,
         "type": "landmark",
         "order": 1,
         "estimatedTime": 0,
-        "notes": "Dapatkan informasi tentang ekosistem mangrove dari guide lokal."
+        "notes": "Selamat datang di Cakalang Fufu. Nikmati pengalaman wisata yang menyenangkan."
       },
       {
-        "id": "checkpoint-mangrove-2",
-        "name": "Jembatan Kayu Mangrove",
-        "description": "Jembatan kayu sepanjang 500m melintasi hutan mangrove.",
+        "id": "checkpoint-culinary-cakalang-fufu-2",
+        "name": "Cakalang Fufu",
+        "description": "Ikan cakalang yang diasap dengan teknik tradisional, kemudian diolah menjadi hidangan lezat. Biasanya disajikan dengan sayur gedi dan nasi putih.",
+        "latitude": 3.606,
+        "longitude": 125.492,
+        "type": "restaurant",
+        "order": 2,
+        "estimatedTime": 60,
+        "notes": "Jelajahi dan nikmati Cakalang Fufu. Ambil foto dan buat kenangan indah."
+      }
+    ],
+    "transports": [],
+    "totalEstimatedTime": 60,
+    "difficulty": "easy",
+    "description": "Tur terpandu ke Cakalang Fufu. Ikan cakalang yang diasap dengan teknik tradisional, kemudian diolah menjadi hidangan lezat. Biasanya disajikan dengan sayur gedi dan nasi putih."
+  },
+  {
+    "id": "route-culinary-ikan-bakar-sangihe",
+    "destinationId": "culinary-ikan-bakar-sangihe",
+    "destinationName": "Ikan Bakar Sangihe",
+    "checkpoints": [
+      {
+        "id": "checkpoint-culinary-ikan-bakar-sangihe-1",
+        "name": "Pintu Masuk Ikan Bakar Sangihe",
+        "description": "Titik awal kunjungan ke Ikan Bakar Sangihe. Dapatkan informasi dan peta lokasi.",
+        "latitude": 3.609,
+        "longitude": 125.489,
+        "type": "landmark",
+        "order": 1,
+        "estimatedTime": 0,
+        "notes": "Selamat datang di Ikan Bakar Sangihe. Nikmati pengalaman wisata yang menyenangkan."
+      },
+      {
+        "id": "checkpoint-culinary-ikan-bakar-sangihe-2",
+        "name": "Ikan Bakar Sangihe",
+        "description": "Ikan segar yang dibakar dengan bumbu khas Sangihe, disajikan dengan sambal dabu-dabu dan nasi hangat. Menu favorit wisatawan dengan cita rasa laut yang autentik.",
+        "latitude": 3.609,
+        "longitude": 125.489,
+        "type": "restaurant",
+        "order": 2,
+        "estimatedTime": 60,
+        "notes": "Jelajahi dan nikmati Ikan Bakar Sangihe. Ambil foto dan buat kenangan indah."
+      }
+    ],
+    "transports": [],
+    "totalEstimatedTime": 60,
+    "difficulty": "easy",
+    "description": "Tur terpandu ke Ikan Bakar Sangihe. Ikan segar yang dibakar dengan bumbu khas Sangihe, disajikan dengan sambal dabu-dabu dan nasi hangat. Menu favorit wisatawan dengan cita rasa laut yang autentik."
+  },
+  {
+    "id": "route-kuliner-boulevard",
+    "destinationId": "culinary-1",
+    "destinationName": "Kawasan Kuliner Boulevard",
+    "checkpoints": [
+      {
+        "id": "checkpoint-culinary-1",
+        "name": "Pusat Kota Tahuna",
+        "description": "Titik awal dari pusat kota menuju Boulevard.",
         "latitude": 3.609722,
-        "longitude": 125.489444,
+        "longitude": 125.490556,
+        "type": "landmark",
+        "order": 1,
+        "estimatedTime": 0,
+        "notes": "Jarak tempuh dekat, bisa jalan kaki."
+      },
+      {
+        "id": "checkpoint-culinary-2",
+        "name": "Boulevard Entrance",
+        "description": "Gerbang masuk kawasan kuliner Boulevard Tahuna.",
+        "latitude": 3.608333,
+        "longitude": 125.488889,
         "type": "landmark",
         "order": 2,
-        "estimatedTime": 20,
-        "notes": "Spot foto terbaik. Perhatikan burung-burung lokal."
+        "estimatedTime": 10,
+        "notes": "Banyak pilihan rumah makan di sepanjang Boulevard."
       },
       {
-        "id": "checkpoint-mangrove-3",
-        "name": "Area Kuliner Mangrove",
-        "description": "Kawasan kuliner dengan berbagai warung seafood segar.",
-        "latitude": 3.609722,
-        "longitude": 125.489444,
+        "id": "checkpoint-culinary-3",
+        "name": "Area Seafood Boulevard",
+        "description": "Kawasan seafood dengan view laut.",
+        "latitude": 3.608056,
+        "longitude": 125.488,
         "type": "restaurant",
         "order": 3,
-        "estimatedTime": 40,
-        "notes": "Coba seafood bakar dengan view mangrove yang indah."
+        "estimatedTime": 15,
+        "notes": "Coba ikan bakar dan seafood segar khas Sangihe."
       }
     ],
     "transports": [],
-    "totalEstimatedTime": 120,
+    "totalEstimatedTime": 30,
     "difficulty": "easy",
-    "description": "Wisata edukasi ekowisata mangrove dengan kuliner seafood."
+    "description": "Kuliner tour ke kawasan Boulevard Tahuna dengan seafood dan sunset view."
   },
   {
-    "id": "route-air-terjun-kadadima",
-    "destinationId": "tourism-5",
-    "destinationName": "Air Terjun Kadadima",
+    "id": "route-culinary-kopi-sangihe",
+    "destinationId": "culinary-kopi-sangihe",
+    "destinationName": "Kopi Sangihe",
     "checkpoints": [
       {
-        "id": "checkpoint-waterfall-1",
-        "name": "Kampung Laine",
-        "description": "Kampung dengan sejarah panjang sebagai titik awal perjalanan.",
-        "latitude": 3.395000,
-        "longitude": 125.445000,
+        "id": "checkpoint-culinary-kopi-sangihe-1",
+        "name": "Pintu Masuk Kopi Sangihe",
+        "description": "Titik awal kunjungan ke Kopi Sangihe. Dapatkan informasi dan peta lokasi.",
+        "latitude": 3.64,
+        "longitude": 125.54,
         "type": "landmark",
         "order": 1,
         "estimatedTime": 0,
-        "notes": "Sewa guide lokal. Dengar cerita 'Tompohe Dalam Mangaha Laine Lohong Kadadima'."
+        "notes": "Selamat datang di Kopi Sangihe. Nikmati pengalaman wisata yang menyenangkan."
       },
       {
-        "id": "checkpoint-waterfall-2",
-        "name": "Pos 1 - Area Parkir",
-        "description": "Area parkir kendaraan sebelum trekking ke air terjun.",
-        "latitude": 3.398000,
-        "longitude": 125.448000,
-        "type": "landmark",
-        "order": 2,
-        "estimatedTime": 15,
-        "notes": "Bawa air minum dan snack untuk perjalanan."
-      },
-      {
-        "id": "checkpoint-waterfall-3",
-        "name": "Air Terjun Tingkat 1 Kadadima",
-        "description": "Tingkat pertama dari lima tingkat air terjun Kadadima.",
-        "latitude": 3.400000,
-        "longitude": 125.450000,
-        "type": "landmark",
-        "order": 3,
-        "estimatedTime": 45,
-        "notes": "Spot terbaik untuk berenang dan foto. Hati-hati dengan bebatuan licin. Top 500 ADWI."
-      }
-    ],
-    "transports": [],
-    "totalEstimatedTime": 150,
-    "difficulty": "medium",
-    "description": "Trekking ke air terjun 5 tingkat di Kampung Laine dengan sejarah dan budaya lokal."
-  },
-  {
-    "id": "route-pantai-pananualeng",
-    "destinationId": "tourism-6",
-    "destinationName": "Pantai Pananualeng (Batuwingkung)",
-    "checkpoints": [
-      {
-        "id": "checkpoint-pananualeng-1",
-        "name": "Kampung Tariang Baru",
-        "description": "Kampung pesisir dekat perbatasan Filipina.",
-        "latitude": 3.695000,
-        "longitude": 125.495000,
-        "type": "landmark",
-        "order": 1,
-        "estimatedTime": 0,
-        "notes": "Desa berbatasan dengan Negara tetangga Philipines."
-      },
-      {
-        "id": "checkpoint-pananualeng-2",
-        "name": "Puncak Batuwingkung",
-        "description": "Puncak dengan view sunrise dan pemandangan pulau-pulau.",
-        "latitude": 3.698000,
-        "longitude": 125.498000,
-        "type": "landmark",
-        "order": 2,
-        "estimatedTime": 15,
-        "notes": "Trekking 15 menit. Datang pagi untuk sunrise terbaik."
-      },
-      {
-        "id": "checkpoint-pananualeng-3",
-        "name": "Pantai Pananualeng",
-        "description": "Pantai dengan pasir putih halus dan air laut jernih.",
-        "latitude": 3.700000,
-        "longitude": 125.500000,
-        "type": "landmark",
-        "order": 3,
-        "estimatedTime": 40,
-        "notes": "Spot snorkeling di KKP (Kawasan Konservasi Pesisir)."
-      },
-      {
-        "id": "checkpoint-pananualeng-4",
-        "name": "Batu Putih Pulau Enggahai",
-        "description": "Formasi batu putih unik yang bisa dijangkau saat air surut.",
-        "latitude": 3.702000,
-        "longitude": 125.502000,
-        "type": "landmark",
-        "order": 4,
-        "estimatedTime": 70,
-        "notes": "20 menit perahu atau 30 menit jalan kaki saat air surut."
-      }
-    ],
-    "transports": [
-      {
-        "id": "transport-pananualeng-1",
-        "name": "Angkutan Umum",
-        "type": "bus",
-        "description": "Angkutan umum dari Tahuna ke Tariang Baru",
-        "price": "Rp 30.000",
-        "schedule": ["07:00", "10:00", "14:00"],
-        "duration": "1.5 jam",
-        "bookingUrl": "",
-        "departurePoint": "Tahuna",
-        "arrivalPoint": "Tariang Baru"
-      }
-    ],
-    "totalEstimatedTime": 180,
-    "difficulty": "medium",
-    "description": "Eksplorasi pantai dan spot unik di perbatasan dengan Filipina."
-  },
-  {
-    "id": "route-desa-hesang",
-    "destinationId": "tourism-7",
-    "destinationName": "Desa Wisata Hesang",
-    "checkpoints": [
-      {
-        "id": "checkpoint-hesang-1",
-        "name": "Entrance Desa Hesang",
-        "description": "Gerbang masuk desa wisata Hesang dengan informasi wisata.",
-        "latitude": 3.444000,
-        "longitude": 125.504000,
-        "type": "landmark",
-        "order": 1,
-        "estimatedTime": 0,
-        "notes": "Desa Bersinar (Bersih Narkoba). Ramah keluarga. Top 500 ADWI."
-      },
-      {
-        "id": "checkpoint-hesang-2",
-        "name": "Pantai Pasir Putih Hesang",
-        "description": "Pantai berpasir putih dengan air laut jernih.",
-        "latitude": 3.445868,
-        "longitude": 125.506095,
-        "type": "landmark",
-        "order": 2,
-        "estimatedTime": 15,
-        "notes": "Spot untuk snorkeling dan berenang."
-      },
-      {
-        "id": "checkpoint-hesang-3",
-        "name": "Area Mangrove Hesang",
-        "description": "Hutan mangrove yang tumbuh hampir di seluruh pesisir pantai.",
-        "latitude": 3.446500,
-        "longitude": 125.507000,
-        "type": "landmark",
-        "order": 3,
-        "estimatedTime": 45,
-        "notes": "Edukasi ekosistem mangrove. Bisa melihat kepiting dan burung."
-      }
-    ],
-    "transports": [
-      {
-        "id": "transport-hesang-1",
-        "name": "Angkutan Umum",
-        "type": "bus",
-        "description": "Angkutan umum dari Tahuna ke Kec. Tamako",
-        "price": "Rp 20.000",
-        "schedule": ["07:00", "10:00", "13:00", "16:00"],
-        "duration": "45 menit",
-        "bookingUrl": "",
-        "departurePoint": "Terminal Tahuna",
-        "arrivalPoint": "Desa Hesang"
-      }
-    ],
-    "totalEstimatedTime": 150,
-    "difficulty": "easy",
-    "description": "Wisata desa dengan pantai, mangrove, dan budaya lokal."
-  },
-  {
-    "id": "route-desa-lenganeng",
-    "destinationId": "tourism-8",
-    "destinationName": "Desa Lenganeng (Negeri Seribu Pedang)",
-    "checkpoints": [
-      {
-        "id": "checkpoint-lenganeng-1",
-        "name": "Entrance Lenganeng",
-        "description": "Pintu masuk kampung Lenganeng di ketinggian 20-75 mdpl.",
-        "latitude": 3.648000,
-        "longitude": 125.508000,
-        "type": "landmark",
-        "order": 1,
-        "estimatedTime": 0,
-        "notes": "Udara sejuk, cocok untuk pertanian. Negeri Seribu Pedang."
-      },
-      {
-        "id": "checkpoint-lenganeng-2",
-        "name": "Workshop Pandai Besi",
-        "description": "Workshop pengrajin pandai besi tradisional turun temurun.",
-        "latitude": 3.649000,
-        "longitude": 125.509000,
-        "type": "landmark",
-        "order": 2,
-        "estimatedTime": 20,
-        "notes": "Lihat langsung pembuatan parang dan pisau. Laki-laki bekerja di rumah, wanita di kebun."
-      },
-      {
-        "id": "checkpoint-lenganeng-3",
-        "name": "Puncak Lenganeng",
-        "description": "Puncak kampung dengan view kota Tahuna.",
-        "latitude": 3.650000,
-        "longitude": 125.510000,
-        "type": "landmark",
-        "order": 3,
-        "estimatedTime": 45,
-        "notes": "Pemandangan Ibukota Kabupaten Sangihe dari ketinggian."
-      }
-    ],
-    "transports": [],
-    "totalEstimatedTime": 120,
-    "difficulty": "medium",
-    "description": "Wisata budaya pandai besi tradisional dengan view kota Tahuna."
-  },
-  {
-    "id": "route-pulau-bebalang",
-    "destinationId": "tourism-9",
-    "destinationName": "Pulau Bebalang",
-    "checkpoints": [
-      {
-        "id": "checkpoint-bebalang-1",
-        "name": "Pelabuhan Manganitu",
-        "description": "Pelabuhan keberangkatan menuju Pulau Bebalang.",
-        "latitude": 3.380000,
-        "longitude": 125.465000,
-        "type": "landmark",
-        "order": 1,
-        "estimatedTime": 0,
-        "notes": "Perahu berangkat setiap hari. Bawa bekal untuk perjalanan 1 jam."
-      },
-      {
-        "id": "checkpoint-bebalang-2",
-        "name": "Dermaga Pulau Bebalang",
-        "description": "Dermaga untuk perahu lokal. 3 lindongan (termasuk Mendaku & Dakupang).",
-        "latitude": 3.349000,
-        "longitude": 125.479000,
-        "type": "landmark",
+        "id": "checkpoint-culinary-kopi-sangihe-2",
+        "name": "Kopi Sangihe",
+        "description": "Kopi lokal Sangihe yang terkenal dengan aroma harum dan rasa yang khas. Ditanam di lereng gunung dengan ketinggian optimal, menghasilkan kopi berkualitas premium.",
+        "latitude": 3.64,
+        "longitude": 125.54,
+        "type": "restaurant",
         "order": 2,
         "estimatedTime": 60,
-        "notes": "Sambutan hangat dari warga. Bisa homestay di rumah penduduk."
-      },
-      {
-        "id": "checkpoint-bebalang-3",
-        "name": "Pantai Pasir Putih Bebalang",
-        "description": "Pantai dengan pasir putih di pemukiman penduduk.",
-        "latitude": 3.350000,
-        "longitude": 125.480000,
-        "type": "landmark",
-        "order": 3,
-        "estimatedTime": 75,
-        "notes": "Spot snorkeling dengan terumbu karang yang luas di selatan pulau."
-      },
-      {
-        "id": "checkpoint-bebalang-4",
-        "name": "Tebing Terjal Bebalang",
-        "description": "Tebing-tebing terjal bagaikan menara di beberapa sudut pulau.",
-        "latitude": 3.351000,
-        "longitude": 125.481000,
-        "type": "landmark",
-        "order": 4,
-        "estimatedTime": 105,
-        "notes": "Pemandangan spektakuler. Hati-hati saat mendekati tebing."
+        "notes": "Jelajahi dan nikmati Kopi Sangihe. Ambil foto dan buat kenangan indah."
       }
     ],
-    "transports": [
-      {
-        "id": "transport-bebalang-1",
-        "name": "Perahu Lokal",
-        "type": "boat",
-        "description": "Perahu lokal menuju Pulau Bebalang",
-        "price": "Rp 35.000",
-        "schedule": ["08:00", "14:00"],
-        "duration": "1 jam",
-        "bookingUrl": "",
-        "departurePoint": "Pelabuhan Manganitu",
-        "arrivalPoint": "Pulau Bebalang"
-      },
-      {
-        "id": "transport-bebalang-2",
-        "name": "Speed Boat",
-        "type": "boat",
-        "description": "Speed boat untuk perjalanan lebih cepat",
-        "price": "Rp 100.000 (sewa private)",
-        "schedule": ["Sesuai permintaan"],
-        "duration": "30 menit",
-        "bookingUrl": "",
-        "departurePoint": "Pelabuhan Manganitu",
-        "arrivalPoint": "Pulau Bebalang"
-      }
-    ],
-    "totalEstimatedTime": 240,
-    "difficulty": "medium",
-    "description": "Petualangan ke pulau eksotis dengan pantai pasir putih dan tebing terjal."
+    "transports": [],
+    "totalEstimatedTime": 60,
+    "difficulty": "easy",
+    "description": "Tur terpandu ke Kopi Sangihe. Kopi lokal Sangihe yang terkenal dengan aroma harum dan rasa yang khas. Ditanam di lereng gunung dengan ketinggian optimal, menghasilkan kopi berkualitas premium."
   },
   {
-    "id": "route-kampung-bukide",
-    "destinationId": "tourism-14",
-    "destinationName": "Kampung Bukide Timur",
+    "id": "route-culinary-kue-sagu-sangihe",
+    "destinationId": "culinary-kue-sagu-sangihe",
+    "destinationName": "Kue Sagu Sangihe",
     "checkpoints": [
       {
-        "id": "checkpoint-bukide-1",
-        "name": "Pelabuhan Tahuna",
-        "description": "Titik keberangkatan menuju Pulau Bukide.",
-        "latitude": 3.609000,
-        "longitude": 125.489000,
+        "id": "checkpoint-culinary-kue-sagu-sangihe-1",
+        "name": "Pintu Masuk Kue Sagu Sangihe",
+        "description": "Titik awal kunjungan ke Kue Sagu Sangihe. Dapatkan informasi dan peta lokasi.",
+        "latitude": 3.605,
+        "longitude": 125.493,
         "type": "landmark",
         "order": 1,
         "estimatedTime": 0,
-        "notes": "Perahu bermotor tempel. Perjalanan 2 jam. Bawa bekal."
+        "notes": "Selamat datang di Kue Sagu Sangihe. Nikmati pengalaman wisata yang menyenangkan."
       },
       {
-        "id": "checkpoint-bukide-2",
-        "name": "Pantai Pasir Putih Kasaraeng",
-        "description": "Pantai pasir putih sepanjang 1.300 meter.",
-        "latitude": 3.499000,
-        "longitude": 125.549000,
+        "id": "checkpoint-culinary-kue-sagu-sangihe-2",
+        "name": "Kue Sagu Sangihe",
+        "description": "Kue tradisional yang terbuat dari sagu lokal dengan berbagai varian rasa. Camilan khas yang cocok dinikmati sambil menikmati pemandangan pantai.",
+        "latitude": 3.605,
+        "longitude": 125.493,
+        "type": "restaurant",
+        "order": 2,
+        "estimatedTime": 60,
+        "notes": "Jelajahi dan nikmati Kue Sagu Sangihe. Ambil foto dan buat kenangan indah."
+      }
+    ],
+    "transports": [],
+    "totalEstimatedTime": 60,
+    "difficulty": "easy",
+    "description": "Tur terpandu ke Kue Sagu Sangihe. Kue tradisional yang terbuat dari sagu lokal dengan berbagai varian rasa. Camilan khas yang cocok dinikmati sambil menikmati pemandangan pantai."
+  },
+  {
+    "id": "route-culinary-lapola",
+    "destinationId": "culinary-lapola",
+    "destinationName": "Lapola (Ikan Cakalang Roa)",
+    "checkpoints": [
+      {
+        "id": "checkpoint-culinary-lapola-1",
+        "name": "Pintu Masuk Lapola (Ikan Cakalang Roa)",
+        "description": "Titik awal kunjungan ke Lapola (Ikan Cakalang Roa). Dapatkan informasi dan peta lokasi.",
+        "latitude": 3.608,
+        "longitude": 125.49,
+        "type": "landmark",
+        "order": 1,
+        "estimatedTime": 0,
+        "notes": "Selamat datang di Lapola (Ikan Cakalang Roa). Nikmati pengalaman wisata yang menyenangkan."
+      },
+      {
+        "id": "checkpoint-culinary-lapola-2",
+        "name": "Lapola (Ikan Cakalang Roa)",
+        "description": "Makanan tradisional Sangihe berupa ikan cakalang yang diasap dan diolah dengan cara khas. Disajikan dengan sayur ubi dan sambal rica-rica.",
+        "latitude": 3.608,
+        "longitude": 125.49,
+        "type": "restaurant",
+        "order": 2,
+        "estimatedTime": 60,
+        "notes": "Jelajahi dan nikmati Lapola (Ikan Cakalang Roa). Ambil foto dan buat kenangan indah."
+      }
+    ],
+    "transports": [],
+    "totalEstimatedTime": 60,
+    "difficulty": "easy",
+    "description": "Tur terpandu ke Lapola (Ikan Cakalang Roa). Makanan tradisional Sangihe berupa ikan cakalang yang diasap dan diolah dengan cara khas. Disajikan dengan sayur ubi dan sambal rica-rica."
+  },
+  {
+    "id": "route-culinary-papeda-sagu",
+    "destinationId": "culinary-papeda-sagu",
+    "destinationName": "Papeda Sagu dengan Kuah Ikan",
+    "checkpoints": [
+      {
+        "id": "checkpoint-culinary-papeda-sagu-1",
+        "name": "Pintu Masuk Papeda Sagu dengan Kuah Ikan",
+        "description": "Titik awal kunjungan ke Papeda Sagu dengan Kuah Ikan. Dapatkan informasi dan peta lokasi.",
+        "latitude": 3.607,
+        "longitude": 125.491,
+        "type": "landmark",
+        "order": 1,
+        "estimatedTime": 0,
+        "notes": "Selamat datang di Papeda Sagu dengan Kuah Ikan. Nikmati pengalaman wisata yang menyenangkan."
+      },
+      {
+        "id": "checkpoint-culinary-papeda-sagu-2",
+        "name": "Papeda Sagu dengan Kuah Ikan",
+        "description": "Papeda yang terbuat dari sagu lokal, disajikan dengan kuah ikan segar dan sayuran. Hidangan khas yang menggugah selera dengan tekstur unik.",
+        "latitude": 3.607,
+        "longitude": 125.491,
+        "type": "restaurant",
+        "order": 2,
+        "estimatedTime": 60,
+        "notes": "Jelajahi dan nikmati Papeda Sagu dengan Kuah Ikan. Ambil foto dan buat kenangan indah."
+      }
+    ],
+    "transports": [],
+    "totalEstimatedTime": 60,
+    "difficulty": "easy",
+    "description": "Tur terpandu ke Papeda Sagu dengan Kuah Ikan. Papeda yang terbuat dari sagu lokal, disajikan dengan kuah ikan segar dan sayuran. Hidangan khas yang menggugah selera dengan tekstur unik."
+  },
+  {
+    "id": "route-culinary-ubud-udang",
+    "destinationId": "culinary-ubud-udang",
+    "destinationName": "Ubud Udang Sangihe",
+    "checkpoints": [
+      {
+        "id": "checkpoint-culinary-ubud-udang-1",
+        "name": "Pintu Masuk Ubud Udang Sangihe",
+        "description": "Titik awal kunjungan ke Ubud Udang Sangihe. Dapatkan informasi dan peta lokasi.",
+        "latitude": 3.55,
+        "longitude": 125.46,
+        "type": "landmark",
+        "order": 1,
+        "estimatedTime": 0,
+        "notes": "Selamat datang di Ubud Udang Sangihe. Nikmati pengalaman wisata yang menyenangkan."
+      },
+      {
+        "id": "checkpoint-culinary-ubud-udang-2",
+        "name": "Ubud Udang Sangihe",
+        "description": "Hidangan udang segar yang diolah dengan bumbu rempah khas, disajikan dengan nasi dan sayur segar. Lokasi tepat di tepi pantai dengan pemandangan yang menawan.",
+        "latitude": 3.55,
+        "longitude": 125.46,
+        "type": "restaurant",
+        "order": 2,
+        "estimatedTime": 60,
+        "notes": "Jelajahi dan nikmati Ubud Udang Sangihe. Ambil foto dan buat kenangan indah."
+      }
+    ],
+    "transports": [],
+    "totalEstimatedTime": 60,
+    "difficulty": "easy",
+    "description": "Tur terpandu ke Ubud Udang Sangihe. Hidangan udang segar yang diolah dengan bumbu rempah khas, disajikan dengan nasi dan sayur segar. Lokasi tepat di tepi pantai dengan pemandangan yang menawan."
+  },
+  {
+    "id": "route-event-festival-bahari-sangihe",
+    "destinationId": "event-festival-bahari-sangihe",
+    "destinationName": "Festival Bahari Sangihe",
+    "checkpoints": [
+      {
+        "id": "checkpoint-event-festival-bahari-sangihe-1",
+        "name": "Pintu Masuk Festival Bahari Sangihe",
+        "description": "Titik awal kunjungan ke Festival Bahari Sangihe. Dapatkan informasi dan peta lokasi.",
+        "latitude": 3.609,
+        "longitude": 125.489,
+        "type": "landmark",
+        "order": 1,
+        "estimatedTime": 0,
+        "notes": "Selamat datang di Festival Bahari Sangihe. Nikmati pengalaman wisata yang menyenangkan."
+      },
+      {
+        "id": "checkpoint-event-festival-bahari-sangihe-2",
+        "name": "Festival Bahari Sangihe",
+        "description": "Festival tahunan yang menampilkan keindahan bahari Sangihe dengan berbagai atraksi budaya, lomba perahu tradisional, kuliner seafood, dan pertunjukan seni budaya lokal.",
+        "latitude": 3.609,
+        "longitude": 125.489,
         "type": "landmark",
         "order": 2,
         "estimatedTime": 120,
-        "notes": "Pantai panjang dengan pemandangan indah."
+        "notes": "Jelajahi dan nikmati Festival Bahari Sangihe. Ambil foto dan buat kenangan indah."
       },
       {
-        "id": "checkpoint-bukide-3",
-        "name": "Spot Snorkeling Bukide",
-        "description": "Terumbu karang indah dan mamalia laut di pesisir.",
-        "latitude": 3.500000,
-        "longitude": 125.550000,
+        "id": "checkpoint-event-festival-bahari-sangihe-3",
+        "name": "Area Sekitar Festival Bahari Sangihe",
+        "description": "Jelajahi area sekitar Festival Bahari Sangihe untuk pengalaman lebih lengkap.",
+        "latitude": 3.6064019207780578,
+        "longitude": 125.49365410168714,
         "type": "landmark",
         "order": 3,
-        "estimatedTime": 150,
-        "notes": "Perairan kaya ikan deho dan malalugis. Spot wildlife: kus-kus beruang, burung maleo, punting."
+        "estimatedTime": 60,
+        "notes": "Temukan spot-spot menarik di sekitar Festival Bahari Sangihe."
       }
     ],
-    "transports": [
+    "transports": [],
+    "totalEstimatedTime": 180,
+    "difficulty": "medium",
+    "description": "Tur terpandu ke Festival Bahari Sangihe. Festival tahunan yang menampilkan keindahan bahari Sangihe dengan berbagai atraksi budaya, lomba perahu tradisional, kuliner seafood, dan pertunjukan seni budaya lokal."
+  },
+  {
+    "id": "route-event-festival-kopi-sangihe",
+    "destinationId": "event-festival-kopi-sangihe",
+    "destinationName": "Festival Kopi Sangihe",
+    "checkpoints": [
       {
-        "id": "transport-bukide-1",
-        "name": "Perahu Bermotor Tempel",
-        "type": "boat",
-        "description": "Perahu bermotor tempel menuju Pulau Bukide",
-        "price": "Rp 50.000",
-        "schedule": ["08:00", "14:00"],
-        "duration": "2 jam",
-        "bookingUrl": "",
-        "departurePoint": "Pelabuhan Tahuna",
-        "arrivalPoint": "Kampung Bukide Timur"
+        "id": "checkpoint-event-festival-kopi-sangihe-1",
+        "name": "Pintu Masuk Festival Kopi Sangihe",
+        "description": "Titik awal kunjungan ke Festival Kopi Sangihe. Dapatkan informasi dan peta lokasi.",
+        "latitude": 3.64,
+        "longitude": 125.54,
+        "type": "landmark",
+        "order": 1,
+        "estimatedTime": 0,
+        "notes": "Selamat datang di Festival Kopi Sangihe. Nikmati pengalaman wisata yang menyenangkan."
+      },
+      {
+        "id": "checkpoint-event-festival-kopi-sangihe-2",
+        "name": "Festival Kopi Sangihe",
+        "description": "Festival yang mempromosikan kopi lokal Sangihe dengan berbagai aktivitas seperti cupping session, pameran produk kopi, dan workshop pembuatan kopi.",
+        "latitude": 3.64,
+        "longitude": 125.54,
+        "type": "landmark",
+        "order": 2,
+        "estimatedTime": 120,
+        "notes": "Jelajahi dan nikmati Festival Kopi Sangihe. Ambil foto dan buat kenangan indah."
+      },
+      {
+        "id": "checkpoint-event-festival-kopi-sangihe-3",
+        "name": "Area Sekitar Festival Kopi Sangihe",
+        "description": "Jelajahi area sekitar Festival Kopi Sangihe untuk pengalaman lebih lengkap.",
+        "latitude": 3.6408086089739493,
+        "longitude": 125.5390939522318,
+        "type": "landmark",
+        "order": 3,
+        "estimatedTime": 60,
+        "notes": "Temukan spot-spot menarik di sekitar Festival Kopi Sangihe."
       }
     ],
-    "totalEstimatedTime": 300,
-    "difficulty": "hard",
-    "description": "Petualangan ke Pulau Bukide dengan pantai panjang, kuliner kue amik, dan wildlife endemik."
+    "transports": [],
+    "totalEstimatedTime": 180,
+    "difficulty": "medium",
+    "description": "Tur terpandu ke Festival Kopi Sangihe. Festival yang mempromosikan kopi lokal Sangihe dengan berbagai aktivitas seperti cupping session, pameran produk kopi, dan workshop pembuatan kopi."
+  },
+  {
+    "id": "route-event-festival-mangrove",
+    "destinationId": "event-festival-mangrove",
+    "destinationName": "Festival Mangrove dan Konservasi",
+    "checkpoints": [
+      {
+        "id": "checkpoint-event-festival-mangrove-1",
+        "name": "Pintu Masuk Festival Mangrove dan Konservasi",
+        "description": "Titik awal kunjungan ke Festival Mangrove dan Konservasi. Dapatkan informasi dan peta lokasi.",
+        "latitude": 3.6,
+        "longitude": 125.5,
+        "type": "landmark",
+        "order": 1,
+        "estimatedTime": 0,
+        "notes": "Selamat datang di Festival Mangrove dan Konservasi. Nikmati pengalaman wisata yang menyenangkan."
+      },
+      {
+        "id": "checkpoint-event-festival-mangrove-2",
+        "name": "Festival Mangrove dan Konservasi",
+        "description": "Acara edukasi dan konservasi lingkungan yang menampilkan keindahan hutan mangrove Hesang. Termasuk penanaman pohon, edukasi lingkungan, dan pameran produk lokal.",
+        "latitude": 3.6,
+        "longitude": 125.5,
+        "type": "landmark",
+        "order": 2,
+        "estimatedTime": 120,
+        "notes": "Jelajahi dan nikmati Festival Mangrove dan Konservasi. Ambil foto dan buat kenangan indah."
+      },
+      {
+        "id": "checkpoint-event-festival-mangrove-3",
+        "name": "Area Sekitar Festival Mangrove dan Konservasi",
+        "description": "Jelajahi area sekitar Festival Mangrove dan Konservasi untuk pengalaman lebih lengkap.",
+        "latitude": 3.5960412572643494,
+        "longitude": 125.50393608878677,
+        "type": "landmark",
+        "order": 3,
+        "estimatedTime": 60,
+        "notes": "Temukan spot-spot menarik di sekitar Festival Mangrove dan Konservasi."
+      }
+    ],
+    "transports": [],
+    "totalEstimatedTime": 180,
+    "difficulty": "medium",
+    "description": "Tur terpandu ke Festival Mangrove dan Konservasi. Acara edukasi dan konservasi lingkungan yang menampilkan keindahan hutan mangrove Hesang. Termasuk penanaman pohon, edukasi lingkungan, dan pameran produk lokal."
+  },
+  {
+    "id": "route-event-lomba-dayung-tradisional",
+    "destinationId": "event-lomba-dayung-tradisional",
+    "destinationName": "Lomba Dayung Perahu Tradisional",
+    "checkpoints": [
+      {
+        "id": "checkpoint-event-lomba-dayung-tradisional-1",
+        "name": "Pintu Masuk Lomba Dayung Perahu Tradisional",
+        "description": "Titik awal kunjungan ke Lomba Dayung Perahu Tradisional. Dapatkan informasi dan peta lokasi.",
+        "latitude": 3.609,
+        "longitude": 125.489,
+        "type": "landmark",
+        "order": 1,
+        "estimatedTime": 0,
+        "notes": "Selamat datang di Lomba Dayung Perahu Tradisional. Nikmati pengalaman wisata yang menyenangkan."
+      },
+      {
+        "id": "checkpoint-event-lomba-dayung-tradisional-2",
+        "name": "Lomba Dayung Perahu Tradisional",
+        "description": "Kompetisi dayung perahu tradisional antar desa yang menunjukkan kekuatan dan kebersamaan masyarakat Sangihe. Acara yang meriah dengan semangat gotong royong.",
+        "latitude": 3.609,
+        "longitude": 125.489,
+        "type": "landmark",
+        "order": 2,
+        "estimatedTime": 120,
+        "notes": "Jelajahi dan nikmati Lomba Dayung Perahu Tradisional. Ambil foto dan buat kenangan indah."
+      },
+      {
+        "id": "checkpoint-event-lomba-dayung-tradisional-3",
+        "name": "Area Sekitar Lomba Dayung Perahu Tradisional",
+        "description": "Jelajahi area sekitar Lomba Dayung Perahu Tradisional untuk pengalaman lebih lengkap.",
+        "latitude": 3.6127806345460702,
+        "longitude": 125.48818170623028,
+        "type": "landmark",
+        "order": 3,
+        "estimatedTime": 60,
+        "notes": "Temukan spot-spot menarik di sekitar Lomba Dayung Perahu Tradisional."
+      }
+    ],
+    "transports": [],
+    "totalEstimatedTime": 180,
+    "difficulty": "medium",
+    "description": "Tur terpandu ke Lomba Dayung Perahu Tradisional. Kompetisi dayung perahu tradisional antar desa yang menunjukkan kekuatan dan kebersamaan masyarakat Sangihe. Acara yang meriah dengan semangat gotong royong."
+  },
+  {
+    "id": "route-event-lomba-foto-wisata",
+    "destinationId": "event-lomba-foto-wisata",
+    "destinationName": "Lomba Foto Wisata Sangihe",
+    "checkpoints": [
+      {
+        "id": "checkpoint-event-lomba-foto-wisata-1",
+        "name": "Pintu Masuk Lomba Foto Wisata Sangihe",
+        "description": "Titik awal kunjungan ke Lomba Foto Wisata Sangihe. Dapatkan informasi dan peta lokasi.",
+        "latitude": 3.609,
+        "longitude": 125.489,
+        "type": "landmark",
+        "order": 1,
+        "estimatedTime": 0,
+        "notes": "Selamat datang di Lomba Foto Wisata Sangihe. Nikmati pengalaman wisata yang menyenangkan."
+      },
+      {
+        "id": "checkpoint-event-lomba-foto-wisata-2",
+        "name": "Lomba Foto Wisata Sangihe",
+        "description": "Kompetisi fotografi yang mengajak peserta menangkap keindahan alam dan budaya Sangihe. Terbuka untuk fotografer amatir dan profesional dengan hadiah menarik.",
+        "latitude": 3.609,
+        "longitude": 125.489,
+        "type": "landmark",
+        "order": 2,
+        "estimatedTime": 120,
+        "notes": "Jelajahi dan nikmati Lomba Foto Wisata Sangihe. Ambil foto dan buat kenangan indah."
+      },
+      {
+        "id": "checkpoint-event-lomba-foto-wisata-3",
+        "name": "Area Sekitar Lomba Foto Wisata Sangihe",
+        "description": "Jelajahi area sekitar Lomba Foto Wisata Sangihe untuk pengalaman lebih lengkap.",
+        "latitude": 3.6121437150935947,
+        "longitude": 125.49263399553317,
+        "type": "landmark",
+        "order": 3,
+        "estimatedTime": 60,
+        "notes": "Temukan spot-spot menarik di sekitar Lomba Foto Wisata Sangihe."
+      }
+    ],
+    "transports": [],
+    "totalEstimatedTime": 180,
+    "difficulty": "medium",
+    "description": "Tur terpandu ke Lomba Foto Wisata Sangihe. Kompetisi fotografi yang mengajak peserta menangkap keindahan alam dan budaya Sangihe. Terbuka untuk fotografer amatir dan profesional dengan hadiah menarik."
+  },
+  {
+    "id": "route-event-pentas-seni-budaya",
+    "destinationId": "event-pentas-seni-budaya",
+    "destinationName": "Pentas Seni Budaya Sangihe",
+    "checkpoints": [
+      {
+        "id": "checkpoint-event-pentas-seni-budaya-1",
+        "name": "Pintu Masuk Pentas Seni Budaya Sangihe",
+        "description": "Titik awal kunjungan ke Pentas Seni Budaya Sangihe. Dapatkan informasi dan peta lokasi.",
+        "latitude": 3.608,
+        "longitude": 125.49,
+        "type": "landmark",
+        "order": 1,
+        "estimatedTime": 0,
+        "notes": "Selamat datang di Pentas Seni Budaya Sangihe. Nikmati pengalaman wisata yang menyenangkan."
+      },
+      {
+        "id": "checkpoint-event-pentas-seni-budaya-2",
+        "name": "Pentas Seni Budaya Sangihe",
+        "description": "Pertunjukan seni budaya yang menampilkan tarian tradisional, musik bambu, lagu daerah, dan teater rakyat. Menggambarkan kekayaan budaya masyarakat Sangihe.",
+        "latitude": 3.608,
+        "longitude": 125.49,
+        "type": "landmark",
+        "order": 2,
+        "estimatedTime": 120,
+        "notes": "Jelajahi dan nikmati Pentas Seni Budaya Sangihe. Ambil foto dan buat kenangan indah."
+      },
+      {
+        "id": "checkpoint-event-pentas-seni-budaya-3",
+        "name": "Area Sekitar Pentas Seni Budaya Sangihe",
+        "description": "Jelajahi area sekitar Pentas Seni Budaya Sangihe untuk pengalaman lebih lengkap.",
+        "latitude": 3.6111728633374676,
+        "longitude": 125.49456509374066,
+        "type": "landmark",
+        "order": 3,
+        "estimatedTime": 60,
+        "notes": "Temukan spot-spot menarik di sekitar Pentas Seni Budaya Sangihe."
+      }
+    ],
+    "transports": [],
+    "totalEstimatedTime": 180,
+    "difficulty": "medium",
+    "description": "Tur terpandu ke Pentas Seni Budaya Sangihe. Pertunjukan seni budaya yang menampilkan tarian tradisional, musik bambu, lagu daerah, dan teater rakyat. Menggambarkan kekayaan budaya masyarakat Sangihe."
+  },
+  {
+    "id": "route-event-natal-dan-tahun-baru",
+    "destinationId": "event-natal-dan-tahun-baru",
+    "destinationName": "Perayaan Natal dan Tahun Baru Sangihe",
+    "checkpoints": [
+      {
+        "id": "checkpoint-event-natal-dan-tahun-baru-1",
+        "name": "Pintu Masuk Perayaan Natal dan Tahun Baru Sangihe",
+        "description": "Titik awal kunjungan ke Perayaan Natal dan Tahun Baru Sangihe. Dapatkan informasi dan peta lokasi.",
+        "latitude": 3.609,
+        "longitude": 125.489,
+        "type": "landmark",
+        "order": 1,
+        "estimatedTime": 0,
+        "notes": "Selamat datang di Perayaan Natal dan Tahun Baru Sangihe. Nikmati pengalaman wisata yang menyenangkan."
+      },
+      {
+        "id": "checkpoint-event-natal-dan-tahun-baru-2",
+        "name": "Perayaan Natal dan Tahun Baru Sangihe",
+        "description": "Perayaan keagamaan dan tahun baru yang meriah dengan berbagai pertunjukan, pesta kembang api, dan acara kebersamaan masyarakat. Suasana yang hangat dan penuh sukacita.",
+        "latitude": 3.609,
+        "longitude": 125.489,
+        "type": "landmark",
+        "order": 2,
+        "estimatedTime": 120,
+        "notes": "Jelajahi dan nikmati Perayaan Natal dan Tahun Baru Sangihe. Ambil foto dan buat kenangan indah."
+      },
+      {
+        "id": "checkpoint-event-natal-dan-tahun-baru-3",
+        "name": "Area Sekitar Perayaan Natal dan Tahun Baru Sangihe",
+        "description": "Jelajahi area sekitar Perayaan Natal dan Tahun Baru Sangihe untuk pengalaman lebih lengkap.",
+        "latitude": 3.608623752213726,
+        "longitude": 125.48439364889866,
+        "type": "landmark",
+        "order": 3,
+        "estimatedTime": 60,
+        "notes": "Temukan spot-spot menarik di sekitar Perayaan Natal dan Tahun Baru Sangihe."
+      }
+    ],
+    "transports": [],
+    "totalEstimatedTime": 180,
+    "difficulty": "medium",
+    "description": "Tur terpandu ke Perayaan Natal dan Tahun Baru Sangihe. Perayaan keagamaan dan tahun baru yang meriah dengan berbagai pertunjukan, pesta kembang api, dan acara kebersamaan masyarakat. Suasana yang hangat dan penuh sukacita."
+  },
+  {
+    "id": "route-event-pesta-adat-tulude",
+    "destinationId": "event-pesta-adat-tulude",
+    "destinationName": "Pesta Adat Tulude",
+    "checkpoints": [
+      {
+        "id": "checkpoint-event-pesta-adat-tulude-1",
+        "name": "Pintu Masuk Pesta Adat Tulude",
+        "description": "Titik awal kunjungan ke Pesta Adat Tulude. Dapatkan informasi dan peta lokasi.",
+        "latitude": 3.6,
+        "longitude": 125.5,
+        "type": "landmark",
+        "order": 1,
+        "estimatedTime": 0,
+        "notes": "Selamat datang di Pesta Adat Tulude. Nikmati pengalaman wisata yang menyenangkan."
+      },
+      {
+        "id": "checkpoint-event-pesta-adat-tulude-2",
+        "name": "Pesta Adat Tulude",
+        "description": "Perayaan adat tahunan masyarakat Sangihe yang penuh makna. Menampilkan tarian tradisional, musik bambu, dan ritual adat yang melestarikan budaya leluhur.",
+        "latitude": 3.6,
+        "longitude": 125.5,
+        "type": "landmark",
+        "order": 2,
+        "estimatedTime": 120,
+        "notes": "Jelajahi dan nikmati Pesta Adat Tulude. Ambil foto dan buat kenangan indah."
+      },
+      {
+        "id": "checkpoint-event-pesta-adat-tulude-3",
+        "name": "Area Sekitar Pesta Adat Tulude",
+        "description": "Jelajahi area sekitar Pesta Adat Tulude untuk pengalaman lebih lengkap.",
+        "latitude": 3.6032185554108844,
+        "longitude": 125.49840406709168,
+        "type": "landmark",
+        "order": 3,
+        "estimatedTime": 60,
+        "notes": "Temukan spot-spot menarik di sekitar Pesta Adat Tulude."
+      }
+    ],
+    "transports": [],
+    "totalEstimatedTime": 180,
+    "difficulty": "medium",
+    "description": "Tur terpandu ke Pesta Adat Tulude. Perayaan adat tahunan masyarakat Sangihe yang penuh makna. Menampilkan tarian tradisional, musik bambu, dan ritual adat yang melestarikan budaya leluhur."
+  },
+  {
+    "id": "route-hotel-bintang-utara",
+    "destinationId": "hotel-bintang-utara",
+    "destinationName": "Hotel Bintang Utaraaaaa",
+    "checkpoints": [
+      {
+        "id": "checkpoint-hotel-bintang-utara-1",
+        "name": "Pintu Masuk Hotel Bintang Utaraaaaa",
+        "description": "Titik awal kunjungan ke Hotel Bintang Utaraaaaa. Dapatkan informasi dan peta lokasi.",
+        "latitude": 3.608,
+        "longitude": 125.49,
+        "type": "landmark",
+        "order": 1,
+        "estimatedTime": 0,
+        "notes": "Selamat datang di Hotel Bintang Utaraaaaa. Nikmati pengalaman wisata yang menyenangkan."
+      },
+      {
+        "id": "checkpoint-hotel-bintang-utara-2",
+        "name": "Hotel Bintang Utaraaaaa",
+        "description": "Hotel nyaman di jantung kota dengan akses mudah ke berbagai tempat wisata.",
+        "latitude": 3.608,
+        "longitude": 125.49,
+        "type": "accommodation",
+        "order": 2,
+        "estimatedTime": 0,
+        "notes": "Jelajahi dan nikmati Hotel Bintang Utaraaaaa. Ambil foto dan buat kenangan indah."
+      }
+    ],
+    "transports": [],
+    "totalEstimatedTime": 0,
+    "difficulty": "easy",
+    "description": "Tur terpandu ke Hotel Bintang Utaraaaaa. Hotel nyaman di jantung kota dengan akses mudah ke berbagai tempat wisata."
+  },
+  {
+    "id": "route-hotel-hayana",
+    "destinationId": "hotel-hayana",
+    "destinationName": "Hotel Hayana",
+    "checkpoints": [
+      {
+        "id": "checkpoint-hotel-hayana-1",
+        "name": "Pintu Masuk Hotel Hayana",
+        "description": "Titik awal kunjungan ke Hotel Hayana. Dapatkan informasi dan peta lokasi.",
+        "latitude": 3.607,
+        "longitude": 125.491,
+        "type": "landmark",
+        "order": 1,
+        "estimatedTime": 0,
+        "notes": "Selamat datang di Hotel Hayana. Nikmati pengalaman wisata yang menyenangkan."
+      },
+      {
+        "id": "checkpoint-hotel-hayana-2",
+        "name": "Hotel Hayana",
+        "description": "Hotel modern dengan pelayanan ramah dan fasilitas memadai.",
+        "latitude": 3.607,
+        "longitude": 125.491,
+        "type": "accommodation",
+        "order": 2,
+        "estimatedTime": 0,
+        "notes": "Jelajahi dan nikmati Hotel Hayana. Ambil foto dan buat kenangan indah."
+      }
+    ],
+    "transports": [],
+    "totalEstimatedTime": 0,
+    "difficulty": "easy",
+    "description": "Tur terpandu ke Hotel Hayana. Hotel modern dengan pelayanan ramah dan fasilitas memadai."
+  },
+  {
+    "id": "route-hotel-madina",
+    "destinationId": "hotel-madina",
+    "destinationName": "Hotel Madina",
+    "checkpoints": [
+      {
+        "id": "checkpoint-hotel-madina-1",
+        "name": "Pintu Masuk Hotel Madina",
+        "description": "Titik awal kunjungan ke Hotel Madina. Dapatkan informasi dan peta lokasi.",
+        "latitude": 3.606,
+        "longitude": 125.492,
+        "type": "landmark",
+        "order": 1,
+        "estimatedTime": 0,
+        "notes": "Selamat datang di Hotel Madina. Nikmati pengalaman wisata yang menyenangkan."
+      },
+      {
+        "id": "checkpoint-hotel-madina-2",
+        "name": "Hotel Madina",
+        "description": "Hotel dengan desain Islami dan suasana yang tenang serta nyaman.",
+        "latitude": 3.606,
+        "longitude": 125.492,
+        "type": "accommodation",
+        "order": 2,
+        "estimatedTime": 0,
+        "notes": "Jelajahi dan nikmati Hotel Madina. Ambil foto dan buat kenangan indah."
+      }
+    ],
+    "transports": [],
+    "totalEstimatedTime": 0,
+    "difficulty": "easy",
+    "description": "Tur terpandu ke Hotel Madina. Hotel dengan desain Islami dan suasana yang tenang serta nyaman."
+  },
+  {
+    "id": "route-hotel-mafana-seaside",
+    "destinationId": "hotel-mafana-seaside",
+    "destinationName": "Mafana Seaside Hotel",
+    "checkpoints": [
+      {
+        "id": "checkpoint-hotel-mafana-seaside-1",
+        "name": "Pintu Masuk Mafana Seaside Hotel",
+        "description": "Titik awal kunjungan ke Mafana Seaside Hotel. Dapatkan informasi dan peta lokasi.",
+        "latitude": 3.605,
+        "longitude": 125.493,
+        "type": "landmark",
+        "order": 1,
+        "estimatedTime": 0,
+        "notes": "Selamat datang di Mafana Seaside Hotel. Nikmati pengalaman wisata yang menyenangkan."
+      },
+      {
+        "id": "checkpoint-hotel-mafana-seaside-2",
+        "name": "Mafana Seaside Hotel",
+        "description": "Hotel tepi pantai dengan konsep modern dan pemandangan laut yang menawan.",
+        "latitude": 3.605,
+        "longitude": 125.493,
+        "type": "accommodation",
+        "order": 2,
+        "estimatedTime": 0,
+        "notes": "Jelajahi dan nikmati Mafana Seaside Hotel. Ambil foto dan buat kenangan indah."
+      }
+    ],
+    "transports": [],
+    "totalEstimatedTime": 0,
+    "difficulty": "easy",
+    "description": "Tur terpandu ke Mafana Seaside Hotel. Hotel tepi pantai dengan konsep modern dan pemandangan laut yang menawan."
+  },
+  {
+    "id": "route-hotel-penginapan-setia",
+    "destinationId": "hotel-penginapan-setia",
+    "destinationName": "Penginapan Setia",
+    "checkpoints": [
+      {
+        "id": "checkpoint-hotel-penginapan-setia-1",
+        "name": "Pintu Masuk Penginapan Setia",
+        "description": "Titik awal kunjungan ke Penginapan Setia. Dapatkan informasi dan peta lokasi.",
+        "latitude": 3.604,
+        "longitude": 125.494,
+        "type": "landmark",
+        "order": 1,
+        "estimatedTime": 0,
+        "notes": "Selamat datang di Penginapan Setia. Nikmati pengalaman wisata yang menyenangkan."
+      },
+      {
+        "id": "checkpoint-hotel-penginapan-setia-2",
+        "name": "Penginapan Setia",
+        "description": "Penginapan yang nyaman dengan harga terjangkau dan pelayanan ramah.",
+        "latitude": 3.604,
+        "longitude": 125.494,
+        "type": "accommodation",
+        "order": 2,
+        "estimatedTime": 0,
+        "notes": "Jelajahi dan nikmati Penginapan Setia. Ambil foto dan buat kenangan indah."
+      }
+    ],
+    "transports": [],
+    "totalEstimatedTime": 0,
+    "difficulty": "easy",
+    "description": "Tur terpandu ke Penginapan Setia. Penginapan yang nyaman dengan harga terjangkau dan pelayanan ramah."
   },
   {
     "id": "route-hotel-tahuna-beach",
@@ -505,8 +833,8 @@
         "id": "checkpoint-hotel-1",
         "name": "Bandara Naha",
         "description": "Bandara Naha Tahuna, pintu gerbang udara Sangihe.",
-        "latitude": 3.680000,
-        "longitude": 125.520000,
+        "latitude": 3.68,
+        "longitude": 125.52,
         "type": "landmark",
         "order": 1,
         "estimatedTime": 0,
@@ -542,7 +870,9 @@
         "type": "taxi",
         "description": "Taxi dari Bandara Naha ke hotel",
         "price": "Rp 100.000",
-        "schedule": ["Setiap saat"],
+        "schedule": [
+          "Setiap saat"
+        ],
         "duration": "30 menit",
         "bookingUrl": "",
         "departurePoint": "Bandara Naha",
@@ -554,47 +884,1109 @@
     "description": "Rute dari bandara ke Tahuna Beach Hotel melewati pusat kota."
   },
   {
-    "id": "route-kuliner-boulevard",
-    "destinationId": "culinary-1",
-    "destinationName": "Kawasan Kuliner Boulevard",
+    "id": "route-hotel-tahuna-beach",
+    "destinationId": "hotel-tahuna-beach",
+    "destinationName": "Tahuna Beach Hotel",
     "checkpoints": [
       {
-        "id": "checkpoint-culinary-1",
-        "name": "Pusat Kota Tahuna",
-        "description": "Titik awal dari pusat kota menuju Boulevard.",
-        "latitude": 3.609722,
-        "longitude": 125.490556,
+        "id": "checkpoint-hotel-tahuna-beach-1",
+        "name": "Pintu Masuk Tahuna Beach Hotel",
+        "description": "Titik awal kunjungan ke Tahuna Beach Hotel. Dapatkan informasi dan peta lokasi.",
+        "latitude": 3.609,
+        "longitude": 125.489,
         "type": "landmark",
         "order": 1,
         "estimatedTime": 0,
-        "notes": "Jarak tempuh dekat, bisa jalan kaki."
+        "notes": "Selamat datang di Tahuna Beach Hotel. Nikmati pengalaman wisata yang menyenangkan."
       },
       {
-        "id": "checkpoint-culinary-2",
-        "name": "Boulevard Entrance",
-        "description": "Gerbang masuk kawasan kuliner Boulevard Tahuna.",
-        "latitude": 3.608333,
-        "longitude": 125.488889,
-        "type": "landmark",
+        "id": "checkpoint-hotel-tahuna-beach-2",
+        "name": "Tahuna Beach Hotel",
+        "description": "Hotel tepi pantai dengan pemandangan laut yang menakjubkan dan fasilitas lengkap untuk kenyamanan tamu.",
+        "latitude": 3.609,
+        "longitude": 125.489,
+        "type": "accommodation",
         "order": 2,
-        "estimatedTime": 10,
-        "notes": "Banyak pilihan rumah makan di sepanjang Boulevard."
-      },
-      {
-        "id": "checkpoint-culinary-3",
-        "name": "Area Seafood Boulevard",
-        "description": "Kawasan seafood dengan view laut.",
-        "latitude": 3.608056,
-        "longitude": 125.488000,
-        "type": "restaurant",
-        "order": 3,
-        "estimatedTime": 15,
-        "notes": "Coba ikan bakar dan seafood segar khas Sangihe."
+        "estimatedTime": 0,
+        "notes": "Jelajahi dan nikmati Tahuna Beach Hotel. Ambil foto dan buat kenangan indah."
       }
     ],
     "transports": [],
-    "totalEstimatedTime": 30,
+    "totalEstimatedTime": 0,
     "difficulty": "easy",
-    "description": "Kuliner tour ke kawasan Boulevard Tahuna dengan seafood dan sunset view."
+    "description": "Tur terpandu ke Tahuna Beach Hotel. Hotel tepi pantai dengan pemandangan laut yang menakjubkan dan fasilitas lengkap untuk kenyamanan tamu."
+  },
+  {
+    "id": "route-hotel-wisma-melia",
+    "destinationId": "hotel-wisma-melia",
+    "destinationName": "Wisma Melia",
+    "checkpoints": [
+      {
+        "id": "checkpoint-hotel-wisma-melia-1",
+        "name": "Pintu Masuk Wisma Melia",
+        "description": "Titik awal kunjungan ke Wisma Melia. Dapatkan informasi dan peta lokasi.",
+        "latitude": 3.603,
+        "longitude": 125.495,
+        "type": "landmark",
+        "order": 1,
+        "estimatedTime": 0,
+        "notes": "Selamat datang di Wisma Melia. Nikmati pengalaman wisata yang menyenangkan."
+      },
+      {
+        "id": "checkpoint-hotel-wisma-melia-2",
+        "name": "Wisma Melia",
+        "description": "Wisma yang nyaman dengan fasilitas standar dan lokasi strategis.",
+        "latitude": 3.603,
+        "longitude": 125.495,
+        "type": "accommodation",
+        "order": 2,
+        "estimatedTime": 0,
+        "notes": "Jelajahi dan nikmati Wisma Melia. Ambil foto dan buat kenangan indah."
+      }
+    ],
+    "transports": [],
+    "totalEstimatedTime": 0,
+    "difficulty": "easy",
+    "description": "Tur terpandu ke Wisma Melia. Wisma yang nyaman dengan fasilitas standar dan lokasi strategis."
+  },
+  {
+    "id": "route-air-terjun-kadadima",
+    "destinationId": "tourism-5",
+    "destinationName": "Air Terjun Kadadima",
+    "checkpoints": [
+      {
+        "id": "checkpoint-waterfall-1",
+        "name": "Kampung Laine",
+        "description": "Kampung dengan sejarah panjang sebagai titik awal perjalanan.",
+        "latitude": 3.395,
+        "longitude": 125.445,
+        "type": "landmark",
+        "order": 1,
+        "estimatedTime": 0,
+        "notes": "Sewa guide lokal. Dengar cerita 'Tompohe Dalam Mangaha Laine Lohong Kadadima'."
+      },
+      {
+        "id": "checkpoint-waterfall-2",
+        "name": "Pos 1 - Area Parkir",
+        "description": "Area parkir kendaraan sebelum trekking ke air terjun.",
+        "latitude": 3.398,
+        "longitude": 125.448,
+        "type": "landmark",
+        "order": 2,
+        "estimatedTime": 15,
+        "notes": "Bawa air minum dan snack untuk perjalanan."
+      },
+      {
+        "id": "checkpoint-waterfall-3",
+        "name": "Air Terjun Tingkat 1 Kadadima",
+        "description": "Tingkat pertama dari lima tingkat air terjun Kadadima.",
+        "latitude": 3.4,
+        "longitude": 125.45,
+        "type": "landmark",
+        "order": 3,
+        "estimatedTime": 45,
+        "notes": "Spot terbaik untuk berenang dan foto. Hati-hati dengan bebatuan licin. Top 500 ADWI."
+      }
+    ],
+    "transports": [],
+    "totalEstimatedTime": 150,
+    "difficulty": "medium",
+    "description": "Trekking ke air terjun 5 tingkat di Kampung Laine dengan sejarah dan budaya lokal."
+  },
+  {
+    "id": "route-tourism-batuwingkung",
+    "destinationId": "tourism-batuwingkung",
+    "destinationName": "Batuwingkungg",
+    "checkpoints": [
+      {
+        "id": "checkpoint-tourism-batuwingkung-1",
+        "name": "Pintu Masuk Batuwingkungg",
+        "description": "Titik awal kunjungan ke Batuwingkungg. Dapatkan informasi dan peta lokasi.",
+        "latitude": 3.609,
+        "longitude": 125.489,
+        "type": "landmark",
+        "order": 1,
+        "estimatedTime": 0,
+        "notes": "Selamat datang di Batuwingkungg. Nikmati pengalaman wisata yang menyenangkan."
+      },
+      {
+        "id": "checkpoint-tourism-batuwingkung-2",
+        "name": "Batuwingkungg",
+        "description": "Kampung Wisata Batuwingkung yang indah dengan pantai berpasir putih dan pemandangan laut yang memukau. Destinasi ini menawarkan pengalaman wisata bahari yang menyegarkan.",
+        "latitude": 3.609,
+        "longitude": 125.489,
+        "type": "landmark",
+        "order": 2,
+        "estimatedTime": 120,
+        "notes": "Jelajahi dan nikmati Batuwingkungg. Ambil foto dan buat kenangan indah."
+      },
+      {
+        "id": "checkpoint-tourism-batuwingkung-3",
+        "name": "Area Sekitar Batuwingkungg",
+        "description": "Jelajahi area sekitar Batuwingkungg untuk pengalaman lebih lengkap.",
+        "latitude": 3.612064171803279,
+        "longitude": 125.48702391379705,
+        "type": "landmark",
+        "order": 3,
+        "estimatedTime": 60,
+        "notes": "Temukan spot-spot menarik di sekitar Batuwingkungg."
+      }
+    ],
+    "transports": [],
+    "totalEstimatedTime": 180,
+    "difficulty": "medium",
+    "description": "Tur terpandu ke Batuwingkungg. Kampung Wisata Batuwingkung yang indah dengan pantai berpasir putih dan pemandangan laut yang memukau. Destinasi ini menawarkan pengalaman wisata bahari yang menyegarkan."
+  },
+  {
+    "id": "route-tourism-bebalang",
+    "destinationId": "tourism-bebalang",
+    "destinationName": "Bebalang",
+    "checkpoints": [
+      {
+        "id": "checkpoint-tourism-bebalang-1",
+        "name": "Pintu Masuk Bebalang",
+        "description": "Titik awal kunjungan ke Bebalang. Dapatkan informasi dan peta lokasi.",
+        "latitude": 3.63,
+        "longitude": 125.55,
+        "type": "landmark",
+        "order": 1,
+        "estimatedTime": 0,
+        "notes": "Selamat datang di Bebalang. Nikmati pengalaman wisata yang menyenangkan."
+      },
+      {
+        "id": "checkpoint-tourism-bebalang-2",
+        "name": "Bebalang",
+        "description": "Kampung Wisata Bebalang menawarkan keindahan alam dan budaya lokal yang menarik.",
+        "latitude": 3.63,
+        "longitude": 125.55,
+        "type": "landmark",
+        "order": 2,
+        "estimatedTime": 120,
+        "notes": "Jelajahi dan nikmati Bebalang. Ambil foto dan buat kenangan indah."
+      },
+      {
+        "id": "checkpoint-tourism-bebalang-3",
+        "name": "Area Sekitar Bebalang",
+        "description": "Jelajahi area sekitar Bebalang untuk pengalaman lebih lengkap.",
+        "latitude": 3.6256779534475134,
+        "longitude": 125.54568980729952,
+        "type": "landmark",
+        "order": 3,
+        "estimatedTime": 60,
+        "notes": "Temukan spot-spot menarik di sekitar Bebalang."
+      }
+    ],
+    "transports": [],
+    "totalEstimatedTime": 180,
+    "difficulty": "medium",
+    "description": "Tur terpandu ke Bebalang. Kampung Wisata Bebalang menawarkan keindahan alam dan budaya lokal yang menarik."
+  },
+  {
+    "id": "route-tourism-bukide-timur",
+    "destinationId": "tourism-bukide-timur",
+    "destinationName": "Bukide Timur",
+    "checkpoints": [
+      {
+        "id": "checkpoint-tourism-bukide-timur-1",
+        "name": "Pintu Masuk Bukide Timur",
+        "description": "Titik awal kunjungan ke Bukide Timur. Dapatkan informasi dan peta lokasi.",
+        "latitude": 3.59,
+        "longitude": 125.51,
+        "type": "landmark",
+        "order": 1,
+        "estimatedTime": 0,
+        "notes": "Selamat datang di Bukide Timur. Nikmati pengalaman wisata yang menyenangkan."
+      },
+      {
+        "id": "checkpoint-tourism-bukide-timur-2",
+        "name": "Bukide Timur",
+        "description": "Kampung Wisata Bukide Timur menawarkan lokasi snorkeling yang indah dengan terumbu karang yang masih alami.",
+        "latitude": 3.59,
+        "longitude": 125.51,
+        "type": "landmark",
+        "order": 2,
+        "estimatedTime": 120,
+        "notes": "Jelajahi dan nikmati Bukide Timur. Ambil foto dan buat kenangan indah."
+      },
+      {
+        "id": "checkpoint-tourism-bukide-timur-3",
+        "name": "Area Sekitar Bukide Timur",
+        "description": "Jelajahi area sekitar Bukide Timur untuk pengalaman lebih lengkap.",
+        "latitude": 3.5872194829216855,
+        "longitude": 125.50680582169102,
+        "type": "landmark",
+        "order": 3,
+        "estimatedTime": 60,
+        "notes": "Temukan spot-spot menarik di sekitar Bukide Timur."
+      }
+    ],
+    "transports": [],
+    "totalEstimatedTime": 180,
+    "difficulty": "medium",
+    "description": "Tur terpandu ke Bukide Timur. Kampung Wisata Bukide Timur menawarkan lokasi snorkeling yang indah dengan terumbu karang yang masih alami."
+  },
+  {
+    "id": "route-desa-lenganeng",
+    "destinationId": "tourism-8",
+    "destinationName": "Desa Lenganeng (Negeri Seribu Pedang)",
+    "checkpoints": [
+      {
+        "id": "checkpoint-lenganeng-1",
+        "name": "Entrance Lenganeng",
+        "description": "Pintu masuk kampung Lenganeng di ketinggian 20-75 mdpl.",
+        "latitude": 3.648,
+        "longitude": 125.508,
+        "type": "landmark",
+        "order": 1,
+        "estimatedTime": 0,
+        "notes": "Udara sejuk, cocok untuk pertanian. Negeri Seribu Pedang."
+      },
+      {
+        "id": "checkpoint-lenganeng-2",
+        "name": "Workshop Pandai Besi",
+        "description": "Workshop pengrajin pandai besi tradisional turun temurun.",
+        "latitude": 3.649,
+        "longitude": 125.509,
+        "type": "landmark",
+        "order": 2,
+        "estimatedTime": 20,
+        "notes": "Lihat langsung pembuatan parang dan pisau. Laki-laki bekerja di rumah, wanita di kebun."
+      },
+      {
+        "id": "checkpoint-lenganeng-3",
+        "name": "Puncak Lenganeng",
+        "description": "Puncak kampung dengan view kota Tahuna.",
+        "latitude": 3.65,
+        "longitude": 125.51,
+        "type": "landmark",
+        "order": 3,
+        "estimatedTime": 45,
+        "notes": "Pemandangan Ibukota Kabupaten Sangihe dari ketinggian."
+      }
+    ],
+    "transports": [],
+    "totalEstimatedTime": 120,
+    "difficulty": "medium",
+    "description": "Wisata budaya pandai besi tradisional dengan view kota Tahuna."
+  },
+  {
+    "id": "route-desa-hesang",
+    "destinationId": "tourism-7",
+    "destinationName": "Desa Wisata Hesang",
+    "checkpoints": [
+      {
+        "id": "checkpoint-hesang-1",
+        "name": "Entrance Desa Hesang",
+        "description": "Gerbang masuk desa wisata Hesang dengan informasi wisata.",
+        "latitude": 3.444,
+        "longitude": 125.504,
+        "type": "landmark",
+        "order": 1,
+        "estimatedTime": 0,
+        "notes": "Desa Bersinar (Bersih Narkoba). Ramah keluarga. Top 500 ADWI."
+      },
+      {
+        "id": "checkpoint-hesang-2",
+        "name": "Pantai Pasir Putih Hesang",
+        "description": "Pantai berpasir putih dengan air laut jernih.",
+        "latitude": 3.445868,
+        "longitude": 125.506095,
+        "type": "landmark",
+        "order": 2,
+        "estimatedTime": 15,
+        "notes": "Spot untuk snorkeling dan berenang."
+      },
+      {
+        "id": "checkpoint-hesang-3",
+        "name": "Area Mangrove Hesang",
+        "description": "Hutan mangrove yang tumbuh hampir di seluruh pesisir pantai.",
+        "latitude": 3.4465,
+        "longitude": 125.507,
+        "type": "landmark",
+        "order": 3,
+        "estimatedTime": 45,
+        "notes": "Edukasi ekosistem mangrove. Bisa melihat kepiting dan burung."
+      }
+    ],
+    "transports": [
+      {
+        "id": "transport-hesang-1",
+        "name": "Angkutan Umum",
+        "type": "bus",
+        "description": "Angkutan umum dari Tahuna ke Kec. Tamako",
+        "price": "Rp 20.000",
+        "schedule": [
+          "07:00",
+          "10:00",
+          "13:00",
+          "16:00"
+        ],
+        "duration": "45 menit",
+        "bookingUrl": "",
+        "departurePoint": "Terminal Tahuna",
+        "arrivalPoint": "Desa Hesang"
+      }
+    ],
+    "totalEstimatedTime": 150,
+    "difficulty": "easy",
+    "description": "Wisata desa dengan pantai, mangrove, dan budaya lokal."
+  },
+  {
+    "id": "route-gunung-api-mahengetang",
+    "destinationId": "tourism-2",
+    "destinationName": "Gunung Api Bawah Laut Mahengetang",
+    "checkpoints": [
+      {
+        "id": "checkpoint-volcano-1",
+        "name": "Dive Center Tahuna",
+        "description": "Pusat penyelaman dengan instruktur bersertifikat dan peralatan lengkap.",
+        "latitude": 3.6085,
+        "longitude": 125.4885,
+        "type": "landmark",
+        "order": 1,
+        "estimatedTime": 0,
+        "notes": "Wajib briefing keselamatan. Sertifikat diving direkomendasikan."
+      },
+      {
+        "id": "checkpoint-volcano-2",
+        "name": "Lokasi Penyelaman Mahengetang",
+        "description": "Titik penyelaman di atas gunung api bawah laut yang aktif.",
+        "latitude": 3.8,
+        "longitude": 125.58,
+        "type": "landmark",
+        "order": 2,
+        "estimatedTime": 60,
+        "notes": "Kedalaman 15-30 meter. Ikuti instruksi pemandu. Pengalaman unik diving di gunung api aktif."
+      }
+    ],
+    "transports": [
+      {
+        "id": "transport-volcano-1",
+        "name": "Boat Diving",
+        "type": "boat",
+        "description": "Kapal khusus untuk aktivitas diving",
+        "price": "Rp 300.000 (paket lengkap)",
+        "schedule": [
+          "08:00",
+          "13:00"
+        ],
+        "duration": "1 jam + 2 jam diving",
+        "bookingUrl": "",
+        "departurePoint": "Dive Center",
+        "arrivalPoint": "Mahengetang"
+      }
+    ],
+    "totalEstimatedTime": 240,
+    "difficulty": "hard",
+    "description": "Eksplorasi gunung api bawah laut Banuawuhu dengan diving yang menantang."
+  },
+  {
+    "id": "route-tourism-hesang",
+    "destinationId": "tourism-hesang",
+    "destinationName": "Hesang",
+    "checkpoints": [
+      {
+        "id": "checkpoint-tourism-hesang-1",
+        "name": "Pintu Masuk Hesang",
+        "description": "Titik awal kunjungan ke Hesang. Dapatkan informasi dan peta lokasi.",
+        "latitude": 3.6,
+        "longitude": 125.5,
+        "type": "landmark",
+        "order": 1,
+        "estimatedTime": 0,
+        "notes": "Selamat datang di Hesang. Nikmati pengalaman wisata yang menyenangkan."
+      },
+      {
+        "id": "checkpoint-tourism-hesang-2",
+        "name": "Hesang",
+        "description": "Kampung Wisata Hesang menawarkan wisata mangrove yang unik, pertanian tradisional, dan pantai yang indah. Pengunjung dapat menikmati keindahan alam tropis yang asri.",
+        "latitude": 3.6,
+        "longitude": 125.5,
+        "type": "landmark",
+        "order": 2,
+        "estimatedTime": 120,
+        "notes": "Jelajahi dan nikmati Hesang. Ambil foto dan buat kenangan indah."
+      },
+      {
+        "id": "checkpoint-tourism-hesang-3",
+        "name": "Area Sekitar Hesang",
+        "description": "Jelajahi area sekitar Hesang untuk pengalaman lebih lengkap.",
+        "latitude": 3.598688559869887,
+        "longitude": 125.4970997229479,
+        "type": "landmark",
+        "order": 3,
+        "estimatedTime": 60,
+        "notes": "Temukan spot-spot menarik di sekitar Hesang."
+      }
+    ],
+    "transports": [],
+    "totalEstimatedTime": 180,
+    "difficulty": "medium",
+    "description": "Tur terpandu ke Hesang. Kampung Wisata Hesang menawarkan wisata mangrove yang unik, pertanian tradisional, dan pantai yang indah. Pengunjung dapat menikmati keindahan alam tropis yang asri."
+  },
+  {
+    "id": "route-kampung-bukide",
+    "destinationId": "tourism-14",
+    "destinationName": "Kampung Bukide Timur",
+    "checkpoints": [
+      {
+        "id": "checkpoint-bukide-1",
+        "name": "Pelabuhan Tahuna",
+        "description": "Titik keberangkatan menuju Pulau Bukide.",
+        "latitude": 3.609,
+        "longitude": 125.489,
+        "type": "landmark",
+        "order": 1,
+        "estimatedTime": 0,
+        "notes": "Perahu bermotor tempel. Perjalanan 2 jam. Bawa bekal."
+      },
+      {
+        "id": "checkpoint-bukide-2",
+        "name": "Pantai Pasir Putih Kasaraeng",
+        "description": "Pantai pasir putih sepanjang 1.300 meter.",
+        "latitude": 3.499,
+        "longitude": 125.549,
+        "type": "landmark",
+        "order": 2,
+        "estimatedTime": 120,
+        "notes": "Pantai panjang dengan pemandangan indah."
+      },
+      {
+        "id": "checkpoint-bukide-3",
+        "name": "Spot Snorkeling Bukide",
+        "description": "Terumbu karang indah dan mamalia laut di pesisir.",
+        "latitude": 3.5,
+        "longitude": 125.55,
+        "type": "landmark",
+        "order": 3,
+        "estimatedTime": 150,
+        "notes": "Perairan kaya ikan deho dan malalugis. Spot wildlife: kus-kus beruang, burung maleo, punting."
+      }
+    ],
+    "transports": [
+      {
+        "id": "transport-bukide-1",
+        "name": "Perahu Bermotor Tempel",
+        "type": "boat",
+        "description": "Perahu bermotor tempel menuju Pulau Bukide",
+        "price": "Rp 50.000",
+        "schedule": [
+          "08:00",
+          "14:00"
+        ],
+        "duration": "2 jam",
+        "bookingUrl": "",
+        "departurePoint": "Pelabuhan Tahuna",
+        "arrivalPoint": "Kampung Bukide Timur"
+      }
+    ],
+    "totalEstimatedTime": 300,
+    "difficulty": "hard",
+    "description": "Petualangan ke Pulau Bukide dengan pantai panjang, kuliner kue amik, dan wildlife endemik."
+  },
+  {
+    "id": "route-mangrove-tahuna",
+    "destinationId": "tourism-3",
+    "destinationName": "Kawasan Mangrove Tahuna",
+    "checkpoints": [
+      {
+        "id": "checkpoint-mangrove-1",
+        "name": "Pintu Masuk Mangrove",
+        "description": "Gerbang masuk kawasan wisata mangrove dengan pusat informasi.",
+        "latitude": 3.6095,
+        "longitude": 125.4892,
+        "type": "landmark",
+        "order": 1,
+        "estimatedTime": 0,
+        "notes": "Dapatkan informasi tentang ekosistem mangrove dari guide lokal."
+      },
+      {
+        "id": "checkpoint-mangrove-2",
+        "name": "Jembatan Kayu Mangrove",
+        "description": "Jembatan kayu sepanjang 500m melintasi hutan mangrove.",
+        "latitude": 3.609722,
+        "longitude": 125.489444,
+        "type": "landmark",
+        "order": 2,
+        "estimatedTime": 20,
+        "notes": "Spot foto terbaik. Perhatikan burung-burung lokal."
+      },
+      {
+        "id": "checkpoint-mangrove-3",
+        "name": "Area Kuliner Mangrove",
+        "description": "Kawasan kuliner dengan berbagai warung seafood segar.",
+        "latitude": 3.609722,
+        "longitude": 125.489444,
+        "type": "restaurant",
+        "order": 3,
+        "estimatedTime": 40,
+        "notes": "Coba seafood bakar dengan view mangrove yang indah."
+      }
+    ],
+    "transports": [],
+    "totalEstimatedTime": 120,
+    "difficulty": "easy",
+    "description": "Wisata edukasi ekowisata mangrove dengan kuliner seafood."
+  },
+  {
+    "id": "route-tourism-kuma",
+    "destinationId": "tourism-kuma",
+    "destinationName": "Kuma",
+    "checkpoints": [
+      {
+        "id": "checkpoint-tourism-kuma-1",
+        "name": "Pintu Masuk Kuma",
+        "description": "Titik awal kunjungan ke Kuma. Dapatkan informasi dan peta lokasi.",
+        "latitude": 3.58,
+        "longitude": 125.45,
+        "type": "landmark",
+        "order": 1,
+        "estimatedTime": 0,
+        "notes": "Selamat datang di Kuma. Nikmati pengalaman wisata yang menyenangkan."
+      },
+      {
+        "id": "checkpoint-tourism-kuma-2",
+        "name": "Kuma",
+        "description": "Desa Wisata Malaesang Kuma adalah destinasi wisata yang menyajikan keindahan alam pedesaan dengan pantai yang eksotis dan budaya lokal yang kaya.",
+        "latitude": 3.58,
+        "longitude": 125.45,
+        "type": "landmark",
+        "order": 2,
+        "estimatedTime": 120,
+        "notes": "Jelajahi dan nikmati Kuma. Ambil foto dan buat kenangan indah."
+      },
+      {
+        "id": "checkpoint-tourism-kuma-3",
+        "name": "Area Sekitar Kuma",
+        "description": "Jelajahi area sekitar Kuma untuk pengalaman lebih lengkap.",
+        "latitude": 3.580321829186595,
+        "longitude": 125.44761452674436,
+        "type": "landmark",
+        "order": 3,
+        "estimatedTime": 60,
+        "notes": "Temukan spot-spot menarik di sekitar Kuma."
+      }
+    ],
+    "transports": [],
+    "totalEstimatedTime": 180,
+    "difficulty": "medium",
+    "description": "Tur terpandu ke Kuma. Desa Wisata Malaesang Kuma adalah destinasi wisata yang menyajikan keindahan alam pedesaan dengan pantai yang eksotis dan budaya lokal yang kaya."
+  },
+  {
+    "id": "route-tourism-laine",
+    "destinationId": "tourism-laine",
+    "destinationName": "Laine",
+    "checkpoints": [
+      {
+        "id": "checkpoint-tourism-laine-1",
+        "name": "Pintu Masuk Laine",
+        "description": "Titik awal kunjungan ke Laine. Dapatkan informasi dan peta lokasi.",
+        "latitude": 3.62,
+        "longitude": 125.52,
+        "type": "landmark",
+        "order": 1,
+        "estimatedTime": 0,
+        "notes": "Selamat datang di Laine. Nikmati pengalaman wisata yang menyenangkan."
+      },
+      {
+        "id": "checkpoint-tourism-laine-2",
+        "name": "Laine",
+        "description": "Kampung Wisata Laine menawarkan air terjun yang menakjubkan, hutan yang lebat, dan atraksi budaya seperti musik bambu dan tarian tradisional.",
+        "latitude": 3.62,
+        "longitude": 125.52,
+        "type": "landmark",
+        "order": 2,
+        "estimatedTime": 120,
+        "notes": "Jelajahi dan nikmati Laine. Ambil foto dan buat kenangan indah."
+      },
+      {
+        "id": "checkpoint-tourism-laine-3",
+        "name": "Area Sekitar Laine",
+        "description": "Jelajahi area sekitar Laine untuk pengalaman lebih lengkap.",
+        "latitude": 3.621649849866221,
+        "longitude": 125.51919432582125,
+        "type": "landmark",
+        "order": 3,
+        "estimatedTime": 60,
+        "notes": "Temukan spot-spot menarik di sekitar Laine."
+      }
+    ],
+    "transports": [],
+    "totalEstimatedTime": 180,
+    "difficulty": "medium",
+    "description": "Tur terpandu ke Laine. Kampung Wisata Laine menawarkan air terjun yang menakjubkan, hutan yang lebat, dan atraksi budaya seperti musik bambu dan tarian tradisional."
+  },
+  {
+    "id": "route-tourism-lelipang",
+    "destinationId": "tourism-lelipang",
+    "destinationName": "Lelipang",
+    "checkpoints": [
+      {
+        "id": "checkpoint-tourism-lelipang-1",
+        "name": "Pintu Masuk Lelipang",
+        "description": "Titik awal kunjungan ke Lelipang. Dapatkan informasi dan peta lokasi.",
+        "latitude": 3.64,
+        "longitude": 125.54,
+        "type": "landmark",
+        "order": 1,
+        "estimatedTime": 0,
+        "notes": "Selamat datang di Lelipang. Nikmati pengalaman wisata yang menyenangkan."
+      },
+      {
+        "id": "checkpoint-tourism-lelipang-2",
+        "name": "Lelipang",
+        "description": "Kampung Wisata Lelipang menawarkan keindahan hutan Sahendaruman, air terjun yang indah, dan kopi lokal yang terkenal.",
+        "latitude": 3.64,
+        "longitude": 125.54,
+        "type": "landmark",
+        "order": 2,
+        "estimatedTime": 120,
+        "notes": "Jelajahi dan nikmati Lelipang. Ambil foto dan buat kenangan indah."
+      },
+      {
+        "id": "checkpoint-tourism-lelipang-3",
+        "name": "Area Sekitar Lelipang",
+        "description": "Jelajahi area sekitar Lelipang untuk pengalaman lebih lengkap.",
+        "latitude": 3.6427851867963725,
+        "longitude": 125.54255402496756,
+        "type": "landmark",
+        "order": 3,
+        "estimatedTime": 60,
+        "notes": "Temukan spot-spot menarik di sekitar Lelipang."
+      }
+    ],
+    "transports": [],
+    "totalEstimatedTime": 180,
+    "difficulty": "medium",
+    "description": "Tur terpandu ke Lelipang. Kampung Wisata Lelipang menawarkan keindahan hutan Sahendaruman, air terjun yang indah, dan kopi lokal yang terkenal."
+  },
+  {
+    "id": "route-tourism-lenganeng",
+    "destinationId": "tourism-lenganeng",
+    "destinationName": "Lenganeng",
+    "checkpoints": [
+      {
+        "id": "checkpoint-tourism-lenganeng-1",
+        "name": "Pintu Masuk Lenganeng",
+        "description": "Titik awal kunjungan ke Lenganeng. Dapatkan informasi dan peta lokasi.",
+        "latitude": 3.61,
+        "longitude": 125.53,
+        "type": "landmark",
+        "order": 1,
+        "estimatedTime": 0,
+        "notes": "Selamat datang di Lenganeng. Nikmati pengalaman wisata yang menyenangkan."
+      },
+      {
+        "id": "checkpoint-tourism-lenganeng-2",
+        "name": "Lenganeng",
+        "description": "Kampung Wisata Lenganeng menawarkan Museum Anggar Apapuhang dan kerajinan parang besi tradisional.",
+        "latitude": 3.61,
+        "longitude": 125.53,
+        "type": "landmark",
+        "order": 2,
+        "estimatedTime": 120,
+        "notes": "Jelajahi dan nikmati Lenganeng. Ambil foto dan buat kenangan indah."
+      },
+      {
+        "id": "checkpoint-tourism-lenganeng-3",
+        "name": "Area Sekitar Lenganeng",
+        "description": "Jelajahi area sekitar Lenganeng untuk pengalaman lebih lengkap.",
+        "latitude": 3.609809873686444,
+        "longitude": 125.52966172313822,
+        "type": "landmark",
+        "order": 3,
+        "estimatedTime": 60,
+        "notes": "Temukan spot-spot menarik di sekitar Lenganeng."
+      }
+    ],
+    "transports": [],
+    "totalEstimatedTime": 180,
+    "difficulty": "medium",
+    "description": "Tur terpandu ke Lenganeng. Kampung Wisata Lenganeng menawarkan Museum Anggar Apapuhang dan kerajinan parang besi tradisional."
+  },
+  {
+    "id": "route-tourism-palareng",
+    "destinationId": "tourism-palareng",
+    "destinationName": "Palareng",
+    "checkpoints": [
+      {
+        "id": "checkpoint-tourism-palareng-1",
+        "name": "Pintu Masuk Palareng",
+        "description": "Titik awal kunjungan ke Palareng. Dapatkan informasi dan peta lokasi.",
+        "latitude": 3.56,
+        "longitude": 125.47,
+        "type": "landmark",
+        "order": 1,
+        "estimatedTime": 0,
+        "notes": "Selamat datang di Palareng. Nikmati pengalaman wisata yang menyenangkan."
+      },
+      {
+        "id": "checkpoint-tourism-palareng-2",
+        "name": "Palareng",
+        "description": "Kampung Wisata Palareng menawarkan pantai Mehong dan Tanjung Melepe dengan pemandangan laut yang mempesona.",
+        "latitude": 3.56,
+        "longitude": 125.47,
+        "type": "landmark",
+        "order": 2,
+        "estimatedTime": 120,
+        "notes": "Jelajahi dan nikmati Palareng. Ambil foto dan buat kenangan indah."
+      },
+      {
+        "id": "checkpoint-tourism-palareng-3",
+        "name": "Area Sekitar Palareng",
+        "description": "Jelajahi area sekitar Palareng untuk pengalaman lebih lengkap.",
+        "latitude": 3.561381163220749,
+        "longitude": 125.47251470932935,
+        "type": "landmark",
+        "order": 3,
+        "estimatedTime": 60,
+        "notes": "Temukan spot-spot menarik di sekitar Palareng."
+      }
+    ],
+    "transports": [],
+    "totalEstimatedTime": 180,
+    "difficulty": "medium",
+    "description": "Tur terpandu ke Palareng. Kampung Wisata Palareng menawarkan pantai Mehong dan Tanjung Melepe dengan pemandangan laut yang mempesona."
+  },
+  {
+    "id": "route-tourism-pananualeng",
+    "destinationId": "tourism-pananualeng",
+    "destinationName": "Pananualeng",
+    "checkpoints": [
+      {
+        "id": "checkpoint-tourism-pananualeng-1",
+        "name": "Pintu Masuk Pananualeng",
+        "description": "Titik awal kunjungan ke Pananualeng. Dapatkan informasi dan peta lokasi.",
+        "latitude": 3.55,
+        "longitude": 125.46,
+        "type": "landmark",
+        "order": 1,
+        "estimatedTime": 0,
+        "notes": "Selamat datang di Pananualeng. Nikmati pengalaman wisata yang menyenangkan."
+      },
+      {
+        "id": "checkpoint-tourism-pananualeng-2",
+        "name": "Pananualeng",
+        "description": "Kampung Wisata Pananualeng menawarkan pantai yang indah dengan berbagai atraksi wisata bahari dan ikan segar.",
+        "latitude": 3.55,
+        "longitude": 125.46,
+        "type": "landmark",
+        "order": 2,
+        "estimatedTime": 120,
+        "notes": "Jelajahi dan nikmati Pananualeng. Ambil foto dan buat kenangan indah."
+      },
+      {
+        "id": "checkpoint-tourism-pananualeng-3",
+        "name": "Area Sekitar Pananualeng",
+        "description": "Jelajahi area sekitar Pananualeng untuk pengalaman lebih lengkap.",
+        "latitude": 3.5493009257928003,
+        "longitude": 125.45922156305242,
+        "type": "landmark",
+        "order": 3,
+        "estimatedTime": 60,
+        "notes": "Temukan spot-spot menarik di sekitar Pananualeng."
+      }
+    ],
+    "transports": [],
+    "totalEstimatedTime": 180,
+    "difficulty": "medium",
+    "description": "Tur terpandu ke Pananualeng. Kampung Wisata Pananualeng menawarkan pantai yang indah dengan berbagai atraksi wisata bahari dan ikan segar."
+  },
+  {
+    "id": "route-pantai-pananualeng",
+    "destinationId": "tourism-6",
+    "destinationName": "Pantai Pananualeng (Batuwingkung)",
+    "checkpoints": [
+      {
+        "id": "checkpoint-pananualeng-1",
+        "name": "Kampung Tariang Baru",
+        "description": "Kampung pesisir dekat perbatasan Filipina.",
+        "latitude": 3.695,
+        "longitude": 125.495,
+        "type": "landmark",
+        "order": 1,
+        "estimatedTime": 0,
+        "notes": "Desa berbatasan dengan Negara tetangga Philipines."
+      },
+      {
+        "id": "checkpoint-pananualeng-2",
+        "name": "Puncak Batuwingkung",
+        "description": "Puncak dengan view sunrise dan pemandangan pulau-pulau.",
+        "latitude": 3.698,
+        "longitude": 125.498,
+        "type": "landmark",
+        "order": 2,
+        "estimatedTime": 15,
+        "notes": "Trekking 15 menit. Datang pagi untuk sunrise terbaik."
+      },
+      {
+        "id": "checkpoint-pananualeng-3",
+        "name": "Pantai Pananualeng",
+        "description": "Pantai dengan pasir putih halus dan air laut jernih.",
+        "latitude": 3.7,
+        "longitude": 125.5,
+        "type": "landmark",
+        "order": 3,
+        "estimatedTime": 40,
+        "notes": "Spot snorkeling di KKP (Kawasan Konservasi Pesisir)."
+      },
+      {
+        "id": "checkpoint-pananualeng-4",
+        "name": "Batu Putih Pulau Enggahai",
+        "description": "Formasi batu putih unik yang bisa dijangkau saat air surut.",
+        "latitude": 3.702,
+        "longitude": 125.502,
+        "type": "landmark",
+        "order": 4,
+        "estimatedTime": 70,
+        "notes": "20 menit perahu atau 30 menit jalan kaki saat air surut."
+      }
+    ],
+    "transports": [
+      {
+        "id": "transport-pananualeng-1",
+        "name": "Angkutan Umum",
+        "type": "bus",
+        "description": "Angkutan umum dari Tahuna ke Tariang Baru",
+        "price": "Rp 30.000",
+        "schedule": [
+          "07:00",
+          "10:00",
+          "14:00"
+        ],
+        "duration": "1.5 jam",
+        "bookingUrl": "",
+        "departurePoint": "Tahuna",
+        "arrivalPoint": "Tariang Baru"
+      }
+    ],
+    "totalEstimatedTime": 180,
+    "difficulty": "medium",
+    "description": "Eksplorasi pantai dan spot unik di perbatasan dengan Filipina."
+  },
+  {
+    "id": "route-pulau-bebalang",
+    "destinationId": "tourism-9",
+    "destinationName": "Pulau Bebalang",
+    "checkpoints": [
+      {
+        "id": "checkpoint-bebalang-1",
+        "name": "Pelabuhan Manganitu",
+        "description": "Pelabuhan keberangkatan menuju Pulau Bebalang.",
+        "latitude": 3.38,
+        "longitude": 125.465,
+        "type": "landmark",
+        "order": 1,
+        "estimatedTime": 0,
+        "notes": "Perahu berangkat setiap hari. Bawa bekal untuk perjalanan 1 jam."
+      },
+      {
+        "id": "checkpoint-bebalang-2",
+        "name": "Dermaga Pulau Bebalang",
+        "description": "Dermaga untuk perahu lokal. 3 lindongan (termasuk Mendaku & Dakupang).",
+        "latitude": 3.349,
+        "longitude": 125.479,
+        "type": "landmark",
+        "order": 2,
+        "estimatedTime": 60,
+        "notes": "Sambutan hangat dari warga. Bisa homestay di rumah penduduk."
+      },
+      {
+        "id": "checkpoint-bebalang-3",
+        "name": "Pantai Pasir Putih Bebalang",
+        "description": "Pantai dengan pasir putih di pemukiman penduduk.",
+        "latitude": 3.35,
+        "longitude": 125.48,
+        "type": "landmark",
+        "order": 3,
+        "estimatedTime": 75,
+        "notes": "Spot snorkeling dengan terumbu karang yang luas di selatan pulau."
+      },
+      {
+        "id": "checkpoint-bebalang-4",
+        "name": "Tebing Terjal Bebalang",
+        "description": "Tebing-tebing terjal bagaikan menara di beberapa sudut pulau.",
+        "latitude": 3.351,
+        "longitude": 125.481,
+        "type": "landmark",
+        "order": 4,
+        "estimatedTime": 105,
+        "notes": "Pemandangan spektakuler. Hati-hati saat mendekati tebing."
+      }
+    ],
+    "transports": [
+      {
+        "id": "transport-bebalang-1",
+        "name": "Perahu Lokal",
+        "type": "boat",
+        "description": "Perahu lokal menuju Pulau Bebalang",
+        "price": "Rp 35.000",
+        "schedule": [
+          "08:00",
+          "14:00"
+        ],
+        "duration": "1 jam",
+        "bookingUrl": "",
+        "departurePoint": "Pelabuhan Manganitu",
+        "arrivalPoint": "Pulau Bebalang"
+      },
+      {
+        "id": "transport-bebalang-2",
+        "name": "Speed Boat",
+        "type": "boat",
+        "description": "Speed boat untuk perjalanan lebih cepat",
+        "price": "Rp 100.000 (sewa private)",
+        "schedule": [
+          "Sesuai permintaan"
+        ],
+        "duration": "30 menit",
+        "bookingUrl": "",
+        "departurePoint": "Pelabuhan Manganitu",
+        "arrivalPoint": "Pulau Bebalang"
+      }
+    ],
+    "totalEstimatedTime": 240,
+    "difficulty": "medium",
+    "description": "Petualangan ke pulau eksotis dengan pantai pasir putih dan tebing terjal."
+  },
+  {
+    "id": "route-pulau-para",
+    "destinationId": "tourism-1",
+    "destinationName": "Pulau Para (Negeri 8 Pantai)",
+    "checkpoints": [
+      {
+        "id": "checkpoint-para-1",
+        "name": "Pelabuhan Tahuna",
+        "description": "Titik keberangkatan menuju Pulau Para. Tersedia perahu dan speedboat untuk menyeberang.",
+        "latitude": 3.609,
+        "longitude": 125.489,
+        "type": "landmark",
+        "order": 1,
+        "estimatedTime": 0,
+        "notes": "Perahu berangkat setiap jam. Persiapkan peralatan snorkeling dan kamera underwater."
+      },
+      {
+        "id": "checkpoint-para-2",
+        "name": "Pantai Pulau Para",
+        "description": "Pantai dengan pasir putih halus dan air yang jernih. Spot pertama untuk snorkeling.",
+        "latitude": 3.748,
+        "longitude": 125.598,
+        "type": "landmark",
+        "order": 2,
+        "estimatedTime": 45,
+        "notes": "Spot terbaik untuk snorkeling. Terumbu karang masih sangat indah."
+      },
+      {
+        "id": "checkpoint-para-3",
+        "name": "Kawasan Konservasi P3K Tatoareng",
+        "description": "Area konservasi dengan keanekaragaman hayati laut yang tinggi.",
+        "latitude": 3.75,
+        "longitude": 125.6,
+        "type": "landmark",
+        "order": 3,
+        "estimatedTime": 90,
+        "notes": "Masuk 300 Besar ADWI. Jaga kebersihan dan tidak merusak terumbu karang."
+      }
+    ],
+    "transports": [
+      {
+        "id": "transport-para-1",
+        "name": "Perahu Tradisional",
+        "type": "boat",
+        "description": "Perahu tradisional menuju Pulau Para",
+        "price": "Rp 50.000",
+        "schedule": [
+          "07:00",
+          "09:00",
+          "11:00",
+          "13:00",
+          "15:00"
+        ],
+        "duration": "45 menit",
+        "bookingUrl": "",
+        "departurePoint": "Pelabuhan Tahuna",
+        "arrivalPoint": "Pulau Para"
+      }
+    ],
+    "totalEstimatedTime": 180,
+    "difficulty": "medium",
+    "description": "Perjalanan wisata ke Pulau Para dengan 8 pantai indah dan snorkeling di kawasan konservasi."
+  },
+  {
+    "id": "route-tourism-utaurano",
+    "destinationId": "tourism-utaurano",
+    "destinationName": "Utaurano",
+    "checkpoints": [
+      {
+        "id": "checkpoint-tourism-utaurano-1",
+        "name": "Pintu Masuk Utaurano",
+        "description": "Titik awal kunjungan ke Utaurano. Dapatkan informasi dan peta lokasi.",
+        "latitude": 3.57,
+        "longitude": 125.48,
+        "type": "landmark",
+        "order": 1,
+        "estimatedTime": 0,
+        "notes": "Selamat datang di Utaurano. Nikmati pengalaman wisata yang menyenangkan."
+      },
+      {
+        "id": "checkpoint-tourism-utaurano-2",
+        "name": "Utaurano",
+        "description": "Kampung Wisata Utaurano menawarkan keindahan alam dan budaya lokal Sangihe yang indah juga autentik.",
+        "latitude": 3.57,
+        "longitude": 125.48,
+        "type": "landmark",
+        "order": 2,
+        "estimatedTime": 120,
+        "notes": "Jelajahi dan nikmati Utaurano. Ambil foto dan buat kenangan indah."
+      },
+      {
+        "id": "checkpoint-tourism-utaurano-3",
+        "name": "Area Sekitar Utaurano",
+        "description": "Jelajahi area sekitar Utaurano untuk pengalaman lebih lengkap.",
+        "latitude": 3.57182614406904,
+        "longitude": 125.4823714333684,
+        "type": "landmark",
+        "order": 3,
+        "estimatedTime": 60,
+        "notes": "Temukan spot-spot menarik di sekitar Utaurano."
+      }
+    ],
+    "transports": [],
+    "totalEstimatedTime": 180,
+    "difficulty": "medium",
+    "description": "Tur terpandu ke Utaurano. Kampung Wisata Utaurano menawarkan keindahan alam dan budaya lokal Sangihe yang indah juga autentik."
+  },
+  {
+    "id": "route-zmebcdgkz4pqeakftr5e",
+    "destinationId": "zMEBcdGkz4PQeakFTR5E",
+    "destinationName": "a",
+    "checkpoints": [
+      {
+        "id": "checkpoint-zMEBcdGkz4PQeakFTR5E-1",
+        "name": "Pintu Masuk a",
+        "description": "Titik awal kunjungan ke a. Dapatkan informasi dan peta lokasi.",
+        "latitude": -6.2,
+        "longitude": 106.816666,
+        "type": "landmark",
+        "order": 1,
+        "estimatedTime": 0,
+        "notes": "Selamat datang di a. Nikmati pengalaman wisata yang menyenangkan."
+      },
+      {
+        "id": "checkpoint-zMEBcdGkz4PQeakFTR5E-2",
+        "name": "a",
+        "description": "a",
+        "latitude": -6.2,
+        "longitude": 106.816666,
+        "type": "accommodation",
+        "order": 2,
+        "estimatedTime": 0,
+        "notes": "Jelajahi dan nikmati a. Ambil foto dan buat kenangan indah."
+      }
+    ],
+    "transports": [],
+    "totalEstimatedTime": 0,
+    "difficulty": "easy",
+    "description": "Tur terpandu ke a. a"
   }
 ]

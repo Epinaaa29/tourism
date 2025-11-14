@@ -1,7 +1,8 @@
 import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
-import { StyleSheet, Text, useColorScheme, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { getColors } from '../../constants/colors';
+import { useIsDarkMode } from '../../hooks/use-theme';
 
 interface LocationRowProps {
   district: string;
@@ -14,8 +15,8 @@ export const LocationRow: React.FC<LocationRowProps> = ({
   size = 'medium',
   showIcon = true 
 }) => {
-  const colorScheme = useColorScheme();
-  const colors = getColors(colorScheme === 'dark');
+  const isDarkMode = useIsDarkMode();
+  const colors = getColors(isDarkMode);
 
   const sizeStyles = {
     small: { fontSize: 12, iconSize: 12 },

@@ -1,19 +1,20 @@
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import React, { useState } from 'react';
-import { Alert, Modal, ScrollView, StyleSheet, Switch, Text, TextInput, TouchableOpacity, useColorScheme, View } from 'react-native';
+import { Alert, Modal, ScrollView, StyleSheet, Switch, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 import { SectionTitle } from '@/components/ui/SectionTitle';
 import { getColors } from '@/constants/colors';
+import { useIsDarkMode } from '@/hooks/use-theme';
 import { clearAllData, getAdminAuth, setAdminAuth, updateAdminPin, verifyAdminPinLocal } from '@/lib/data';
 import { useAppStore } from '@/lib/store';
 import { useAuthStore } from '@/lib/auth-store';
 import { logoutUser } from '@/lib/auth-service';
 
 export default function SettingsScreen() {
-  const colorScheme = useColorScheme();
-  const colors = getColors(colorScheme === 'dark');
-  const { isDarkMode, setDarkMode, favorites, clearFilters } = useAppStore();
+  const isDarkMode = useIsDarkMode();
+  const colors = getColors(isDarkMode);
+  const { setDarkMode, favorites, clearFilters } = useAppStore();
   const { user, clearAuth } = useAuthStore();
   
   const [showAdminModal, setShowAdminModal] = useState(false);
@@ -23,8 +24,8 @@ export default function SettingsScreen() {
   const [confirmNewPin, setConfirmNewPin] = useState('');
   const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false);
 
-  const handleToggleTheme = () => {
-    setDarkMode(!isDarkMode);
+  const handleToggleTheme = async () => {
+    await setDarkMode(!isDarkMode);
   };
 
   const handleClearCache = () => {
@@ -183,7 +184,8 @@ export default function SettingsScreen() {
                 value={isDarkMode}
                 onValueChange={handleToggleTheme}
                 trackColor={{ false: colors.border, true: colors.primary }}
-                thumbColor={isDarkMode ? '#FFFFFF' : colors.textMuted}
+                thumbColor="#FFFFFF"
+                ios_backgroundColor={colors.border}
               />
             }
           />
@@ -209,9 +211,7 @@ export default function SettingsScreen() {
             icon="heart-outline"
             title="Favorites"
             subtitle={`${favorites.length} items favorited`}
-            onPress={() => {
-              // Navigate to favorites list
-            }}
+            onPress={() => router.push('/favorites')}
           />
           <SettingItem
             icon="trash-outline"

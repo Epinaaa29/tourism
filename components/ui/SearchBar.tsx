@@ -1,7 +1,8 @@
 import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
-import { StyleSheet, TextInput, TouchableOpacity, useColorScheme, View } from 'react-native';
+import { StyleSheet, TextInput, TouchableOpacity, View } from 'react-native';
 import { getColors } from '../../constants/colors';
+import { useIsDarkMode } from '../../hooks/use-theme';
 
 interface SearchBarProps {
   value: string;
@@ -18,8 +19,8 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   onFilterPress,
   showFilter = true,
 }) => {
-  const colorScheme = useColorScheme();
-  const colors = getColors(colorScheme === 'dark');
+  const isDarkMode = useIsDarkMode();
+  const colors = getColors(isDarkMode);
 
   return (
     <View style={[

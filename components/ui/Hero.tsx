@@ -1,7 +1,8 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
-import { Dimensions, StyleSheet, Text, useColorScheme, View } from 'react-native';
+import { Dimensions, StyleSheet, Text, View } from 'react-native';
 import { getColors } from '../../constants/colors';
+import { useIsDarkMode } from '../../hooks/use-theme';
 
 const { width } = Dimensions.get('window');
 
@@ -16,8 +17,8 @@ export const Hero: React.FC<HeroProps> = ({
   subtitle, 
   height = 220 
 }) => {
-  const colorScheme = useColorScheme();
-  const colors = getColors(colorScheme === 'dark');
+  const isDarkMode = useIsDarkMode();
+  const colors = getColors(isDarkMode);
 
   return (
     <View style={[styles.container, { height }]}>

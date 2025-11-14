@@ -6,10 +6,11 @@ import { View, ActivityIndicator } from 'react-native';
 import 'react-native-reanimated';
 import Toast from 'react-native-toast-message';
 
-import { useColorScheme } from '@/hooks/use-color-scheme';
+import { useTheme } from '@/hooks/use-theme';
 import { useAuthStore } from '../lib/auth-store';
 import { useAppStore } from '../lib/store';
 import { useTourStore } from '../lib/tour-store';
+import { useLocationStore } from '../lib/location-store';
 import { getColors } from '@/constants/colors';
 
 export const unstable_settings = {
@@ -17,26 +18,35 @@ export const unstable_settings = {
 };
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const colors = getColors(colorScheme === 'dark');
+  const theme = useTheme();
+  const isDark = theme === 'dark';
+  const colors = getColors(isDark);
   const router = useRouter();
   const segments = useSegments();
   const { user, isLoading: authLoading, initializeAuth } = useAuthStore();
   const loadAppData = useAppStore((state) => state.loadAppData);
   const loadTourRoutes = useTourStore((state) => state.loadTourRoutes);
+  const loadDarkModePreference = useAppStore((state) => state.loadDarkModePreference);
+  const initializeLocation = useLocationStore((state) => state.initializeLocation);
 
-  // Initialize auth on mount
+  // Initialize auth, dark mode preference, and location on mount
   useEffect(() => {
     initializeAuth();
+    loadDarkModePreference();
+    initializeLocation();
   }, []);
 
-  // Load data when user changes
+  // Load data when user changes or when auth is ready
   useEffect(() => {
     if (!authLoading) {
-      if (user) {
-        loadAppData(user.uid);
-      }
-      loadTourRoutes();
+      // Load data - if user is logged in, use their ID, otherwise load global data
+      loadAppData(user?.uid).catch((error) => {
+        console.error('Failed to load app data:', error);
+        // Error is logged but app continues - data will be empty if Firestore is unavailable
+      });
+      loadTourRoutes().catch((error) => {
+        console.error('Failed to load tour routes:', error);
+      });
     }
   }, [user, authLoading]);
 
@@ -65,7 +75,7 @@ export default function RootLayout() {
   }
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+    <ThemeProvider value={isDark ? DarkTheme : DefaultTheme}>
         <Stack>
           <Stack.Screen name="auth" options={{ headerShown: false }} />
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
@@ -76,7 +86,7 @@ export default function RootLayout() {
           <Stack.Screen name="transport-detail" options={{ headerShown: false }} />
           <Stack.Screen name="tour-history" options={{ headerShown: false }} />
         </Stack>
-      <StatusBar style="auto" />
+      <StatusBar style={isDark ? 'light' : 'dark'} />
       <Toast />
     </ThemeProvider>
   );

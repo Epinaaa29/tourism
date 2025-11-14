@@ -2,13 +2,16 @@ import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
 import React, { useState } from 'react';
-import { FlatList, RefreshControl, ScrollView, StyleSheet, Text, TouchableOpacity, useColorScheme, View } from 'react-native';
+import { FlatList, RefreshControl, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
+import { AppHeader } from '@/components/ui/AppHeader';
 import { Hero } from '@/components/ui/Hero';
 import { PlaceholderImage } from '@/components/ui/PlaceholderImage';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 import { getColors } from '@/constants/colors';
+import { useIsDarkMode } from '@/hooks/use-theme';
 import { useAppStore } from '@/lib/store';
+import { useAuthStore } from '@/lib/auth-store';
 import { Item } from '@/types';
 
 const DiscoverCard = ({ 
@@ -24,8 +27,8 @@ const DiscoverCard = ({
   description: string;
   onPress: () => void; 
 }) => {
-  const colorScheme = useColorScheme();
-  const colors = getColors(colorScheme === 'dark');
+  const isDarkMode = useIsDarkMode();
+  const colors = getColors(isDarkMode);
 
   return (
     <TouchableOpacity
@@ -53,8 +56,8 @@ const DiscoverCard = ({
 };
 
 const TrendingCard = ({ item }: { item: Item }) => {
-  const colorScheme = useColorScheme();
-  const colors = getColors(colorScheme === 'dark');
+  const isDarkMode = useIsDarkMode();
+  const colors = getColors(isDarkMode);
   const addToRecent = useAppStore((state) => state.addToRecent);
 
   const handlePress = () => {
@@ -104,9 +107,10 @@ const TrendingCard = ({ item }: { item: Item }) => {
 };
 
 export default function HomeScreen() {
-  const colorScheme = useColorScheme();
-  const colors = getColors(colorScheme === 'dark');
+  const isDarkMode = useIsDarkMode();
+  const colors = getColors(isDarkMode);
   const { getTrendingItems, loadAppData, isLoading } = useAppStore();
+  const { user } = useAuthStore();
   const [refreshing, setRefreshing] = useState(false);
 
   const trendingItems = getTrendingItems();
@@ -114,7 +118,7 @@ export default function HomeScreen() {
   const onRefresh = async () => {
     setRefreshing(true);
     try {
-      await loadAppData();
+      await loadAppData(user?.uid);
     } catch (error) {
       console.error('Error refreshing data:', error);
     } finally {
@@ -154,8 +158,10 @@ export default function HomeScreen() {
   ];
 
   return (
+    <View style={[styles.container, { backgroundColor: colors.background }]}>
+      <AppHeader showLocation={true} />
     <ScrollView 
-      style={[styles.container, { backgroundColor: colors.background }]} 
+        style={styles.scrollView}
       showsVerticalScrollIndicator={false}
       refreshControl={
         <RefreshControl
@@ -205,11 +211,15 @@ export default function HomeScreen() {
         </View>
       </View>
     </ScrollView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+  },
+  scrollView: {
     flex: 1,
   },
   content: {

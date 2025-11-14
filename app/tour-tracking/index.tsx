@@ -1,15 +1,16 @@
 import { Ionicons } from '@expo/vector-icons';
 import { router, useLocalSearchParams } from 'expo-router';
-import React, { useEffect, useState } from 'react';
-import { Alert, FlatList, ScrollView, StyleSheet, Text, TouchableOpacity, useColorScheme, View } from 'react-native';
+import React, { useEffect, useRef, useState } from 'react';
+import { Alert, FlatList, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { CheckpointCard } from '../../components/ui/CheckpointCard';
 import { getColors } from '../../constants/colors';
+import { useIsDarkMode } from '../../hooks/use-theme';
 import { useTourStore } from '../../lib/tour-store';
 import { Checkpoint, TourRoute, Transport } from '../../types';
 
 export default function TourTrackingScreen() {
-  const colorScheme = useColorScheme();
-  const colors = getColors(colorScheme === 'dark');
+  const isDarkMode = useIsDarkMode();
+  const colors = getColors(isDarkMode);
   const { tourId } = useLocalSearchParams<{ tourId: string }>();
   
   const { 
@@ -24,26 +25,89 @@ export default function TourTrackingScreen() {
 
   const [currentRoute, setCurrentRoute] = useState<TourRoute | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isInitialized, setIsInitialized] = useState(false);
+  const hasAutoCompletedRef = useRef(false);
 
   useEffect(() => {
+    if (!tourId || isInitialized) return;
+    
     initializeTour();
-  }, [tourId]);
+  }, [tourId]); // Removed routes from dependencies to prevent infinite loop
+
+  // Auto-complete tour when all checkpoints are completed
+  useEffect(() => {
+    if (!currentRoute || !activeTour || activeTour.status !== 'active' || hasAutoCompletedRef.current) return;
+    
+    const totalItems = currentRoute.checkpoints.length + currentRoute.transports.length;
+    const completedCount = activeTour.completedCheckpoints.length;
+    
+    if (completedCount >= totalItems && totalItems > 0) {
+      hasAutoCompletedRef.current = true; // Prevent multiple triggers
+      console.log('🎉 All checkpoints completed! Auto-completing tour...', {
+        completedCount,
+        totalItems
+      });
+      
+      // Small delay to ensure UI updates
+      setTimeout(async () => {
+        try {
+          await completeTour();
+          Alert.alert(
+            'Tour Completed!',
+            'Congratulations! You have completed the tour.',
+            [
+              {
+                text: 'View History',
+                onPress: () => router.push('/tour-history'),
+              },
+              {
+                text: 'OK',
+                onPress: () => {},
+              },
+            ]
+          );
+        } catch (error) {
+          console.error('Error auto-completing tour:', error);
+          hasAutoCompletedRef.current = false; // Reset on error
+        }
+      }, 500);
+    }
+  }, [activeTour?.completedCheckpoints.length, currentRoute, activeTour?.status]);
 
   const initializeTour = async () => {
+    if (isInitialized) return; // Prevent multiple initializations
+    
     try {
       setIsLoading(true);
-      await loadTourRoutes();
+      hasAutoCompletedRef.current = false; // Reset auto-complete flag for new tour
+      
+      // Only load routes if not already loaded
+      const currentRoutes = useTourStore.getState().routes;
+      if (currentRoutes.length === 0) {
+        await loadTourRoutes();
+      }
+      
+      // Get routes from store after loading
+      const updatedRoutes = useTourStore.getState().routes;
       
       if (tourId) {
-        const route = routes.find(r => r.id === tourId);
+        const route = updatedRoutes.find(r => r.id === tourId);
         if (route) {
           setCurrentRoute(route);
+          setIsInitialized(true);
+          setIsLoading(false);
+        } else {
+          console.error('Tour route not found:', tourId);
+          console.log('Available routes:', updatedRoutes.map(r => ({ id: r.id, destinationId: r.destinationId, name: r.destinationName })));
+          Alert.alert('Error', 'Tour route not found');
+          setIsLoading(false);
         }
+      } else {
+        setIsLoading(false);
       }
     } catch (error) {
       console.error('Error initializing tour:', error);
       Alert.alert('Error', 'Failed to load tour data');
-    } finally {
       setIsLoading(false);
     }
   };
@@ -66,24 +130,44 @@ export default function TourTrackingScreen() {
     try {
       await completeCheckpoint(checkpointId);
       
+      // Get updated tour state after completing checkpoint
+      const updatedTour = useTourStore.getState().activeTour;
+      
       // Check if tour is completed
-      if (currentRoute && activeTour) {
+      if (currentRoute && updatedTour) {
         const totalItems = currentRoute.checkpoints.length + currentRoute.transports.length;
-        if (activeTour.currentCheckpointIndex >= totalItems) {
-          Alert.alert(
-            'Tour Completed!',
-            'Congratulations! You have completed the tour.',
-            [
-              {
-                text: 'View History',
-                onPress: () => router.push('/tour-history'),
-              },
-              {
-                text: 'OK',
-                onPress: completeTour,
-              },
-            ]
-          );
+        const completedCount = updatedTour.completedCheckpoints.length;
+        
+        console.log('✅ Checkpoint completed:', {
+          checkpointId,
+          completedCount,
+          totalItems,
+          isComplete: completedCount >= totalItems
+        });
+        
+        if (completedCount >= totalItems) {
+          // Small delay to ensure state is updated
+          setTimeout(() => {
+            Alert.alert(
+              'Tour Completed!',
+              'Congratulations! You have completed the tour.',
+              [
+                {
+                  text: 'View History',
+                  onPress: async () => {
+                    await completeTour();
+                    router.push('/tour-history');
+                  },
+                },
+                {
+                  text: 'OK',
+                  onPress: async () => {
+                    await completeTour();
+                  },
+                },
+              ]
+            );
+          }, 100);
         }
       }
     } catch (error) {

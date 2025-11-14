@@ -59,6 +59,7 @@ export type LocalEdit = {
   id: string;
   action: 'create' | 'update' | 'delete';
   data?: Item;
+  category?: Category; // Required for delete action
   timestamp: string;
 };
 

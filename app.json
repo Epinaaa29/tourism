@@ -42,9 +42,9 @@
           "image": "./assets/images/LOGO-KABUPATEN-KEPULAUAN-SANGIHE-SULAWESI-UTARA.png",
           "imageWidth": 200,
           "resizeMode": "contain",
-          "backgroundColor": "#2563EB",
+          "backgroundColor": "#FFFFFF",
           "dark": {
-            "backgroundColor": "#1F2937"
+            "backgroundColor": "#FFFFFF"
           }
         }
       ]
@@ -59,6 +59,7 @@
         "projectId": "d65d8297-ade5-44b2-9d29-b3a22e7a7636"
       },
       "googleMapsApiKey": "YOUR_GOOGLE_MAPS_API_KEY"
-    }
+    },
+    "owner": "sitouxz"
   }
 }

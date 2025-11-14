@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, useColorScheme, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { getColors } from '../../constants/colors';
+import { useIsDarkMode } from '../../hooks/use-theme';
 
 interface SectionTitleProps {
   title: string;
@@ -13,8 +14,8 @@ export const SectionTitle: React.FC<SectionTitleProps> = ({
   subtitle, 
   rightAction 
 }) => {
-  const colorScheme = useColorScheme();
-  const colors = getColors(colorScheme === 'dark');
+  const isDarkMode = useIsDarkMode();
+  const colors = getColors(isDarkMode);
 
   return (
     <View style={styles.container}>
