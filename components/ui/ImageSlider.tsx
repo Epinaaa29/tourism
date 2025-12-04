@@ -1,8 +1,9 @@
 import React, { useRef, useState } from 'react';
-import { StyleSheet, View, Dimensions, Text } from 'react-native';
+import { StyleSheet, View, Dimensions, Text, Pressable } from 'react-native';
 import { Image } from 'expo-image';
 import Carousel from 'react-native-reanimated-carousel';
 import { PlaceholderImage } from './PlaceholderImage';
+import { FullScreenImageViewer } from './FullScreenImageViewer';
 
 interface ImageSliderProps {
   images: (string | any)[];
@@ -21,6 +22,7 @@ const isUri = (img: any): img is string => {
 export function ImageSlider({ images, category = 'tourism', name = '', style }: ImageSliderProps) {
   const carouselRef = useRef<any>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isFullScreenVisible, setIsFullScreenVisible] = useState(false);
 
   if (!images || images.length === 0) {
     return (
@@ -31,24 +33,22 @@ export function ImageSlider({ images, category = 'tourism', name = '', style }: 
   }
 
   return (
-    <View style={[styles.container, style]}>
-      <Carousel
-        ref={carouselRef}
-        width={screenWidth}
-        height={300}
-        data={images}
-        renderItem={({ item, index }) => {
-          if (isUri(item)) {
-            return (
+    <>
+      <View style={[styles.container, style]}>
+        <Carousel
+          ref={carouselRef}
+          width={screenWidth}
+          height={300}
+          data={images}
+          renderItem={({ item, index }) => {
+            const imageComponent = isUri(item) ? (
               <Image
                 key={index}
                 source={{ uri: item }}
                 style={styles.image}
                 resizeMode="cover"
               />
-            );
-          } else {
-            return (
+            ) : (
               <Image
                 key={index}
                 source={item}
@@ -56,34 +56,53 @@ export function ImageSlider({ images, category = 'tourism', name = '', style }: 
                 resizeMode="cover"
               />
             );
-          }
-        }}
-        onSnapToItem={(index) => setCurrentIndex(index)}
-        autoPlay={false}
-        scrollAnimationDuration={300}
+
+            return (
+              <Pressable
+                onPress={() => {
+                  setCurrentIndex(index);
+                  setIsFullScreenVisible(true);
+                }}
+                style={styles.imagePressable}
+              >
+                {imageComponent}
+              </Pressable>
+            );
+          }}
+          onSnapToItem={(index) => setCurrentIndex(index)}
+          autoPlay={false}
+          scrollAnimationDuration={300}
+        />
+        
+        {images.length > 1 && (
+          <>
+            <View style={styles.indicatorContainer}>
+              {images.map((_, index) => (
+                <View
+                  key={index}
+                  style={[
+                    styles.indicator,
+                    index === currentIndex && styles.indicatorActive,
+                  ]}
+                />
+              ))}
+            </View>
+            <View style={styles.counter}>
+              <Text style={styles.counterText}>
+                {currentIndex + 1} / {images.length}
+              </Text>
+            </View>
+          </>
+        )}
+      </View>
+
+      <FullScreenImageViewer
+        visible={isFullScreenVisible}
+        images={images}
+        initialIndex={currentIndex}
+        onClose={() => setIsFullScreenVisible(false)}
       />
-      
-      {images.length > 1 && (
-        <>
-          <View style={styles.indicatorContainer}>
-            {images.map((_, index) => (
-              <View
-                key={index}
-                style={[
-                  styles.indicator,
-                  index === currentIndex && styles.indicatorActive,
-                ]}
-              />
-            ))}
-          </View>
-          <View style={styles.counter}>
-            <Text style={styles.counterText}>
-              {currentIndex + 1} / {images.length}
-            </Text>
-          </View>
-        </>
-      )}
-    </View>
+    </>
   );
 }
 
@@ -93,6 +112,10 @@ const styles = StyleSheet.create({
     height: 300,
     position: 'relative',
     backgroundColor: '#000',
+  },
+  imagePressable: {
+    width: '100%',
+    height: '100%',
   },
   image: {
     width: '100%',

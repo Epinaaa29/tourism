@@ -1,25 +1,26 @@
 {
   "expo": {
-    "name": "City Explorer",
-    "slug": "city-explorer",
+    "name": "Visiting Sangihe",
+    "slug": "visiting-sangihe",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/LOGO-KABUPATEN-KEPULAUAN-SANGIHE-SULAWESI-UTARA.png",
-    "scheme": "cityexplorer",
+    "scheme": "visitingsangihe",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
+      "bundleIdentifier": "com.sitouxz.visitingsangihe",
       "supportsTablet": true,
       "infoPlist": {
+        "CFBundleDisplayName": "Visiting Sangihe",
         "NSLocationWhenInUseUsageDescription": "This app uses location to show nearby places on the map."
       }
     },
     "android": {
+      "label": "Visiting Sangihe",
       "adaptiveIcon": {
-        "backgroundColor": "#2563EB",
         "foregroundImage": "./assets/images/LOGO-KABUPATEN-KEPULAUAN-SANGIHE-SULAWESI-UTARA.png",
-        "backgroundImage": "./assets/images/LOGO-KABUPATEN-KEPULAUAN-SANGIHE-SULAWESI-UTARA.png",
-        "monochromeImage": "./assets/images/LOGO-KABUPATEN-KEPULAUAN-SANGIHE-SULAWESI-UTARA.png"
+        "backgroundColor": "#FFFFFF"
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
@@ -28,7 +29,7 @@
         "ACCESS_COARSE_LOCATION",
         "INTERNET"
       ],
-      "package": "com.sitouxz.cityexplorer"
+      "package": "com.sitouxz.visitingsangihe"
     },
     "web": {
       "output": "static",
@@ -39,26 +40,28 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/LOGO-KABUPATEN-KEPULAUAN-SANGIHE-SULAWESI-UTARA.png",
-          "imageWidth": 200,
-          "resizeMode": "contain",
           "backgroundColor": "#FFFFFF",
+          "resizeMode": "native",
           "dark": {
             "backgroundColor": "#FFFFFF"
           }
         }
       ]
     ],
+    "splash": {
+      "backgroundColor": "#FFFFFF",
+      "resizeMode": "native"
+    },
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
     },
     "extra": {
       "router": {},
+      "googleMapsApiKey": "YOUR_GOOGLE_MAPS_API_KEY",
       "eas": {
-        "projectId": "d65d8297-ade5-44b2-9d29-b3a22e7a7636"
-      },
-      "googleMapsApiKey": "YOUR_GOOGLE_MAPS_API_KEY"
+        "projectId": "50c94d1f-ed10-4b31-95cb-65687edb620a"
+      }
     },
     "owner": "sitouxz"
   }

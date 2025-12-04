@@ -1,7 +1,12 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { create } from 'zustand';
 import { Category, FilterOptions, Item } from '../types';
 import { addFavorite, addRecent, getFavorites, getRecent, loadData, removeFavorite } from './data';
 import { useAuthStore } from './auth-store';
+
+const STORAGE_KEYS = {
+  DARK_MODE: 'city_explorer_dark_mode',
+} as const;
 
 interface AppState {
   // Data
@@ -12,6 +17,7 @@ interface AppState {
   // UI State
   isLoading: boolean;
   isDarkMode: boolean;
+  hasDarkModePreference: boolean; // Whether user has explicitly set a preference
   
   // Filter State
   searchQuery: string;
@@ -19,7 +25,8 @@ interface AppState {
   
   // Actions
   loadAppData: (userId?: string) => Promise<void>;
-  setDarkMode: (isDark: boolean) => void;
+  loadDarkModePreference: () => Promise<void>;
+  setDarkMode: (isDark: boolean) => Promise<void>;
   setSearchQuery: (query: string) => void;
   setFilters: (filters: FilterOptions) => void;
   clearFilters: () => void;
@@ -49,33 +56,95 @@ export const useAppStore = create<AppState>((set, get) => ({
   recent: [],
   isLoading: false,
   isDarkMode: false,
+  hasDarkModePreference: false,
   searchQuery: '',
   filters: {},
   
   // Load all app data (user-specific)
   loadAppData: async (userId?: string) => {
+    const currentState = get();
     set({ isLoading: true });
     try {
       const [data, favorites, recent] = await Promise.all([
         loadData(userId),
-        getFavorites(),
-        getRecent(),
+        getFavorites(userId),
+        getRecent(userId),
       ]);
       
-      set({
-        data,
-        favorites,
-        recent,
-        isLoading: false,
+      console.log('Loaded data:', {
+        tourism: data.tourism?.length || 0,
+        culinary: data.culinary?.length || 0,
+        hotel: data.hotel?.length || 0,
+        event: data.event?.length || 0,
+        favorites: favorites.length,
+        recent: recent.length,
+        userId: userId || 'none (global)',
       });
+      
+      // Only update if we got data, otherwise keep existing data
+      const hasData = Object.values(data).some(items => items.length > 0);
+      if (hasData || !currentState.data || Object.values(currentState.data).every(items => items.length === 0)) {
+        set({
+          data,
+          favorites,
+          recent,
+          isLoading: false,
+        });
+      } else {
+        // Keep existing data but update favorites and recent
+        set({
+          favorites,
+          recent,
+          isLoading: false,
+        });
+      }
     } catch (error) {
       console.error('Error loading app data:', error);
+      // Don't reset data on error - keep existing data if any
+      // But still set loading to false
       set({ isLoading: false });
+      // Re-throw error so callers can handle it
+      throw error;
     }
   },
   
-  // Theme
-  setDarkMode: (isDark: boolean) => set({ isDarkMode: isDark }),
+  // Load dark mode preference from storage
+  loadDarkModePreference: async () => {
+    try {
+      const storedPreference = await AsyncStorage.getItem(STORAGE_KEYS.DARK_MODE);
+      if (storedPreference !== null) {
+        const isDark = JSON.parse(storedPreference);
+        set({ 
+          isDarkMode: isDark,
+          hasDarkModePreference: true,
+        });
+      } else {
+        // No stored preference - user hasn't set one yet
+        set({ hasDarkModePreference: false });
+      }
+    } catch (error) {
+      console.error('Error loading dark mode preference:', error);
+      set({ hasDarkModePreference: false });
+    }
+  },
+  
+  // Theme - persist to storage
+  setDarkMode: async (isDark: boolean) => {
+    try {
+      await AsyncStorage.setItem(STORAGE_KEYS.DARK_MODE, JSON.stringify(isDark));
+      set({ 
+        isDarkMode: isDark,
+        hasDarkModePreference: true, // User has now set a preference
+      });
+    } catch (error) {
+      console.error('Error saving dark mode preference:', error);
+      // Still update state even if storage fails
+      set({ 
+        isDarkMode: isDark,
+        hasDarkModePreference: true,
+      });
+    }
+  },
   
   // Search and filters
   setSearchQuery: (query: string) => set({ searchQuery: query }),
@@ -90,13 +159,14 @@ export const useAppStore = create<AppState>((set, get) => ({
   // Favorites
   toggleFavorite: async (itemId: string) => {
     const { favorites } = get();
+    const { user } = useAuthStore.getState();
     const isCurrentlyFavorite = favorites.includes(itemId);
     
     if (isCurrentlyFavorite) {
-      await removeFavorite(itemId);
+      await removeFavorite(itemId, user?.uid);
       set({ favorites: favorites.filter(id => id !== itemId) });
     } else {
-      await addFavorite(itemId);
+      await addFavorite(itemId, user?.uid);
       set({ favorites: [...favorites, itemId] });
     }
   },
@@ -108,7 +178,8 @@ export const useAppStore = create<AppState>((set, get) => ({
   
   // Recent
   addToRecent: async (itemId: string) => {
-    await addRecent(itemId);
+    const { user } = useAuthStore.getState();
+    await addRecent(itemId, user?.uid);
     const { recent } = get();
     const updatedRecent = [itemId, ...recent.filter(id => id !== itemId)].slice(0, 10);
     set({ recent: updatedRecent });
