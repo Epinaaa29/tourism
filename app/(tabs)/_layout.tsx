@@ -54,7 +54,7 @@ export default function TabLayout() {
           title: 'Tourism',
           tabBarIcon: ({ color, focused }) => (
             <Ionicons 
-              name={focused ? 'camera' : 'camera-outline'} 
+              name={focused ? 'leaf' : 'leaf-outline'} 
               size={24} 
               color={color} 
             />

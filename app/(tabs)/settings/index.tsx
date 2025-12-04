@@ -1,28 +1,38 @@
 import { Ionicons } from '@expo/vector-icons';
-import { router } from 'expo-router';
-import React, { useState } from 'react';
+import { router, useFocusEffect } from 'expo-router';
+import React, { useState, useCallback } from 'react';
 import { Alert, Modal, ScrollView, StyleSheet, Switch, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 import { SectionTitle } from '@/components/ui/SectionTitle';
 import { getColors } from '@/constants/colors';
 import { useIsDarkMode } from '@/hooks/use-theme';
-import { clearAllData, getAdminAuth, setAdminAuth, updateAdminPin, verifyAdminPinLocal } from '@/lib/data';
+import { clearAllData, getAdminAuth, setAdminAuth, updateAdminCredentialsLocal, verifyAdminCredentialsLocal } from '@/lib/data';
 import { useAppStore } from '@/lib/store';
-import { useAuthStore } from '@/lib/auth-store';
-import { logoutUser } from '@/lib/auth-service';
 
 export default function SettingsScreen() {
   const isDarkMode = useIsDarkMode();
   const colors = getColors(isDarkMode);
-  const { setDarkMode, favorites, clearFilters } = useAppStore();
-  const { user, clearAuth } = useAuthStore();
+  const { setDarkMode, clearFilters } = useAppStore();
   
   const [showAdminModal, setShowAdminModal] = useState(false);
-  const [showChangePinModal, setShowChangePinModal] = useState(false);
-  const [adminPin, setAdminPin] = useState('');
-  const [newPin, setNewPin] = useState('');
-  const [confirmNewPin, setConfirmNewPin] = useState('');
+  const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
+  const [adminUsername, setAdminUsername] = useState('');
+  const [adminPassword, setAdminPassword] = useState('');
+  const [newUsername, setNewUsername] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmNewPassword, setConfirmNewPassword] = useState('');
   const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false);
+
+  // Check admin auth status when screen is focused
+  useFocusEffect(
+    useCallback(() => {
+      const checkAdminAuth = async () => {
+        const auth = await getAdminAuth();
+        setIsAdminAuthenticated(auth.isAuthenticated);
+      };
+      checkAdminAuth();
+    }, [])
+  );
 
   const handleToggleTheme = async () => {
     await setDarkMode(!isDarkMode);
@@ -69,39 +79,95 @@ export default function SettingsScreen() {
   };
 
   const handleAdminSubmit = async () => {
-    const isValid = await verifyAdminPinLocal(adminPin);
+    if (!adminUsername.trim() || !adminPassword.trim()) {
+      Alert.alert('Error', 'Please fill in all fields');
+      return;
+    }
+
+    // Validate username: must contain letters and numbers
+    if (!/^(?=.*[a-zA-Z])(?=.*[0-9])/.test(adminUsername)) {
+      Alert.alert('Error', 'Username must contain both letters and numbers');
+      return;
+    }
+
+    // Validate password: must contain letters and numbers
+    if (!/^(?=.*[a-zA-Z])(?=.*[0-9])/.test(adminPassword)) {
+      Alert.alert('Error', 'Password must contain both letters and numbers');
+      return;
+    }
+
+    const isValid = await verifyAdminCredentialsLocal(adminUsername.trim(), adminPassword);
     if (isValid) {
       setIsAdminAuthenticated(true);
       await setAdminAuth(true);
       setShowAdminModal(false);
-      setAdminPin('');
+      setAdminUsername('');
+      setAdminPassword('');
       router.push('/admin');
     } else {
-      Alert.alert('Error', 'Invalid PIN');
-      setAdminPin('');
+      Alert.alert('Error', 'Invalid username or password');
+      setAdminUsername('');
+      setAdminPassword('');
     }
   };
 
-  const handleChangePin = async () => {
-    if (!newPin || newPin.length < 4) {
-      Alert.alert('Error', 'PIN must be at least 4 digits');
+  const handleChangePassword = async () => {
+    if (!newUsername.trim() || !newPassword.trim()) {
+      Alert.alert('Error', 'Please fill in all fields');
       return;
     }
 
-    if (newPin !== confirmNewPin) {
-      Alert.alert('Error', 'PINs do not match');
+    // Validate username: must contain letters and numbers
+    if (!/^(?=.*[a-zA-Z])(?=.*[0-9])/.test(newUsername)) {
+      Alert.alert('Error', 'Username must contain both letters and numbers');
+      return;
+    }
+
+    // Validate password: must contain letters and numbers
+    if (!/^(?=.*[a-zA-Z])(?=.*[0-9])/.test(newPassword)) {
+      Alert.alert('Error', 'Password must contain both letters and numbers');
+      return;
+    }
+
+    if (newPassword !== confirmNewPassword) {
+      Alert.alert('Error', 'Passwords do not match');
+      return;
+    }
+
+    if (newPassword.length < 6) {
+      Alert.alert('Error', 'Password must be at least 6 characters');
       return;
     }
 
     try {
-      await updateAdminPin(newPin);
-      Alert.alert('Success', 'PIN updated successfully');
-      setShowChangePinModal(false);
-      setNewPin('');
-      setConfirmNewPin('');
+      await updateAdminCredentialsLocal(newUsername.trim(), newPassword);
+      Alert.alert('Success', 'Admin credentials updated successfully');
+      setShowChangePasswordModal(false);
+      setNewUsername('');
+      setNewPassword('');
+      setConfirmNewPassword('');
     } catch (error: any) {
-      Alert.alert('Error', error.message || 'Failed to update PIN');
+      Alert.alert('Error', error.message || 'Failed to update credentials');
     }
+  };
+
+  const handleExitAdminMode = async () => {
+    Alert.alert(
+      'Exit Admin Mode',
+      'Are you sure you want to exit Admin Mode?',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        {
+          text: 'Exit',
+          style: 'destructive',
+          onPress: async () => {
+            setIsAdminAuthenticated(false);
+            await setAdminAuth(false);
+            router.back();
+          },
+        },
+      ]
+    );
   };
 
   const handleLogout = () => {
@@ -193,26 +259,8 @@ export default function SettingsScreen() {
 
         <View style={styles.section}>
           <Text style={[styles.sectionTitle, { color: colors.text }]}>
-            Tour Management
-          </Text>
-          <SettingItem
-            icon="map-outline"
-            title="Tour History"
-            subtitle="View your tour history and progress"
-            onPress={() => router.push('/tour-history')}
-          />
-        </View>
-
-        <View style={styles.section}>
-          <Text style={[styles.sectionTitle, { color: colors.text }]}>
             Data Management
           </Text>
-          <SettingItem
-            icon="heart-outline"
-            title="Favorites"
-            subtitle={`${favorites.length} items favorited`}
-            onPress={() => router.push('/favorites')}
-          />
           <SettingItem
             icon="trash-outline"
             title="Clear Cache"
@@ -229,42 +277,6 @@ export default function SettingsScreen() {
 
         <View style={styles.section}>
           <Text style={[styles.sectionTitle, { color: colors.text }]}>
-            Account
-          </Text>
-          {user ? (
-            <>
-              <SettingItem
-                icon="person-outline"
-                title="User"
-                subtitle={user.email || 'Logged in'}
-              />
-              <SettingItem
-                icon="log-out-outline"
-                title="Logout"
-                subtitle="Sign out of your account"
-                onPress={handleLogout}
-              />
-            </>
-          ) : (
-            <>
-              <SettingItem
-                icon="log-in-outline"
-                title="Login"
-                subtitle="Sign in to your account"
-                onPress={() => router.push('/auth/login')}
-              />
-              <SettingItem
-                icon="person-add-outline"
-                title="Register"
-                subtitle="Create a new account"
-                onPress={() => router.push('/auth/register')}
-              />
-            </>
-          )}
-        </View>
-
-        <View style={styles.section}>
-          <Text style={[styles.sectionTitle, { color: colors.text }]}>
             Admin
           </Text>
           <SettingItem
@@ -274,12 +286,20 @@ export default function SettingsScreen() {
             onPress={handleAdminAccess}
           />
           {isAdminAuthenticated && (
-            <SettingItem
-              icon="key-outline"
-              title="Change Admin PIN"
-              subtitle="Update admin access PIN"
-              onPress={() => setShowChangePinModal(true)}
-            />
+            <>
+              <SettingItem
+                icon="key-outline"
+                title="Change Admin Password"
+                subtitle="Update admin credentials"
+                onPress={() => setShowChangePasswordModal(true)}
+              />
+              <SettingItem
+                icon="log-out-outline"
+                title="Exit Admin Mode"
+                subtitle="Exit admin mode and return to settings"
+                onPress={handleExitAdminMode}
+              />
+            </>
           )}
         </View>
 
@@ -289,7 +309,7 @@ export default function SettingsScreen() {
           </Text>
           <SettingItem
             icon="information-circle-outline"
-            title="City Explorer"
+            title="Visiting Sangihe"
             subtitle="Version 1.0.0"
           />
         </View>
@@ -299,12 +319,19 @@ export default function SettingsScreen() {
         visible={showAdminModal}
         transparent
         animationType="fade"
-        onRequestClose={() => setShowAdminModal(false)}
+        onRequestClose={() => {
+          setShowAdminModal(false);
+          setAdminUsername('');
+          setAdminPassword('');
+        }}
       >
         <View style={styles.modalOverlay}>
           <View style={[styles.modalContent, { backgroundColor: colors.card }]}>
             <Text style={[styles.modalTitle, { color: colors.text }]}>
-              Enter Admin PIN
+              Login Admin
+            </Text>
+            <Text style={[styles.modalSubtitle, { color: colors.textMuted }]}>
+              Username dan password harus kombinasi huruf + angka
             </Text>
             <TextInput
               style={[
@@ -313,20 +340,40 @@ export default function SettingsScreen() {
                   backgroundColor: colors.surface,
                   color: colors.text,
                   borderColor: colors.border,
+                  marginTop: 12,
                 }
               ]}
-              value={adminPin}
-              onChangeText={setAdminPin}
-              placeholder="Enter PIN"
+              value={adminUsername}
+              onChangeText={setAdminUsername}
+              placeholder="Username (huruf + angka)"
+              placeholderTextColor={colors.textMuted}
+              autoCapitalize="none"
+            />
+            <TextInput
+              style={[
+                styles.pinInput,
+                {
+                  backgroundColor: colors.surface,
+                  color: colors.text,
+                  borderColor: colors.border,
+                  marginTop: 12,
+                }
+              ]}
+              value={adminPassword}
+              onChangeText={setAdminPassword}
+              placeholder="Password (huruf + angka)"
               placeholderTextColor={colors.textMuted}
               secureTextEntry
-              keyboardType="numeric"
-              maxLength={4}
+              autoCapitalize="none"
             />
             <View style={styles.modalButtons}>
               <TouchableOpacity
                 style={[styles.modalButton, { backgroundColor: colors.surface }]}
-                onPress={() => setShowAdminModal(false)}
+                onPress={() => {
+                  setShowAdminModal(false);
+                  setAdminUsername('');
+                  setAdminPassword('');
+                }}
               >
                 <Text style={[styles.modalButtonText, { color: colors.text }]}>
                   Cancel
@@ -337,25 +384,33 @@ export default function SettingsScreen() {
                 onPress={handleAdminSubmit}
               >
                 <Text style={[styles.modalButtonText, { color: '#FFFFFF' }]}>
-                  Enter
+                  Login
                 </Text>
               </TouchableOpacity>
             </View>
-            </View>
           </View>
-        </Modal>
+        </View>
+      </Modal>
 
-        {/* Change PIN Modal */}
+        {/* Change Password Modal */}
         <Modal
-          visible={showChangePinModal}
+          visible={showChangePasswordModal}
           transparent
           animationType="fade"
-          onRequestClose={() => setShowChangePinModal(false)}
+          onRequestClose={() => {
+            setShowChangePasswordModal(false);
+            setNewUsername('');
+            setNewPassword('');
+            setConfirmNewPassword('');
+          }}
         >
           <View style={styles.modalOverlay}>
             <View style={[styles.modalContent, { backgroundColor: colors.card }]}>
               <Text style={[styles.modalTitle, { color: colors.text }]}>
-                Change Admin PIN
+                Change Admin Credentials
+              </Text>
+              <Text style={[styles.modalSubtitle, { color: colors.textMuted }]}>
+                Username dan password harus kombinasi huruf + angka
               </Text>
               <TextInput
                 style={[
@@ -364,15 +419,14 @@ export default function SettingsScreen() {
                     backgroundColor: colors.surface,
                     color: colors.text,
                     borderColor: colors.border,
+                    marginTop: 12,
                   }
                 ]}
-                value={newPin}
-                onChangeText={setNewPin}
-                placeholder="New PIN (min 4 digits)"
+                value={newUsername}
+                onChangeText={setNewUsername}
+                placeholder="New Username (huruf + angka)"
                 placeholderTextColor={colors.textMuted}
-                secureTextEntry
-                keyboardType="numeric"
-                maxLength={10}
+                autoCapitalize="none"
               />
               <TextInput
                 style={[
@@ -384,21 +438,38 @@ export default function SettingsScreen() {
                     marginTop: 12,
                   }
                 ]}
-                value={confirmNewPin}
-                onChangeText={setConfirmNewPin}
-                placeholder="Confirm New PIN"
+                value={newPassword}
+                onChangeText={setNewPassword}
+                placeholder="New Password (min 6 karakter, huruf + angka)"
                 placeholderTextColor={colors.textMuted}
                 secureTextEntry
-                keyboardType="numeric"
-                maxLength={10}
+                autoCapitalize="none"
+              />
+              <TextInput
+                style={[
+                  styles.pinInput,
+                  {
+                    backgroundColor: colors.surface,
+                    color: colors.text,
+                    borderColor: colors.border,
+                    marginTop: 12,
+                  }
+                ]}
+                value={confirmNewPassword}
+                onChangeText={setConfirmNewPassword}
+                placeholder="Confirm New Password"
+                placeholderTextColor={colors.textMuted}
+                secureTextEntry
+                autoCapitalize="none"
               />
               <View style={styles.modalButtons}>
                 <TouchableOpacity
                   style={[styles.modalButton, { backgroundColor: colors.surface }]}
                   onPress={() => {
-                    setShowChangePinModal(false);
-                    setNewPin('');
-                    setConfirmNewPin('');
+                    setShowChangePasswordModal(false);
+                    setNewUsername('');
+                    setNewPassword('');
+                    setConfirmNewPassword('');
                   }}
                 >
                   <Text style={[styles.modalButtonText, { color: colors.text }]}>
@@ -407,10 +478,10 @@ export default function SettingsScreen() {
                 </TouchableOpacity>
                 <TouchableOpacity
                   style={[styles.modalButton, { backgroundColor: colors.primary }]}
-                  onPress={handleChangePin}
+                  onPress={handleChangePassword}
                 >
                   <Text style={[styles.modalButtonText, { color: '#FFFFFF' }]}>
-                    Change PIN
+                    Change
                   </Text>
                 </TouchableOpacity>
               </View>
@@ -496,6 +567,11 @@ const styles = StyleSheet.create({
   modalTitle: {
     fontSize: 20,
     fontWeight: '600',
+    textAlign: 'center',
+    marginBottom: 8,
+  },
+  modalSubtitle: {
+    fontSize: 14,
     textAlign: 'center',
     marginBottom: 20,
   },

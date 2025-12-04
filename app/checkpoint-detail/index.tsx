@@ -26,13 +26,40 @@ export default function CheckpointDetailScreen() {
     try {
       setIsLoading(true);
       
+      let foundCheckpoint: Checkpoint | null = null;
+      
+      // First, try to find the checkpoint in the routes
       for (const route of routes) {
-        const foundCheckpoint = route.checkpoints.find(cp => cp.id === checkpointId);
-        if (foundCheckpoint) {
-          setCheckpoint(foundCheckpoint);
+        const checkpoint = route.checkpoints.find(cp => cp.id === checkpointId);
+        if (checkpoint) {
+          foundCheckpoint = checkpoint;
           break;
         }
       }
+      
+      // If not found and it's the Pelabuhan Manado checkpoint, create it dynamically
+      if (!foundCheckpoint && checkpointId?.startsWith('pelabuhan-manado-')) {
+        // Extract route ID from checkpoint ID (format: pelabuhan-manado-${routeId})
+        const routeId = checkpointId.replace('pelabuhan-manado-', '');
+        const route = routes.find(r => r.id === routeId);
+        
+        if (route) {
+          // Create the Pelabuhan Manado checkpoint dynamically
+          foundCheckpoint = {
+            id: `pelabuhan-manado-${route.id}`,
+            name: 'Pelabuhan Manado',
+            description: 'Titik keberangkatan dari Pelabuhan Manado menuju destinasi wisata.',
+            latitude: 1.4931,
+            longitude: 124.8421,
+            type: 'landmark',
+            order: 0, // Special order for prefix
+            estimatedTime: 0,
+            notes: `Titik keberangkatan dari Pelabuhan Manado. Persiapkan diri untuk perjalanan menuju ${route.destinationName}.`
+          };
+        }
+      }
+      
+      setCheckpoint(foundCheckpoint);
     } catch (error) {
       console.error('Error finding checkpoint:', error);
       Alert.alert('Error', 'Failed to load checkpoint details');

@@ -20,7 +20,7 @@ export default function EventDetailScreen() {
   const colors = getColors(isDarkMode);
   const { id } = useLocalSearchParams<{ id: string }>();
   
-  const { data, isFavorite, toggleFavorite, getNearbyItems } = useAppStore();
+  const { data, getNearbyItems } = useAppStore();
   const { routes, loadTourRoutes } = useTourStore();
   const [item, setItem] = useState<Item | null>(null);
   const [nearbyItems, setNearbyItems] = useState<Item[]>([]);
@@ -85,11 +85,6 @@ export default function EventDetailScreen() {
     }
   };
 
-  const handleToggleFavorite = () => {
-    if (item) {
-      toggleFavorite(item.id);
-    }
-  };
 
   const handleNearbyPress = (itemId: string) => {
     router.push(`/events/${itemId}`);
@@ -242,31 +237,6 @@ export default function EventDetailScreen() {
               </View>
             </View>
 
-        <View style={styles.actions}>
-          <TouchableOpacity
-            style={[
-              styles.actionButton,
-              { 
-                backgroundColor: isFavorite(item.id) ? colors.error : colors.surface,
-                borderWidth: 1,
-                borderColor: isFavorite(item.id) ? colors.error : colors.border,
-              }
-            ]}
-            onPress={handleToggleFavorite}
-          >
-            <Ionicons 
-              name={isFavorite(item.id) ? "heart" : "heart-outline"} 
-              size={20} 
-              color={isFavorite(item.id) ? "#FFFFFF" : colors.text} 
-            />
-            <Text style={[
-              styles.actionButtonText,
-              { color: isFavorite(item.id) ? "#FFFFFF" : colors.text }
-            ]}>
-              {isFavorite(item.id) ? "Favorited" : "Add to Favorites"}
-            </Text>
-          </TouchableOpacity>
-        </View>
 
         {eventItem.startDate && (
           <View style={styles.detailsSection}>

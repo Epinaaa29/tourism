@@ -17,6 +17,7 @@ export default function TourHistoryScreen() {
     routes, 
     getTourHistory, 
     clearTourHistory,
+    deleteTourFromHistory,
     startTour 
   } = useTourStore();
 
@@ -99,6 +100,38 @@ export default function TourHistoryScreen() {
     );
   };
 
+  const handleDeleteTour = (tour: TourProgress) => {
+    // Prevent deleting active tour
+    if (activeTour && activeTour.tourId === tour.tourId) {
+      Alert.alert(
+        'Cannot Delete Active Tour',
+        'Please complete or cancel the active tour before deleting it.',
+      );
+      return;
+    }
+
+    const route = getTourRoute(tour.tourId);
+    Alert.alert(
+      'Delete Tour',
+      `Are you sure you want to delete the tour for "${route?.destinationName || 'Unknown Destination'}"?`,
+      [
+        { text: 'Cancel', style: 'cancel' },
+        {
+          text: 'Delete',
+          style: 'destructive',
+          onPress: async () => {
+            try {
+              await deleteTourFromHistory(tour.tourId);
+            } catch (error) {
+              console.error('Error deleting tour:', error);
+              Alert.alert('Error', 'Failed to delete tour');
+            }
+          },
+        },
+      ]
+    );
+  };
+
   const renderTourItem = ({ item }: { item: TourProgress }) => {
     const route = getTourRoute(item.tourId);
     const statusColor = getStatusColor(item.status);
@@ -173,14 +206,27 @@ export default function TourHistoryScreen() {
         </View>
 
         <View style={styles.tourFooter}>
-          <Text style={[styles.actionText, { color: colors.primary }]}>
-            {item.status === 'completed' ? 'View Details' : 'Resume Tour'}
-          </Text>
-          <Ionicons 
-            name="chevron-forward" 
-            size={16} 
-            color={colors.primary} 
-          />
+          <TouchableOpacity
+            onPress={() => handleDeleteTour(item)}
+            style={styles.deleteButton}
+            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+          >
+            <Ionicons 
+              name="trash-outline" 
+              size={20} 
+              color={colors.error} 
+            />
+          </TouchableOpacity>
+          <View style={styles.actionContainer}>
+            <Text style={[styles.actionText, { color: colors.primary }]}>
+              {item.status === 'completed' ? 'View Details' : 'Resume Tour'}
+            </Text>
+            <Ionicons 
+              name="chevron-forward" 
+              size={16} 
+              color={colors.primary} 
+            />
+          </View>
         </View>
       </TouchableOpacity>
     );
@@ -390,6 +436,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 16,
     paddingTop: 0,
+  },
+  deleteButton: {
+    padding: 4,
+  },
+  actionContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flex: 1,
+    justifyContent: 'flex-end',
   },
   actionText: {
     fontSize: 14,

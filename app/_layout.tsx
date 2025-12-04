@@ -1,17 +1,17 @@
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { Stack, useRouter, useSegments } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import { useEffect } from 'react';
-import { View, ActivityIndicator } from 'react-native';
+import { useEffect, useState } from 'react';
+import { ActivityIndicator, Image, StyleSheet, Text, View } from 'react-native';
 import 'react-native-reanimated';
 import Toast from 'react-native-toast-message';
 
+import { getColors } from '@/constants/colors';
 import { useTheme } from '@/hooks/use-theme';
 import { useAuthStore } from '../lib/auth-store';
+import { useLocationStore } from '../lib/location-store';
 import { useAppStore } from '../lib/store';
 import { useTourStore } from '../lib/tour-store';
-import { useLocationStore } from '../lib/location-store';
-import { getColors } from '@/constants/colors';
 
 export const unstable_settings = {
   anchor: '(tabs)',
@@ -28,12 +28,27 @@ export default function RootLayout() {
   const loadTourRoutes = useTourStore((state) => state.loadTourRoutes);
   const loadDarkModePreference = useAppStore((state) => state.loadDarkModePreference);
   const initializeLocation = useLocationStore((state) => state.initializeLocation);
+  const [appIsReady, setAppIsReady] = useState(false);
+  const [isInitialized, setIsInitialized] = useState(false);
 
   // Initialize auth, dark mode preference, and location on mount
   useEffect(() => {
-    initializeAuth();
-    loadDarkModePreference();
-    initializeLocation();
+    async function prepare() {
+      try {
+        // Initialize in parallel for faster startup
+        await Promise.all([
+          Promise.resolve(initializeAuth()),
+          Promise.resolve(loadDarkModePreference()),
+          Promise.resolve(initializeLocation()),
+        ]);
+      } catch (e) {
+        console.warn(e);
+      } finally {
+        setIsInitialized(true);
+        setAppIsReady(true);
+      }
+    }
+    prepare();
   }, []);
 
   // Load data when user changes or when auth is ready
@@ -65,11 +80,21 @@ export default function RootLayout() {
     }
   }, [user, segments, authLoading]);
 
-  // Show loading screen while checking auth
-  if (authLoading) {
+  // Show custom splash screen while initializing
+  if (!isInitialized || authLoading || !appIsReady) {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: colors.background }}>
-        <ActivityIndicator size="large" color={colors.primary} />
+      <View style={styles.splashContainer}>
+        <View style={styles.brandRow}>
+          <Image
+            source={require('../assets/images/LOGO-KABUPATEN-KEPULAUAN-SANGIHE-SULAWESI-UTARA.png')}
+            style={styles.brandLogo}
+          />
+          <View style={styles.divider} />
+          <View style={styles.brandTextWrapper}>
+            <Text style={styles.brandText}>Visiting Sangihe</Text>
+          </View>
+        </View>
+        <ActivityIndicator size="small" color="#111827" style={styles.spinner} />
       </View>
     );
   }
@@ -91,3 +116,39 @@ export default function RootLayout() {
     </ThemeProvider>
   );
 }
+
+const styles = StyleSheet.create({
+  splashContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#FFFFFF',
+  },
+  brandRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  brandLogo: {
+    width: 96,
+    height: 96,
+    resizeMode: 'contain',
+  },
+  divider: {
+    width: 3,
+    height: 80,
+    backgroundColor: '#000000',
+    marginHorizontal: 16,
+  },
+  brandTextWrapper: {
+    justifyContent: 'center',
+  },
+  brandText: {
+    fontSize: 24,
+    letterSpacing: 0.5,
+    fontWeight: '700',
+    color: '#000000',
+  },
+  spinner: {
+    marginTop: 48,
+  },
+});

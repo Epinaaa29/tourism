@@ -85,11 +85,6 @@ export default function HotelDetailScreen() {
     }
   };
 
-  const handleToggleFavorite = () => {
-    if (item) {
-      toggleFavorite(item.id);
-    }
-  };
 
   const handleNearbyPress = (itemId: string) => {
     router.push(`/hotels/${itemId}`);
@@ -230,31 +225,6 @@ export default function HotelDetailScreen() {
               </View>
             </View>
 
-        <View style={styles.actions}>
-          <TouchableOpacity
-            style={[
-              styles.actionButton,
-              { 
-                backgroundColor: isFavorite(item.id) ? colors.error : colors.surface,
-                borderWidth: 1,
-                borderColor: isFavorite(item.id) ? colors.error : colors.border,
-              }
-            ]}
-            onPress={handleToggleFavorite}
-          >
-            <Ionicons 
-              name={isFavorite(item.id) ? "heart" : "heart-outline"} 
-              size={20} 
-              color={isFavorite(item.id) ? "#FFFFFF" : colors.text} 
-            />
-            <Text style={[
-              styles.actionButtonText,
-              { color: isFavorite(item.id) ? "#FFFFFF" : colors.text }
-            ]}>
-              {isFavorite(item.id) ? "Favorited" : "Add to Favorites"}
-            </Text>
-          </TouchableOpacity>
-        </View>
 
         <View style={styles.detailsSection}>
           <Text style={[styles.sectionTitle, { color: colors.text }]}>

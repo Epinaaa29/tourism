@@ -1,7 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { router, Stack, useLocalSearchParams } from 'expo-router';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { Alert, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Alert, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View, Modal } from 'react-native';
 import { Image } from 'expo-image';
 
 import { SectionTitle } from '@/components/ui/SectionTitle';
@@ -59,6 +59,135 @@ const InputField = React.memo(({
   );
 });
 
+// 14 Kecamatan di Kabupaten Kepulauan Sangihe
+const DISTRICTS = [
+  'Kendahe',
+  'Kepulauan Marore',
+  'Manganitu',
+  'Manganitu Selatan',
+  'Nusa Tabukan',
+  'Tabukan Selatan',
+  'Tabukan Selatan Tengah',
+  'Tabukan Selatan Tenggara',
+  'Tabukan Tengah',
+  'Tabukan Utara',
+  'Tahuna',
+  'Tahuna Barat',
+  'Tahuna Timur',
+  'Tamako',
+  'Tatoareng',
+];
+
+// 4 Jenis Wisata
+const TOURISM_TYPES = [
+  'Wisata Kuliner',
+  'Wisata Alam',
+  'Wisata Buatan',
+  'Wisata Budaya',
+];
+
+// Dropdown Component
+const DropdownField = ({ 
+  label, 
+  value, 
+  options, 
+  onSelect, 
+  placeholder,
+  inputColors
+}: {
+  label: string;
+  value: string;
+  options: string[];
+  onSelect: (value: string) => void;
+  placeholder: string;
+  inputColors: any;
+}) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const isDarkMode = useIsDarkMode();
+  const colors = getColors(isDarkMode);
+
+  return (
+    <View style={inputFieldStyles.inputGroup}>
+      <Text style={[inputFieldStyles.inputLabel, { color: inputColors.text }]}>
+        {label}
+      </Text>
+      <TouchableOpacity
+        style={[
+          inputFieldStyles.input,
+          {
+            backgroundColor: inputColors.surface,
+            borderColor: inputColors.border,
+          }
+        ]}
+        onPress={() => setIsOpen(true)}
+      >
+        <Text style={[
+          { color: value ? inputColors.text : inputColors.textMuted },
+          { fontSize: 16 }
+        ]}>
+          {value || placeholder}
+        </Text>
+        <Ionicons name="chevron-down" size={20} color={inputColors.textMuted} />
+      </TouchableOpacity>
+      
+      <Modal
+        visible={isOpen}
+        transparent
+        animationType="fade"
+        onRequestClose={() => setIsOpen(false)}
+      >
+        <TouchableOpacity
+          style={dropdownStyles.modalOverlay}
+          activeOpacity={1}
+          onPress={() => setIsOpen(false)}
+        >
+          <View style={[dropdownStyles.modalContent, { backgroundColor: colors.card }]}>
+            <View style={dropdownStyles.modalHeader}>
+              <Text style={[dropdownStyles.modalTitle, { color: colors.text }]}>
+                Pilih {label}
+              </Text>
+              <TouchableOpacity onPress={() => setIsOpen(false)}>
+                <Ionicons name="close" size={24} color={colors.text} />
+              </TouchableOpacity>
+            </View>
+            <ScrollView style={dropdownStyles.optionsList}>
+              {options.map((option, index) => (
+                <TouchableOpacity
+                  key={index}
+                  style={[
+                    dropdownStyles.optionItem,
+                    { 
+                      backgroundColor: value === option ? colors.primary + '20' : 'transparent',
+                      borderBottomColor: colors.border 
+                    }
+                  ]}
+                  onPress={() => {
+                    onSelect(option);
+                    setIsOpen(false);
+                  }}
+                >
+                  <Text style={[
+                    dropdownStyles.optionText,
+                    { 
+                      color: value === option ? colors.primary : colors.text,
+                      fontWeight: value === option ? '600' : '400'
+                    }
+                  ]}>
+                    {option}
+                  </Text>
+                  {value === option && (
+                    <Ionicons name="checkmark" size={20} color={colors.primary} />
+                  )}
+                </TouchableOpacity>
+              ))}
+            </ScrollView>
+          </View>
+        </TouchableOpacity>
+      </Modal>
+    </View>
+  );
+};
+
 const inputFieldStyles = StyleSheet.create({
   inputGroup: {
     marginBottom: 16,
@@ -74,10 +203,54 @@ const inputFieldStyles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 12,
     fontSize: 16,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
   multilineInput: {
     height: 80,
     textAlignVertical: 'top',
+  },
+});
+
+const dropdownStyles = StyleSheet.create({
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalContent: {
+    width: '80%',
+    maxHeight: '70%',
+    borderRadius: 16,
+    overflow: 'hidden',
+  },
+  modalHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: '#E5E7EB',
+  },
+  modalTitle: {
+    fontSize: 18,
+    fontWeight: '600',
+  },
+  optionsList: {
+    maxHeight: 400,
+  },
+  optionItem: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 16,
+    borderBottomWidth: 1,
+  },
+  optionText: {
+    fontSize: 16,
+    flex: 1,
   },
 });
 
@@ -100,6 +273,7 @@ export default function AdminItemScreen() {
     priceRange: '',
     // Category-specific fields
     admissionFee: '',
+    tourismType: '', // Jenis Wisata untuk kategori tourism
     cuisineType: '',
     starRating: '3',
     amenities: '',
@@ -124,6 +298,7 @@ export default function AdminItemScreen() {
           operatingHours: existingItem.operatingHours || '',
           priceRange: existingItem.priceRange || '',
           admissionFee: (existingItem as TourismItem).admissionFee || '',
+          tourismType: (existingItem as TourismItem).tourismType || '',
           cuisineType: (existingItem as CulinaryItem).cuisineType || '',
           starRating: ((existingItem as HotelItem).starRating || 3).toString(),
           amenities: ((existingItem as HotelItem).amenities || []).join(', '),
@@ -186,6 +361,7 @@ export default function AdminItemScreen() {
       // Add category-specific fields
       if (category === 'tourism') {
         itemData.admissionFee = formData.admissionFee.trim() || undefined;
+        itemData.tourismType = formData.tourismType.trim() || undefined;
       } else if (category === 'culinary') {
         itemData.cuisineType = formData.cuisineType.trim() || undefined;
         itemData.priceRange = formData.priceRange.trim() || '$';
@@ -278,6 +454,10 @@ export default function AdminItemScreen() {
 
   const handleDistrictChange = useCallback((text: string) => {
     setFormData(prev => ({ ...prev, district: text }));
+  }, []);
+
+  const handleTourismTypeChange = useCallback((text: string) => {
+    setFormData(prev => ({ ...prev, tourismType: text }));
   }, []);
 
   const handleRatingChange = useCallback((text: string) => {
@@ -400,11 +580,12 @@ export default function AdminItemScreen() {
             inputColors={inputColors}
           />
 
-          <InputField
+          <DropdownField
             label="District *"
             value={formData.district}
-            onChangeText={handleDistrictChange}
-            placeholder="e.g., City Center, North District"
+            options={DISTRICTS}
+            onSelect={handleDistrictChange}
+            placeholder="Pilih Kecamatan"
             inputColors={inputColors}
           />
 
@@ -528,13 +709,23 @@ export default function AdminItemScreen() {
 
           {/* Category-specific fields */}
           {category === 'tourism' && (
-            <InputField
-              label="Admission Fee"
-              value={formData.admissionFee}
-              onChangeText={handleAdmissionFeeChange}
-              placeholder="e.g., Free, $5, $10"
-              inputColors={inputColors}
-            />
+            <>
+              <DropdownField
+                label="Jenis Wisata *"
+                value={formData.tourismType}
+                options={TOURISM_TYPES}
+                onSelect={handleTourismTypeChange}
+                placeholder="Pilih Jenis Wisata"
+                inputColors={inputColors}
+              />
+              <InputField
+                label="Admission Fee"
+                value={formData.admissionFee}
+                onChangeText={handleAdmissionFeeChange}
+                placeholder="e.g., Free, $5, $10"
+                inputColors={inputColors}
+              />
+            </>
           )}
 
           {category === 'culinary' && (

@@ -129,7 +129,7 @@ export default function HomeScreen() {
   const discoverItems = [
     { 
       title: 'Tourism', 
-      icon: 'camera-outline' as const, 
+      icon: 'leaf-outline' as const, 
       color: colors.primary, 
       description: 'Beautiful places to visit',
       route: '/tourism' 

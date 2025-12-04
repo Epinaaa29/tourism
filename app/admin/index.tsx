@@ -8,6 +8,7 @@ import { getColors } from '@/constants/colors';
 import { useIsDarkMode } from '@/hooks/use-theme';
 import { useAppStore } from '@/lib/store';
 import { Category } from '@/types';
+import { setAdminAuth } from '@/lib/data';
 
 export const options = {
   title: 'Admin Panel',
@@ -72,7 +73,9 @@ export default function AdminScreen() {
     router.push('/admin/tour-guides');
   };
 
-  const handleBack = () => {
+  const handleBack = async () => {
+    // Exit admin mode when going back
+    await setAdminAuth(false);
     router.back();
   };
 

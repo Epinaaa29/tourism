@@ -20,13 +20,65 @@ export default function TourTrackingScreen() {
     completeCheckpoint, 
     pauseTour, 
     resumeTour, 
-    completeTour 
+    completeTour,
+    cancelTour
   } = useTourStore();
 
   const [currentRoute, setCurrentRoute] = useState<TourRoute | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isInitialized, setIsInitialized] = useState(false);
   const hasAutoCompletedRef = useRef(false);
+
+  const getTourItems = () => {
+    if (!currentRoute) return [];
+    
+    // Fixed starting point: Pelabuhan Manado
+    const PELABUHAN_MANADO: Checkpoint = {
+      id: `pelabuhan-manado-${currentRoute.id}`,
+      name: 'Pelabuhan Manado',
+      description: 'Titik keberangkatan dari Pelabuhan Manado menuju destinasi wisata.',
+      latitude: 1.4931,
+      longitude: 124.8421,
+      type: 'landmark',
+      order: 0, // Special order for prefix
+      estimatedTime: 0,
+      notes: `Titik keberangkatan dari Pelabuhan Manado. Persiapkan diri untuk perjalanan menuju ${currentRoute.destinationName}.`
+    };
+    
+    const items: (Checkpoint | Transport)[] = [];
+    
+    // Always start with Pelabuhan Manado as the first checkpoint
+    items.push(PELABUHAN_MANADO);
+    
+    const checkpointMap = new Map(currentRoute.checkpoints.map(cp => [cp.order, cp]));
+    const transportMap = new Map(currentRoute.transports.map(t => [t.departurePoint, t]));
+    
+    // Create a combined list sorted by order
+    const maxOrder = Math.max(
+      ...currentRoute.checkpoints.map(cp => cp.order),
+      currentRoute.transports.length > 0 ? currentRoute.transports.length : 0
+    );
+    
+    for (let i = 1; i <= maxOrder; i++) {
+      const checkpoint = checkpointMap.get(i);
+      if (checkpoint) {
+        items.push(checkpoint);
+      }
+    }
+    
+    // Add transports at appropriate positions
+    currentRoute.transports.forEach(transport => {
+      const insertIndex = items.findIndex(item => 
+        'type' in item && item.type !== 'transport' && 
+        item.name === transport.departurePoint
+      );
+      if (insertIndex !== -1) {
+        items.splice(insertIndex + 1, 0, transport);
+      }
+    });
+    
+    return items;
+  };
 
   useEffect(() => {
     if (!tourId || isInitialized) return;
@@ -38,7 +90,9 @@ export default function TourTrackingScreen() {
   useEffect(() => {
     if (!currentRoute || !activeTour || activeTour.status !== 'active' || hasAutoCompletedRef.current) return;
     
-    const totalItems = currentRoute.checkpoints.length + currentRoute.transports.length;
+    // Use the same calculation as getProgressPercentage for consistency
+    const tourItems = getTourItems();
+    const totalItems = tourItems.length;
     const completedCount = activeTour.completedCheckpoints.length;
     
     if (completedCount >= totalItems && totalItems > 0) {
@@ -135,7 +189,8 @@ export default function TourTrackingScreen() {
       
       // Check if tour is completed
       if (currentRoute && updatedTour) {
-        const totalItems = currentRoute.checkpoints.length + currentRoute.transports.length;
+        // Include Pelabuhan Manado in the total count (it's added as prefix in getTourItems)
+        const totalItems = currentRoute.checkpoints.length + currentRoute.transports.length + 1;
         const completedCount = updatedTour.completedCheckpoints.length;
         
         console.log('✅ Checkpoint completed:', {
@@ -193,44 +248,39 @@ export default function TourTrackingScreen() {
     }
   };
 
-  const getTourItems = () => {
-    if (!currentRoute) return [];
-    
-    const items: (Checkpoint | Transport)[] = [];
-    const checkpointMap = new Map(currentRoute.checkpoints.map(cp => [cp.order, cp]));
-    const transportMap = new Map(currentRoute.transports.map(t => [t.departurePoint, t]));
-    
-    // Create a combined list sorted by order
-    const maxOrder = Math.max(
-      ...currentRoute.checkpoints.map(cp => cp.order),
-      currentRoute.transports.length > 0 ? currentRoute.transports.length : 0
+  const handleCancelTour = async () => {
+    Alert.alert(
+      'Cancel Tour',
+      'Are you sure you want to cancel this tour? Your progress will be lost.',
+      [
+        {
+          text: 'No',
+          style: 'cancel',
+        },
+        {
+          text: 'Yes, Cancel',
+          style: 'destructive',
+          onPress: async () => {
+            try {
+              await cancelTour();
+              Alert.alert('Tour Cancelled', 'The tour has been cancelled.');
+              router.back();
+            } catch (error) {
+              console.error('Error cancelling tour:', error);
+              Alert.alert('Error', 'Failed to cancel tour');
+            }
+          },
+        },
+      ]
     );
-    
-    for (let i = 1; i <= maxOrder; i++) {
-      const checkpoint = checkpointMap.get(i);
-      if (checkpoint) {
-        items.push(checkpoint);
-      }
-    }
-    
-    // Add transports at appropriate positions
-    currentRoute.transports.forEach(transport => {
-      const insertIndex = items.findIndex(item => 
-        'type' in item && item.type !== 'transport' && 
-        item.name === transport.departurePoint
-      );
-      if (insertIndex !== -1) {
-        items.splice(insertIndex + 1, 0, transport);
-      }
-    });
-    
-    return items;
   };
 
   const getProgressPercentage = () => {
     if (!activeTour || !currentRoute) return 0;
-    const totalItems = currentRoute.checkpoints.length + currentRoute.transports.length;
-    return (activeTour.completedCheckpoints.length / totalItems) * 100;
+    const tourItems = getTourItems();
+    const totalItems = tourItems.length;
+    const completedCount = activeTour.completedCheckpoints.length;
+    return totalItems > 0 ? (completedCount / totalItems) * 100 : 0;
   };
 
   if (isLoading) {
@@ -347,21 +397,39 @@ export default function TourTrackingScreen() {
 
           <View style={styles.statusActions}>
             {activeTour.status === 'active' ? (
-              <TouchableOpacity 
-                style={[styles.actionButton, { backgroundColor: colors.warning }]}
-                onPress={handlePauseTour}
-              >
-                <Ionicons name="pause-outline" size={20} color="#FFFFFF" />
-                <Text style={styles.actionButtonText}>Pause</Text>
-              </TouchableOpacity>
+              <>
+                <TouchableOpacity 
+                  style={[styles.actionButton, { backgroundColor: colors.warning }]}
+                  onPress={handlePauseTour}
+                >
+                  <Ionicons name="pause-outline" size={20} color="#FFFFFF" />
+                  <Text style={styles.actionButtonText}>Pause</Text>
+                </TouchableOpacity>
+                <TouchableOpacity 
+                  style={[styles.actionButton, styles.cancelButton, { backgroundColor: colors.error }]}
+                  onPress={handleCancelTour}
+                >
+                  <Ionicons name="close-outline" size={20} color="#FFFFFF" />
+                  <Text style={styles.actionButtonText}>Cancel</Text>
+                </TouchableOpacity>
+              </>
             ) : (
-              <TouchableOpacity 
-                style={[styles.actionButton, { backgroundColor: colors.success }]}
-                onPress={handleResumeTour}
-              >
-                <Ionicons name="play-outline" size={20} color="#FFFFFF" />
-                <Text style={styles.actionButtonText}>Resume</Text>
-              </TouchableOpacity>
+              <>
+                <TouchableOpacity 
+                  style={[styles.actionButton, { backgroundColor: colors.success }]}
+                  onPress={handleResumeTour}
+                >
+                  <Ionicons name="play-outline" size={20} color="#FFFFFF" />
+                  <Text style={styles.actionButtonText}>Resume</Text>
+                </TouchableOpacity>
+                <TouchableOpacity 
+                  style={[styles.actionButton, styles.cancelButton, { backgroundColor: colors.error }]}
+                  onPress={handleCancelTour}
+                >
+                  <Ionicons name="close-outline" size={20} color="#FFFFFF" />
+                  <Text style={styles.actionButtonText}>Cancel</Text>
+                </TouchableOpacity>
+              </>
             )}
           </View>
         </View>
@@ -540,6 +608,8 @@ const styles = StyleSheet.create({
   },
   statusActions: {
     marginLeft: 16,
+    flexDirection: 'row',
+    gap: 8,
   },
   actionButton: {
     flexDirection: 'row',
@@ -547,6 +617,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 8,
     borderRadius: 12,
+  },
+  cancelButton: {
+    marginLeft: 0,
   },
   actionButtonText: {
     color: '#FFFFFF',
